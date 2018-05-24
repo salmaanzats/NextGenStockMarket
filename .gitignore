@@ -11,5 +11,6 @@
 /Code/NextGenStockMarketAPI/NextGenStockMarket.Data/bin/*
 
 /Code/NextGenStockMarketAPI/.vs/NextGenStockMarketAPI/v15/Server/sqlite3/*
+/Code/NextGenStockMarketAPI/packages/*
 
 

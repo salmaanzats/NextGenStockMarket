@@ -19,13 +19,13 @@ namespace NextGenStockMarketAPI.Controllers.Api
             bankService = _bankService;
         }
 
-        [HttpPost, Route("createaccount")]
+        [HttpPost, Route("bank/createaccount"),AllowAnonymous]
         public async Task<IHttpActionResult> CreateAccount([FromBody]BankAccount bankAccount)
         {
             return Ok(await bankService.CreateBankAccount(bankAccount));
         }
 
-        [HttpGet, Route("bankbalance")]
+        [HttpGet, Route("bank/bankbalance")]
         public async Task<IHttpActionResult> Get(string playerName)
         {
             return Ok(await bankService.ShowBankBalance(playerName));
@@ -37,7 +37,7 @@ namespace NextGenStockMarketAPI.Controllers.Api
             return Ok(await bankService.Deposit(transaction));
         }
 
-        [HttpPut, Route("bank/wiithdrw")]
+        [HttpPut, Route("bank/withdraw")]
         public async Task<IHttpActionResult> Withdraw(BankTransaction transaction)
         {
             return Ok(await bankService.Withdraw(transaction));
