@@ -10,6 +10,12 @@
 /Code/NextGenStockMarketAPI/NextGenStockMarket.Data/obj/*
 /Code/NextGenStockMarketAPI/NextGenStockMarket.Data/bin/*
 
+
+/Code/NextGenStockMarketAPI/NextGenStockMarketAPI.Tests/obj/*
+/Code/NextGenStockMarketAPI/NextGenStockMarketAPI.Tests/bin/*
+
+
+
 /Code/NextGenStockMarketAPI/.vs/NextGenStockMarketAPI/v15/Server/sqlite3/*
 /Code/NextGenStockMarketAPI/packages/*
 
