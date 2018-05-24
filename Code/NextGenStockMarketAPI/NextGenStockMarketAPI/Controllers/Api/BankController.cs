@@ -19,7 +19,7 @@ namespace NextGenStockMarketAPI.Controllers.Api
             bankService = _bankService;
         }
 
-        [HttpPost, Route("bank/createaccount"),AllowAnonymous]
+        [HttpPost, Route("bank/createaccount")]
         public async Task<IHttpActionResult> CreateAccount([FromBody]BankAccount bankAccount)
         {
             return Ok(await bankService.CreateBankAccount(bankAccount));

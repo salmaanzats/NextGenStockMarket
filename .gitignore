@@ -14,6 +14,9 @@
 /Code/NextGenStockMarketAPI/NextGenStockMarketAPI.Tests/obj/*
 /Code/NextGenStockMarketAPI/NextGenStockMarketAPI.Tests/bin/*
 
+/Code/NextGenStockMarketAPI/.vs/*
+
+
 
 
 /Code/NextGenStockMarketAPI/.vs/NextGenStockMarketAPI/v15/Server/sqlite3/*
