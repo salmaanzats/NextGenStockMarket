@@ -5,6 +5,9 @@ namespace NextGenStockMarket.Service.Interface
 {
     public interface IBankService
     {
-        Task<Bank> CreateBankAccount(Bank bank);
+        Task<BankAccount> CreateBankAccount(BankAccount bank);
+        Task<AllBankRecords> ShowBankBalance(string PlayerName);
+        Task<AllBankRecords> Deposit(BankTransaction transaction);
+        Task<AllBankRecords> Withdraw(BankTransaction transaction);
     }
 }

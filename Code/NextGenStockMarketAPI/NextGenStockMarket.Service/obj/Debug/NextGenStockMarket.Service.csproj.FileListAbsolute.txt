@@ -1,8 +1,0 @@
-E:\NextGenStockMarket\Code\NextGenStockMarketAPI\NextGenStockMarket.Service\bin\Debug\NextGenStockMarket.Service.dll
-E:\NextGenStockMarket\Code\NextGenStockMarketAPI\NextGenStockMarket.Service\bin\Debug\NextGenStockMarket.Service.pdb
-E:\NextGenStockMarket\Code\NextGenStockMarketAPI\NextGenStockMarket.Service\obj\Debug\NextGenStockMarket.Service.csprojResolveAssemblyReference.cache
-E:\NextGenStockMarket\Code\NextGenStockMarketAPI\NextGenStockMarket.Service\obj\Debug\NextGenStockMarket.Service.csproj.CoreCompileInputs.cache
-E:\NextGenStockMarket\Code\NextGenStockMarketAPI\NextGenStockMarket.Service\obj\Debug\NextGenStockMarket.Service.dll
-E:\NextGenStockMarket\Code\NextGenStockMarketAPI\NextGenStockMarket.Service\obj\Debug\NextGenStockMarket.Service.pdb
-E:\NextGenStockMarket\Code\NextGenStockMarketAPI\NextGenStockMarket.Service\bin\Debug\NextGenStockMarket.Data.dll
-E:\NextGenStockMarket\Code\NextGenStockMarketAPI\NextGenStockMarket.Service\bin\Debug\NextGenStockMarket.Data.pdb

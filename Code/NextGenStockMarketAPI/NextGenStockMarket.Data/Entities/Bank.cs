@@ -1,17 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace NextGenStockMarket.Data.Entities
 {
-    public class Bank
+    public class BankAccount
+    {
+        public string PlayerName { get; set; }
+        public decimal Balance { get; set; }
+    }
+
+    public class BankTransaction
     {
         public string PlayerName { get; set; }
         public int Turn { get; set; }
-        public List<BankTransactions> BankTransactions { get; set; }
-    }
-
-    public class BankTransactions
-    {
         public string Transceiver { get; set; }
         public decimal Price { get; set; }
+    }
+
+    public class AllBankRecords
+    {
+        public BankAccount Accounts { get; set; }
+        public ICollection<BankTransaction> BankTransactions { get; set; } = new List<BankTransaction>();
     }
 }

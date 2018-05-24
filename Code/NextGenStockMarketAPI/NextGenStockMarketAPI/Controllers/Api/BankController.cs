@@ -19,47 +19,28 @@ namespace NextGenStockMarketAPI.Controllers.Api
             bankService = _bankService;
         }
 
-        [HttpPost, Route("createAccount")]
-        public async Task<IHttpActionResult> CreateAccount([FromBody]Bank bank)
+        [HttpPost, Route("createaccount")]
+        public async Task<IHttpActionResult> CreateAccount([FromBody]BankAccount bankAccount)
         {
-            return Ok(await bankService.CreateBankAccount(bank));
-
+            return Ok(await bankService.CreateBankAccount(bankAccount));
         }
 
-        [HttpPost, Route("bank/deposit")]
-        public async Task<IHttpActionResult> Deposit([FromBody]Bank bank)
+        [HttpGet, Route("bankbalance")]
+        public async Task<IHttpActionResult> Get(string playerName)
         {
-            throw new NotImplementedException();
+            return Ok(await bankService.ShowBankBalance(playerName));
         }
 
-        [HttpPost, Route("bank/withdraw")]
-        public async Task<IHttpActionResult> Withdraw([FromBody]Bank bank)
+        [HttpPut, Route("bank/deposit")]
+        public async Task<IHttpActionResult> Deposit(BankTransaction transaction)
         {
-            throw new NotImplementedException();
+            return Ok(await bankService.Deposit(transaction));
         }
 
-        [HttpGet, Route("bank")]
-        public async Task<IHttpActionResult> Get()
+        [HttpPut, Route("bank/wiithdrw")]
+        public async Task<IHttpActionResult> Withdraw(BankTransaction transaction)
         {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet, Route("banks/{id:int}")]
-        public async Task<IHttpActionResult> Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPut, Route("banks")]
-        public async Task<IHttpActionResult> Update([FromBody]Bank bank)
-        {
-            return Ok();
-        }
-
-        [HttpDelete, Route("banks/{id:int}")]
-        public async Task<IHttpActionResult> Delete(int id)
-        {
-            return Ok();
+            return Ok(await bankService.Withdraw(transaction));
         }
     }
 }
