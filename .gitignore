@@ -1,1 +1,15 @@
-/Code/NextGenStockMarketAPI/NextGenStockMarket.Data/bin/Debug/*
+#DO NOT CHANGE
+#these folders are ignored from the git....
+
+/Code/NextGenStockMarketAPI/NextGenStockMarketAPI/bin/*
+/Code/NextGenStockMarketAPI/NextGenStockMarketAPI/obj/*
+
+/Code/NextGenStockMarketAPI/NextGenStockMarket.Service/bin/*
+/Code/NextGenStockMarketAPI/NextGenStockMarket.Service/obj/*
+
+/Code/NextGenStockMarketAPI/NextGenStockMarket.Data/obj/*
+/Code/NextGenStockMarketAPI/NextGenStockMarket.Data/bin/*
+
+/Code/NextGenStockMarketAPI/.vs/NextGenStockMarketAPI/v15/Server/sqlite3/*
+
+
