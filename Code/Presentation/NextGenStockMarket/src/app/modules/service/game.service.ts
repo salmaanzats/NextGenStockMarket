@@ -6,17 +6,16 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 @Injectable()
-export class PlayerService extends BaseService {
+export class GameService extends BaseService {
 
-  private bankEndPoint = this.baseApiEndPoint + "v1/bank"
+  private stockEndPoint = this.baseApiEndPoint + "v1/stock"
 
   constructor(private http: HttpClient) {
     super();
   }
 
-  createPlayer(player) {
-    return this.http.post(`${this.bankEndPoint}/createaccount`,
-      player, this.httpOptions)
+  getStockData() {
+    return this.http.get(`${this.stockEndPoint}`, this.httpOptions)
       .map(response => response)
       .catch(this.errorHandler)
   }

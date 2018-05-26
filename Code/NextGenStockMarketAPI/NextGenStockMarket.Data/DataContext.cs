@@ -5,7 +5,7 @@ namespace NextGenStockMarket.Data
 {
     public class DataContext
     {
-        //public List<Bank> Banks { get; set; }
-
+        public List<AllBankRecords> AllBankRecords { get; set; } = new List<AllBankRecords>();
+        public List<AllStockMarketRecords> AllStockMarketRecords { get; set; } = new List<Entities.AllStockMarketRecords>();
     }
 }

@@ -11,12 +11,15 @@ import { SharedModule } from './modules/shared/shared.module';
 import { PlayerService } from './modules/service/player.service';
 import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GameComponent } from './modules/game/game.component';
+import { GameService } from './modules/service/game.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PlayerComponent
+    PlayerComponent,
+    GameComponent
   ],
   imports: [
     BrowserModule,
@@ -24,9 +27,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
-    CoreModule.forRoot(), 
+    CoreModule.forRoot(),
   ],
-  providers: [PlayerService],
+  providers: [PlayerService, GameService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

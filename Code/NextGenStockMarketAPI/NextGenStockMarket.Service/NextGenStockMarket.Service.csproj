@@ -46,7 +46,9 @@
     <Compile Include="Cache\ICacheManager.cs" />
     <Compile Include="Cache\MemoryCacheManager.cs" />
     <Compile Include="Interface\IBankService.cs" />
+    <Compile Include="Interface\IStockMarketService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StockMarketService.cs" />
     <Compile Include="Utility\Constants.cs" />
   </ItemGroup>
   <ItemGroup>

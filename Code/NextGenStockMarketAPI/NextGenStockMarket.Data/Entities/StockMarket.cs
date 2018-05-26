@@ -8,12 +8,17 @@ namespace NextGenStockMarket.Data.Entities
 {
     public class StockMarket
     {
-        public string CompanyName { get; set; }
-        public List<Sector> Sectors { get; set; }
+        public string CompanyName { get; set; } 
     }
 
     public class Sector {
         public string SectorName { get; set; }
-        public string StockPrice { get; set; }
+        public decimal StockPrice { get; set; }
+    }
+
+    public class AllStockMarketRecords
+    {
+        public StockMarket StockMarket { get; set; } = new StockMarket();
+        public List<Sector> Sectors { get; set; } = new List<Sector>();
     }
 }
