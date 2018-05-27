@@ -25,5 +25,17 @@ namespace NextGenStockMarketAPI.Controllers.Api
             return Ok(await stockMarketService.GetMarketData());
         }
 
+        [HttpGet, Route("getcompanies")]
+        public async Task<IHttpActionResult> GetCompanies()
+        {
+            return Ok(await stockMarketService.getCompany());
+        }
+
+        [HttpGet, Route("getsectors")]
+        public async Task<IHttpActionResult> GetSectors(string companyName)
+        {
+            return Ok(await stockMarketService.getSector(companyName));
+        }
+
     }
 }

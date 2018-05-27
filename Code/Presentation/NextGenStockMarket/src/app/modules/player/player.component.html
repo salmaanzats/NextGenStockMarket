@@ -5,6 +5,7 @@
     <div class="form-group">
       <label for="usr">Enter Player Name :</label>
       <input type="text" class="form-control" id="usr" formControlName="playerName">
+      
       <div *ngIf="playerForm.controls['playerName'].errors && (!playerForm.controls['playerName'].pristine || isFormSubmitted)">
         <small [hidden]="!playerForm.controls['playerName'].errors.required">
           <i class="fas fa-info-circle m-r-5"></i>Player Name is required.</small>

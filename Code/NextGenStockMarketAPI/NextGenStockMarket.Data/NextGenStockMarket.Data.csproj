@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="DataContext.cs" />
     <Compile Include="Entities\Bank.cs" />
+    <Compile Include="Entities\Broker.cs" />
     <Compile Include="Entities\StockMarket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

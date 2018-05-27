@@ -18,7 +18,8 @@ namespace NextGenStockMarketAPI.Utility
    
             builder.RegisterType<BankService>().As<IBankService>().InstancePerRequest();
             builder.RegisterType<StockMarketService>().As<IStockMarketService>().InstancePerRequest();
-
+            builder.RegisterType<BrokerService>().As<IBrokerService>().InstancePerRequest();
+            
             var container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
             return container;

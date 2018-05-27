@@ -9,5 +9,6 @@ namespace NextGenStockMarket.Service.Utility
     public class Constants
     {
         public static int cacheTime = 60;
+        public static string marketData = "StockData";
     }
 }

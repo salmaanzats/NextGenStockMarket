@@ -13,6 +13,7 @@ import { Player } from '../model/player';
 export class PlayerComponent implements OnInit {
 
   playerForm: FormGroup;
+
   player = new Player();
   isFormSubmitted = false;
 
@@ -39,7 +40,7 @@ export class PlayerComponent implements OnInit {
 
     this.playerService.createPlayer(this.player)
       .subscribe(playerInfo => {
-        this.router.navigate(['/game',playerInfo.PlayerName]);
+        this.router.navigate(['/game', playerInfo.PlayerName]);
         this.toastr.success("Player Has been successfully created!", "Success");
       }, error => {
         this.toastr.error("Player exist with the provided name!try a different name", "Warning");
