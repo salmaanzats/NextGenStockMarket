@@ -10,15 +10,17 @@ namespace NextGenStockMarket.Service
     public class BankService : IBankService
     {
         protected readonly ICacheManager cache;
+        protected readonly IClockService clockService;
 
-        public BankService()
+        public BankService(IClockService _clockService)
         {
             cache = new MemoryCacheManager();
+            clockService = _clockService;
         }
 
         public async Task<BankAccount> CreateBankAccount(BankAccount bank)
         {
-            var Bank = cache.Get<BankAccount>(bank.PlayerName);
+            var Bank = cache.Get<BankAccount>(bank.PlayerName+"_Bank");
 
             if (Bank != null)
             {
@@ -28,6 +30,11 @@ namespace NextGenStockMarket.Service
                 }
             }
 
+            var clock = new Clock();
+            clock.PlayerName = bank.PlayerName;
+            clock.PlayerTurn = 0;
+            this.clockService.CreateClock(clock);
+
             BankAccount newPlayer = new BankAccount() { };
             newPlayer.PlayerName = bank.PlayerName;
             newPlayer.Balance = bank.Balance;
@@ -35,17 +42,17 @@ namespace NextGenStockMarket.Service
             var bankRecords = new AllBankRecords() { };
             bankRecords.Accounts = newPlayer;
            
-            cache.Set(newPlayer.PlayerName, bankRecords, Constants.cacheTime);
+            cache.Set(newPlayer.PlayerName + "_Bank", bankRecords, Constants.cacheTime);
             return newPlayer;
         }
 
         public async Task<AllBankRecords> ShowBankBalance(string playerName)
         {
-            var playerAccount = cache.Get<AllBankRecords>(playerName);
+            var playerAccount = cache.Get<AllBankRecords>(playerName + "_Bank");
 
             if (playerAccount == null)
             {
-                throw new Exception("No bank account exist for provided data");
+                throw new Exception("No bank account exists for provided player");
             }
 
             return playerAccount;
@@ -53,11 +60,21 @@ namespace NextGenStockMarket.Service
 
         public async Task<AllBankRecords> Deposit(BankTransaction transaction)
         {
-            var playerAccount = cache.Get<AllBankRecords>(transaction.PlayerName);
+            var playerAccount = cache.Get<AllBankRecords>(transaction.PlayerName + "_Bank");
+            var turn = cache.Get<Clock>(transaction.PlayerName + "_Clock");
 
             if (playerAccount == null)
             {
-                throw new Exception("No bank account exist for provided data");
+                throw new Exception("No bank account exists for provided player");
+            }
+
+            var clock = new Clock();
+            clock.PlayerName = turn.PlayerName;
+            clock.PlayerTurn += 1;
+            var gameStatus =  this.clockService.PlayerTurn(clock);
+            if(gameStatus == Constants.gameOver)
+            {
+                throw new Exception("Game Over");
             }
 
             playerAccount.Accounts.Balance += transaction.Price;
@@ -66,17 +83,27 @@ namespace NextGenStockMarket.Service
             bankRecords = playerAccount;
             bankRecords.BankTransactions.Add(transaction);
 
-            cache.Set(transaction.PlayerName, bankRecords, Constants.cacheTime);
+            cache.Set(transaction.PlayerName + "_Bank", bankRecords, Constants.cacheTime);
             return bankRecords;
         }
 
         public async Task<AllBankRecords> Withdraw(BankTransaction transaction)
         {
-            var playerAccount = cache.Get<AllBankRecords>(transaction.PlayerName);
+            var playerAccount = cache.Get<AllBankRecords>(transaction.PlayerName + "_Bank");
+            var turn = cache.Get<Clock>(transaction.PlayerName + "_Clock");
 
             if (playerAccount == null)
             {
-                throw new Exception("No bank account exist for provided data");
+                throw new Exception("No bank account exists for provided player");
+            }
+
+            var clock = new Clock();
+            clock.PlayerName = turn.PlayerName;
+            clock.PlayerTurn += 1;
+            var gameStatus = this.clockService.PlayerTurn(clock);
+            if (gameStatus == Constants.gameOver)
+            {
+                throw new Exception("Game Over");
             }
 
             playerAccount.Accounts.Balance -= transaction.Price;
@@ -85,7 +112,7 @@ namespace NextGenStockMarket.Service
             bankRecords = playerAccount;
             bankRecords.BankTransactions.Add(transaction);
 
-            cache.Set(transaction.PlayerName, bankRecords, Constants.cacheTime);
+            cache.Set(transaction.PlayerName + "_Bank", bankRecords, Constants.cacheTime);
             return bankRecords;
         }
     }

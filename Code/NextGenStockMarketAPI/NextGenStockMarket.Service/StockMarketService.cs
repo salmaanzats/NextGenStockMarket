@@ -141,45 +141,5 @@ namespace NextGenStockMarket.Service
             cache.Set(Constants.marketData, allMarketData, Constants.cacheTime);
             return allMarketData;
         }
-
-        public async Task<List<StockMarket>> getCompany()
-        {
-            var companies = new List<StockMarket>();
-            var markets = cache.Get<List<AllStockMarketRecords>>(Constants.marketData);
-
-            if (markets == null)
-            {
-                throw new Exception("Stock market is empty");
-            }
-
-            foreach (var market in markets)
-            {
-                companies.Add(market.StockMarket);
-            }
-
-            return companies;
-        }
-
-        public async Task<List<Sector>> getSector(string companyName)
-        {
-            var sectors = new List<Sector>();
-            var markets = cache.Get<List<AllStockMarketRecords>>(Constants.marketData);
-
-            if (markets == null)
-            {
-                throw new Exception("Stock market is empty");
-            }
-
-            foreach (var market in markets)
-            {
-                if (market.StockMarket.CompanyName == companyName)
-                {
-                    sectors =market.Sectors;
-                }
-            }
-
-            return sectors;
-        }
-
     }
 }

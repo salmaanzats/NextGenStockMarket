@@ -11,9 +11,11 @@ namespace NextGenStockMarket.Data.Entities
 
         public class BrokerInfo
         {
+            public string PlayerName { get; set; }
             public string Sector { get; set; }
             public int Quantity { get; set; }
             public decimal StockPrice { get; set; }
+            public string Status { get; set; }
         }
 
         public class AllBrokerData
