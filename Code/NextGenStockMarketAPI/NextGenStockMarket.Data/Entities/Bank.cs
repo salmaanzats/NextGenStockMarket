@@ -19,6 +19,6 @@ namespace NextGenStockMarket.Data.Entities
     public class AllBankRecords
     {
         public BankAccount Accounts { get; set; }
-        public ICollection<BankTransaction> BankTransactions { get; set; } = new List<BankTransaction>();
+        public List<BankTransaction> BankTransactions { get; set; } = new List<BankTransaction>();
     }
 }

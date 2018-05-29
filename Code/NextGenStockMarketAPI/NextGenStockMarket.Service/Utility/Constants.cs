@@ -6,7 +6,7 @@
         public static string marketData = "StockData";
         public static string boughtStock = "Buy";
         public static string sellStock = "sell";
-        public static int maximumPlayers = 4;
+        public static int maximumPlayers = 3;
         public static int gameTurns = 2;
         public static string gameOver = "Game Over";
         public static string play = "Play";
