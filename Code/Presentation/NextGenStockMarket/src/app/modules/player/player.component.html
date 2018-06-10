@@ -1,16 +1,36 @@
-<div class="container">
+<div class="container" style="background: #555555;">
   <h2>Stock Market Simulation Game</h2>
-  <p>Register to Play</p>
-  <form [formGroup]="playerForm" novalidate>
-    <div class="form-group">
-      <label for="usr">Enter Player Name:</label>
-      <input type="text" class="form-control" id="usr" formControlName="playerName">
-      
-      <div *ngIf="playerForm.controls['playerName'].errors && (!playerForm.controls['playerName'].pristine || isFormSubmitted)">
-        <small [hidden]="!playerForm.controls['playerName'].errors.required">
-          <i class="fas fa-info-circle m-r-5"></i>Player Name is required.</small>
-      </div>
+  <div class="modal-body row" style="background: rgba(168, 59, 59);">
+    <div class="col-md-6" style="background: #952;">
+      <p>Register to Play</p>
+      <form [formGroup]="playerForm" novalidate>
+        <div class="form-group">
+          <label for="usr">Enter Player Name:</label>
+          <input type="text" class="form-control" id="usr" formControlName="playerName">
+
+          <div *ngIf="playerForm.controls['playerName'].errors && (!playerForm.controls['playerName'].pristine || isFormSubmitted)">
+            <small [hidden]="!playerForm.controls['playerName'].errors.required">
+              <i class="fas fa-info-circle m-r-5"></i>Player Name is required.</small>
+          </div>
+        </div>
+        <button class="btn btn-default" (click)="createPlayer()">Create Player</button>
+      </form>
     </div>
-    <button class="btn btn-default" (click)="createPlayer()">Create Player</button>
-  </form>
+    <div class="col-md-6" style="background: #952254;">
+      <p>If you are already registerd</p>
+      <form [formGroup]="playerForm" novalidate>
+        <div class="form-group">
+          <label for="usr">Enter Player Name:</label>
+          <input type="text" class="form-control" id="usr" formControlName="playerName">
+
+          <div *ngIf="playerForm.controls['playerName'].errors && (!playerForm.controls['playerName'].pristine || isFormSubmitted)">
+            <small [hidden]="!playerForm.controls['playerName'].errors.required">
+              <i class="fas fa-info-circle m-r-5"></i>Player Name is required.</small>
+          </div>
+        </div>
+        <button class="btn btn-default" (click)="createPlayer()">Play</button>
+      </form>
+    </div>
+  </div>
+
 </div>
