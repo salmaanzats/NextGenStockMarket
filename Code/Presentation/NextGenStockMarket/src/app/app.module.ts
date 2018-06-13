@@ -13,13 +13,19 @@ import { HttpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GameComponent } from './modules/game/game.component';
 import { GameService } from './modules/service/game.service';
+import { SidebarComponent } from './modules/layout/sidebar/sidebar/sidebar.component';
+import { BankTransactionComponent } from './modules/bank-transaction/bank-transaction.component';
+import { PlayerPortfolioComponent } from './modules/player-portfolio/player-portfolio.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     PlayerComponent,
-    GameComponent
+    GameComponent,
+    SidebarComponent,
+    BankTransactionComponent,
+    PlayerPortfolioComponent
   ],
   imports: [
     BrowserModule,

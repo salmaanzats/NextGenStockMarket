@@ -1,18 +1,4 @@
-<!-- Sidebar -->
-<div id="sidebar-wrapper">
-  <ul class="sidebar-nav">
-    <li class="sidebar-brand">
-      <a href="#">History</a>
-    </li>
-    <li>
-      <a href="#">Recent activities</a>
-    </li>
-    <li>
-      <a href="#">History</a>
-    </li>
-
-  </ul>
-</div>
+<app-sidebar></app-sidebar>
 <div class="modal-body" style="background: #555555;margin-left: 250px">
   <div class="row row-flex-box" style="background: rgba(168, 59, 59);">
     <div class="col-xs-6 col-sm-6 col-md-3">
@@ -20,7 +6,7 @@
         <div class="caption">
           <H4>
             <span>Balance: </span>
-            <span>VALUE</span>
+            <span>${{this.balance}}</span>
           </H4>
         </div>
       </div>
@@ -50,7 +36,7 @@
         <div class="caption">
           <H4>
             <span>Player: </span>
-            <span> VALUE</span>
+            <span>{{this.player}}</span>
           </H4>
         </div>
       </div>
@@ -59,32 +45,29 @@
 
 
   <div class="row row-flex-box" style="margin-top: 10px; background: yellow;">
-   
-    
-    <div class="container">
 
+    <div class="container">
       <div class="row">
-    
         <div class="space sm-col-3">
           <h4>Google Stock Details</h4>
           <table class="table table-bordered table-striped">
-    
+
             <thead>
               <tr>
                 <th>Sector</th>
                 <th>Price</th>
               </tr>
             </thead>
-    
+
             <tbody>
               <tr *ngFor="let sector of this.google.Sectors">
                 <td>{{sector.SectorName}}</td>
                 <td>{{sector.StockPrice}}</td>
               </tr>
             </tbody>
-    
+
           </table>
-    
+
         </div>
 
         <div class="space sm-col-3">
@@ -104,9 +87,9 @@
               </tr>
             </tbody>
           </table>
-    
+
         </div>
-    
+
         <div class="space sm-col-3">
 
           <h4>Microsoft Stock Details</h4>
@@ -124,32 +107,28 @@
               </tr>
             </tbody>
           </table>
-    
+
         </div>
-    
+
         <div class="space sm-col-3">
 
-        <h4>Amazon Stock Details</h4>
-        <table class="table table-bordered table-striped">
-          <thead>
-            <tr>
-              <th>Sector</th>
-              <th>Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let sector of this.amazon.Sectors">
-              <td>{{sector.SectorName}}</td>
-              <td>{{sector.StockPrice}}</td>
-            </tr>
-          </tbody>
-        </table>       
+          <h4>Amazon Stock Details</h4>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Sector</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let sector of this.amazon.Sectors">
+                <td>{{sector.SectorName}}</td>
+                <td>{{sector.StockPrice}}</td>
+              </tr>
+            </tbody>
+          </table>
 
-        </div> 
+        </div>
       </div>
-
-
+    </div>
   </div>
-
-
-</div>

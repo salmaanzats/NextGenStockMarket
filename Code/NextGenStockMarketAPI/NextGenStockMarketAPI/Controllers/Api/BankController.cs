@@ -31,16 +31,22 @@ namespace NextGenStockMarketAPI.Controllers.Api
             return Ok(await bankService.ShowBankBalance(playerName));
         }
 
-        //[HttpPut, Route("bank/deposit")]
-        //public async Task<IHttpActionResult> Deposit(BankTransaction transaction)
-        //{
-        //    return Ok(await bankService.Deposit(transaction));
-        //}
+        [HttpPut, Route("bank/deposit")]
+        public async Task<IHttpActionResult> Deposit(BankTransaction transaction)
+        {
+            return Ok(await bankService.Deposit(transaction));
+        }
 
-        //[HttpPut, Route("bank/withdraw")]
-        //public async Task<IHttpActionResult> Withdraw(BankTransaction transaction)
-        //{
-        //    return Ok(await bankService.Withdraw(transaction));
-        //}
+        [HttpPut, Route("bank/withdraw")]
+        public async Task<IHttpActionResult> Withdraw(BankTransaction transaction)
+        {
+            return Ok(await bankService.Withdraw(transaction));
+        }
+
+        [HttpPost, Route("bank/getaccount")]
+        public async Task<IHttpActionResult> GetAccount([FromBody]BankAccount bankAccount)
+        {
+            return Ok(await bankService.GetBankAccount(bankAccount));
+        }
     }
 }

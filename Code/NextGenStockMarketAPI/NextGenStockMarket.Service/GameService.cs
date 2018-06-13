@@ -32,7 +32,7 @@ namespace NextGenStockMarket.Service
 
                 if (connectedPlayers.Players.Count == Constants.maximumPlayers)
                 {
-                    throw new Exception("Can't create account. Maximum players are connected!");
+                    throw new Exception("Can't create a account. Maximum players are connected!");
                 }
                 else
                 {

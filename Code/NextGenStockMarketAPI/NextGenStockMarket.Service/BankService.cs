@@ -23,9 +23,9 @@ namespace NextGenStockMarket.Service
         public async Task<BankAccount> CreateBankAccount(BankAccount bank)
         {
             var players = new Players();
-            players.PlayerName = bank.PlayerName; 
+            players.PlayerName = bank.PlayerName;
 
-            var status =  gameService.CreatePlayer(players);
+            var status = gameService.CreatePlayer(players);
             if (status == "Created")
             {
 
@@ -57,6 +57,18 @@ namespace NextGenStockMarket.Service
             return null;
         }
 
+        public async Task<AllBankRecords> GetBankAccount(BankAccount bank)
+        {
+            var playerBank = cache.Get<AllBankRecords>(bank.PlayerName + "_Bank");
+
+            if (playerBank == null)
+            {
+                throw new Exception("No bank account exists for provided player");
+            }
+           
+            return playerBank;
+        }
+
         public async Task<AllBankRecords> ShowBankBalance(string playerName)
         {
             var playerAccount = cache.Get<AllBankRecords>(playerName + "_Bank");
@@ -82,8 +94,8 @@ namespace NextGenStockMarket.Service
             var clock = new Clock();
             clock.PlayerName = turn.PlayerName;
             clock.PlayerTurn += 1;
-            var gameStatus =  this.clockService.PlayerTurn(clock);
-            if(gameStatus == Constants.gameOver)
+            var gameStatus = this.clockService.PlayerTurn(clock);
+            if (gameStatus == Constants.gameOver)
             {
                 throw new Exception("Game Over");
             }
