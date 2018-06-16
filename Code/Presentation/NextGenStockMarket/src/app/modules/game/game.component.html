@@ -26,7 +26,7 @@
         <div class="caption">
           <H4>
             <span>Turn: </span>
-            <span>VALUE</span>
+            <span>VALUE</span> 
           </H4>
         </div>
       </div>
@@ -131,4 +131,45 @@
         </div>
       </div>
     </div>
+    
   </div>
+  <div class = "D1">
+     <table>
+      <tr>
+        <td><label class="lbl1" for="selectMarket">Select Market  : </label></td>
+        <td> <select class = "Marketdropdown" id="market">
+                <option selected value="base">----------</option>
+                 <option value="google">Google</option>
+                  <option value="yahoo">Yahoo</option>
+                  <option value="amazon">Amazon</option>
+                   <option value="microsoft">Microsoft</option>
+
+                </select>
+      </td>
+      <!--<td><input type="text" class="form-control" id="selectMarket" formControlName="selectMarket"></td>-->
+      </tr>
+      <tr>
+        <td><label class="lbl1" for="selectSector">Select Sector  : </label></td>
+       <td> <select class = "Sectordropdown" id="sector">
+                <option selected value="base" >----------</option>
+                 <option value="financial">Financial</option>
+                  <option value="AI">Artificial Intelligence</option>
+                  <option value="robotics">Robotics</option>
+                   <option value="android">Android</option>
+
+                </select>
+      </td> 
+      <!--<td><input type="text" class="form-control" id="selectSector" formControlName="selectSector"></td>-->
+      <td><label class="lbl1" for="selectPrice">Price  : </label></td>
+      <td><input type="text" class="form-control" id="selectPrice" formControlName="selectPrice"></td>
+      </tr>
+      <tr><td><label class="lbl1" for="selectStock">Stock  : </label></td>
+      <td><input type="text" class="form-control" id="selectStock" formControlName="selectStock"></td></tr>
+      </table><table><tr>
+      <td><label class="lbl2" for="totalAmount">Total Amount  : </label></td>
+      <td><input type="text" class="form-control" id="totalAmount" formControlName="totalAmount"></td>  
+      </tr></table>
+     ><button class="btn btn-default" style="margin-left: 900px;" (click)="checkExistingPlayer()"> Buy </button>
+  
+  </div>
+     </div>
