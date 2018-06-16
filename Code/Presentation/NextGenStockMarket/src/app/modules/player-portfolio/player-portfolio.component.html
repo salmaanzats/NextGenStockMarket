@@ -1,4 +1,25 @@
 <app-sidebar></app-sidebar>
-<p>
-  player-portfolio works!
-</p>
+<div class="modal-body" style="background: #d6e5ff;margin-left: 250px">
+  <app-header></app-header>
+  <h4>Portfolio</h4>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Sector</th>
+        <th>Stock</th>
+        <th>Stock Price</th>
+        <th>Quantity</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let info of brokerInfo">
+        <td>{{info.Sector}}</td>
+        <td>{{info.Stock}}</td>
+        <td>{{info.StockPrice}}</td>
+        <td>{{info.Quantity}}</td>
+        <td>{{info.Status}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

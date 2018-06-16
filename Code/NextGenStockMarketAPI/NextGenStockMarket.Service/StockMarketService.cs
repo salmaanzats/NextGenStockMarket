@@ -1,4 +1,4 @@
-﻿using Inx.CarWash.Core.Cache;
+﻿using Core.Cache;
 using NextGenStockMarket.Data.Entities;
 using NextGenStockMarket.Service.Interface;
 using NextGenStockMarket.Service.Utility;

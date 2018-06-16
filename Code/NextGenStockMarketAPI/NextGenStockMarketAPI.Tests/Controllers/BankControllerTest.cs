@@ -32,10 +32,10 @@ namespace NextGenStockMarketAPI.Tests.Controllers
 
             var account = DemoBankAccount();
 
-            var result = controller.;
+            //var result = controller.;
 
-            Assert.IsNotNull(result);
-            Console.WriteLine(result);
+            //Assert.IsNotNull(result);
+            //Console.WriteLine(result);
         }
       BankAccount DemoBankAccount()
         {

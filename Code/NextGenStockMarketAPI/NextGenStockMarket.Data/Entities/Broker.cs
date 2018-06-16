@@ -13,6 +13,7 @@ namespace NextGenStockMarket.Data.Entities
         {
             public string PlayerName { get; set; }
             public string Sector { get; set; }
+            public string Stock { get; set; }
             public int Quantity { get; set; }
             public decimal StockPrice { get; set; }
             public string Status { get; set; }
