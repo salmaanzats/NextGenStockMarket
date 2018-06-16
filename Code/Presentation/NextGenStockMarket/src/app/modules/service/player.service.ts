@@ -21,5 +21,12 @@ export class PlayerService extends BaseService {
       .catch(this.errorHandler)
   }
 
+  checkExistingPlayer(player){
+    return this.http.post(`${this.bankEndPoint}/getaccount`,
+    player, this.httpOptions)
+    .map(response => response)
+    .catch(this.errorHandler)
+  }
+
 
 }
