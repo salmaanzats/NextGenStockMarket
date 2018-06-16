@@ -7,8 +7,6 @@ import { Stock } from '../model/stock';
 import { BrokerService } from '../service/broker.service';
 import { Constants } from '../core/constants';
 import { BlockUiService } from '../core/services/block-ui.service';
-import { statSync } from 'fs';
-import { reject } from 'q';
 
 @Component({
   selector: 'app-game',
