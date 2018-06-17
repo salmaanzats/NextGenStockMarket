@@ -35,7 +35,7 @@ namespace NextGenStockMarketAPI.Tests.Controllers
             var result = controller.Get(account.PlayerName); //as CreatedAtRouteNegotiatedContentResult<>;
 
             Assert.IsNotNull(result);
-           Assert.Equals(result, account.Balance);
+            Assert.Equals(result.ToString(), account.Balance);
             Console.WriteLine(result);
         }
       BankAccount DemoBankAccount()

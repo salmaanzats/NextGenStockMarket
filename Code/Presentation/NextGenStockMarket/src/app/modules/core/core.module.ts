@@ -1,6 +1,7 @@
 import { NgModule, ModuleWithProviders, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BaseService } from './services/base.service';
+import { BlockUiService } from './services/block-ui.service';
 
 @NgModule({
   imports: [
@@ -20,7 +21,7 @@ export class CoreModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: CoreModule,
-      providers: [BaseService]
+      providers: [BaseService,BlockUiService]
     };
   }
  }

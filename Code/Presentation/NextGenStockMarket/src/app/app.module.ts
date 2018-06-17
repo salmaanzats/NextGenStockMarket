@@ -16,6 +16,8 @@ import { GameService } from './modules/service/game.service';
 import { SidebarComponent } from './modules/layout/sidebar/sidebar/sidebar.component';
 import { BankTransactionComponent } from './modules/bank-transaction/bank-transaction.component';
 import { PlayerPortfolioComponent } from './modules/player-portfolio/player-portfolio.component';
+import { BrokerService } from './modules/service/broker.service';
+import { HeaderComponent } from './modules/layout/header/header/header.component';
 
 
 @NgModule({
@@ -25,7 +27,8 @@ import { PlayerPortfolioComponent } from './modules/player-portfolio/player-port
     GameComponent,
     SidebarComponent,
     BankTransactionComponent,
-    PlayerPortfolioComponent
+    PlayerPortfolioComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,7 @@ import { PlayerPortfolioComponent } from './modules/player-portfolio/player-port
     SharedModule,
     CoreModule.forRoot(),
   ],
-  providers: [PlayerService, GameService],
+  providers: [PlayerService, GameService, BrokerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

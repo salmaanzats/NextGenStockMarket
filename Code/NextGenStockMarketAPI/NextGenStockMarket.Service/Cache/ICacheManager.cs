@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Inx.CarWash.Core.Cache
+namespace Core.Cache
 {
     public interface ICacheManager : IDisposable
     {

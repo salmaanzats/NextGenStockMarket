@@ -3,6 +3,10 @@ import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr';
+import { Stock } from '../model/stock';
+import { BrokerService } from '../service/broker.service';
+import { Constants } from '../core/constants';
+import { BlockUiService } from '../core/services/block-ui.service';
 
 @Component({
   selector: 'app-game',
@@ -12,16 +16,30 @@ import { ToastsManager } from 'ng2-toastr';
 
 export class GameComponent implements OnInit {
 
-  totalStock = [];
   google = [];
   yahoo = [];
   amazon = [];
   microsoft = [];
-  player: string;
-  balance:number;
+  sectors = [];
+  stocks = [];
+  stockPrices = [];
 
-  constructor(private fb: FormBuilder, private router: Router, private gameService: GameService, private activatedRoute: ActivatedRoute,
-    private toastr: ToastsManager, vcr: ViewContainerRef) {
+  stockEntity = new Stock();
+
+  selectedSector: string;
+  selectedStock: string;
+  player: string;
+  balance: number;
+  stockPrice: number;
+  stockQuantity: number;
+  totalAmount: number;
+  currentTurn: number = 0;
+  totalTurns: number = Constants.maximumTurn;
+  isBlocked = false;
+  message = 'Please wait until all players connect';
+
+  constructor(private router: Router, private gameService: GameService, private activatedRoute: ActivatedRoute,
+    private toastr: ToastsManager, vcr: ViewContainerRef, private blockUiService: BlockUiService) {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
@@ -31,10 +49,22 @@ export class GameComponent implements OnInit {
       if (this.player != null || this.player != undefined) {
         this.loadPlayerData();
         this.loadStockData();
+        this.getCurrentTurn();
+        this.gamePlay();
       }
     });
   }
-
+  gamePlay() {
+    this.gameService.getConnectedPlayers()
+      .subscribe(playerCount => {
+        if (playerCount == Constants.maximumPlayers) {
+          this.isBlocked = false;
+        } else {
+          this.isBlocked = true;
+          this.gamePlay();
+        }
+      });
+  }
   loadStockData() {
     this.gameService.getStockData()
       .subscribe(data => {
@@ -42,6 +72,7 @@ export class GameComponent implements OnInit {
         this.yahoo = data[1];
         this.microsoft = data[2];
         this.amazon = data[3];
+        this.loadSectors();
       }, error => {
         this.toastr.warning("Error in loading stock data", "Warning");
       });
@@ -57,5 +88,81 @@ export class GameComponent implements OnInit {
           this.router.navigate([''])
         }, 3000);
       })
+  }
+
+  loadSectors() {
+    this.gameService.getSectorData()
+      .subscribe(sect => {
+        this.sectors = sect;
+        this.getStocks();
+      }, error => {
+        this.toastr.warning("Error in loading Sectors", "Warning");
+      });
+  }
+
+  getStocks() {
+    this.gameService.getStockToSectors(this.selectedSector)
+      .subscribe(stocks => {
+        this.stocks = stocks;
+      }, error => {
+        this.toastr.warning("Error in loading stocks", "Warning");
+      });
+  }
+
+  loadPrice() {
+    this.stockPrice = this.stocks.find(s => s.SectorName == this.selectedStock).StockPrice;
+  }
+
+  calculateTotalAmount() {
+    this.totalAmount = this.stockQuantity * this.stockPrice;
+  }
+
+  buyStocks() {
+    this.stockEntity.PlayerName = this.player;
+    this.stockEntity.Sector = this.selectedSector;
+    this.stockEntity.Stock = this.selectedStock;
+    this.stockEntity.Quantity = this.stockQuantity;
+    this.stockEntity.StockPrice = this.stockPrice;
+    this.gameService.buyStocks(this.stockEntity)
+      .subscribe(bought => {
+        this.toastr.success("Your purchase has been successfully completed", "Success");
+        this.loadPlayerData();
+        this.getCurrentTurn();
+      }, error => {
+        this.toastr.warning(error, "Warning");
+      });
+  }
+
+  gameOver() {
+    this.gameService.getGameStatus()
+      .subscribe(status => {
+        if (status == 'Game Over') {
+          this.gameService.getWinner()
+            .subscribe(winner => {
+              this.isBlocked = true;
+              this.message = 'winner :' + winner.Accounts.PlayerName + '  Score:' + winner.Accounts.Balance;
+              setTimeout(() => {
+                this.gameService.newGame()
+                this.router.navigate([''])
+              }, 4000);
+            });
+        } else {
+          this.isBlocked = true;
+          this.message = 'Game Over...Please wait until other players finish';
+          this.gameOver();
+        }
+      });
+  }
+
+  getCurrentTurn() {
+    this.gameService.getBankData(this.player)
+      .subscribe(bankdata => {
+        this.currentTurn = bankdata.CurrentTurn;
+        if(this.currentTurn == Constants.maximumTurn){
+          this.gameOver();
+        }
+      }, error => {
+        this.toastr.warning(error, "Warning");
+      });
   }
 }
