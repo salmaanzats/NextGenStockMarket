@@ -13,11 +13,12 @@ namespace NextGenStockMarket.Service
     {
         protected readonly ICacheManager cache;
         protected readonly IBankService bankService;
-
+    
         public BrokerService(IBankService _bankService)
         {
             cache = new MemoryCacheManager();
             bankService = _bankService;
+           
         }
 
         public async Task<BrokerAccount> CreateAccount(string playerName)
@@ -85,6 +86,8 @@ namespace NextGenStockMarket.Service
 
         public async Task<AllBrokerData> BuyStock(BrokerInfo brokerInfo)
         {
+            var stockbuy = new StockMarketService();
+            var markets = cache.Get<List<AllStockMarketRecords>>(Constants.marketData);
             var playerBrokerAccount = cache.Get<AllBrokerData>(brokerInfo.PlayerName + "_Broker");
 
             if (playerBrokerAccount == null)
@@ -117,6 +120,10 @@ namespace NextGenStockMarket.Service
             brokerRecords.BrokerInfos.Add(brokerInfo);
 
             cache.Set(brokerInfo.PlayerName + "_Broker", brokerRecords, Constants.cacheTime);
+            int GameTurn = 1;
+            var CompaniesList = await GetSector(brokerInfo.StockName);
+            stockbuy.BuyStock(brokerInfo, CompaniesList, GameTurn, markets);
+
             return brokerRecords;
         }
 
