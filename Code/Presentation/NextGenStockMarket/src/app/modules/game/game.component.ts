@@ -125,7 +125,7 @@ export class GameComponent implements OnInit {
 
   buyStocks() {
     this.isFormSubmitted = true;
-  //if(this.selectedSector == '' || this.selectedStock== ''|| this.stockQuantity== 0 ||this.stockPrice== 0)return;
+if(this.selectedSector == '' || this.selectedStock== ''|| this.stockQuantity== 0 ||this.stockPrice== 0)return;
     this.stockEntity.PlayerName = this.player;
     this.stockEntity.Sector = this.selectedSector;
     this.stockEntity.Stock = this.selectedStock;
