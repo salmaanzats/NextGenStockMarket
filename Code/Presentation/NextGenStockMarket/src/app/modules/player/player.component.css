@@ -6,3 +6,23 @@
     display: flex;
     flex:1 0 auto;
   }
+
+
+.bg {
+    /* The image used */
+    background-image: url("/assets/images/stock3.jpg");
+
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+h1{
+  line-height: 30px;
+  
+  margin-bottom:50px;
+}

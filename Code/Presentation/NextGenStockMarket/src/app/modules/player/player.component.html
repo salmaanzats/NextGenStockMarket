@@ -1,11 +1,12 @@
-<div class="container" style="background: #555555;">
-  <h2>Stock Market Simulation Game</h2>
-  <div class="modal-body row" style="background: rgba(168, 59, 59);">
-    <div class="col-md-6" style="background: #952;">
-      <p>Register to Play</p>
+<body class="bg">
+<div class="container" style="height: 796px;">
+  
+  <div class="modal-body row" >
+    <div class="col-md-6" style="margin-top: 190px;">
+      <h3><p style="color:mediumblue">Register to Play...</p></h3>
       <form [formGroup]="playerForm" novalidate>
         <div class="form-group">
-          <label for="usr">Enter Player Name:</label>
+          <label for="usr"><h4 style="color:orangered">Enter Player Name:</h4></label>
           <input type="text" class="form-control" id="usr" formControlName="playerName">
 
           <div *ngIf="playerForm.controls['playerName'].errors && (!playerForm.controls['playerName'].pristine || isFormSubmitted)">
@@ -16,11 +17,11 @@
         <button class="btn btn-default" (click)="createPlayer()">Create Player</button>
       </form>
     </div>
-    <div class="col-md-6" style="background: #952254;">
-      <p>If you are already registerd</p>
+    <div class="col-md-6" style="margin-top: 190px;">
+      <h3><p style="color: mediumblue">If you are already registered...</p></h3>
       <form [formGroup]="playerForm" novalidate>
         <div class="form-group">
-          <label for="usr">Enter Player Name:</label>
+          <label for="usr"><h4 style="color:orangered">Enter Player Name:</h4></label>
           <input type="text" class="form-control" id="usr" formControlName="playerName">
 
           <div *ngIf="playerForm.controls['playerName'].errors && (!playerForm.controls['playerName'].pristine || isFormSubmitted)">
@@ -34,3 +35,4 @@
   </div>
 
 </div>
+</body>
