@@ -42,7 +42,7 @@ namespace NextGenStockMarketAPI.Tests.Controllers
         {
             var controller = new NextGenStockMarketAPI.Controllers.Api.BrokerController();
 
-            var result = controller.GetSectors("Google");
+            var result = controller.GetCompanies();
 
             Assert.IsNotNull(result);
             Console.WriteLine(result);

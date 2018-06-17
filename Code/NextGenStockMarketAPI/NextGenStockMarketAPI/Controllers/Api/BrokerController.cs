@@ -14,10 +14,14 @@ namespace NextGenStockMarketAPI.Controllers.Api
         {
             brokerService = _brokerService;
         }
+        public BrokerController() { }
 
-        [HttpPost, Route("createaccount")]
+
+     //   [HttpPost, Route("createaccount")]
+
         [HttpPost, Route("broker/createaccount")]
-		public BrokerController() {}        public async Task<IHttpActionResult> Create(string playerName)
+		
+        public async Task<IHttpActionResult> Create(string playerName)
         {
             return Ok(await brokerService.CreateAccount(playerName));
         }
