@@ -141,6 +141,7 @@
       <div class="col-6">
         <label> Select stock : </label>
         <select class="form-control" [(ngModel)]="selectedStock" (change)="loadPrice()">
+          <option selected>Select a stock</option>
           <option *ngFor="let stock of stocks">{{stock.SectorName}}</option>
         </select>
       </div>

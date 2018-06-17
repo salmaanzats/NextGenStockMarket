@@ -30,13 +30,14 @@ export class GameComponent implements OnInit {
   selectedStock: string;
   player: string;
   balance: number;
-  stockPrice: number;
-  stockQuantity: number;
+  stockPrice: number = 0;
+  stockQuantity: number =0;
   totalAmount: number;
   currentTurn: number = 0;
   totalTurns: number = Constants.maximumTurn;
   isBlocked = false;
   message = 'Please wait until all players connect';
+  isFormSubmitted = false;
 
   constructor(private router: Router, private gameService: GameService, private activatedRoute: ActivatedRoute,
     private toastr: ToastsManager, vcr: ViewContainerRef, private blockUiService: BlockUiService) {
@@ -104,6 +105,9 @@ export class GameComponent implements OnInit {
     this.gameService.getStockToSectors(this.selectedSector)
       .subscribe(stocks => {
         this.stocks = stocks;
+        this.stockQuantity = null;
+        this.stockPrice = null;
+        this.totalAmount = null;
       }, error => {
         this.toastr.warning("Error in loading stocks", "Warning");
       });
@@ -111,6 +115,8 @@ export class GameComponent implements OnInit {
 
   loadPrice() {
     this.stockPrice = this.stocks.find(s => s.SectorName == this.selectedStock).StockPrice;
+    this.stockQuantity = null;
+    this.totalAmount = null;
   }
 
   calculateTotalAmount() {
@@ -118,6 +124,8 @@ export class GameComponent implements OnInit {
   }
 
   buyStocks() {
+    this.isFormSubmitted = true;
+  //if(this.selectedSector == '' || this.selectedStock== ''|| this.stockQuantity== 0 ||this.stockPrice== 0)return;
     this.stockEntity.PlayerName = this.player;
     this.stockEntity.Sector = this.selectedSector;
     this.stockEntity.Stock = this.selectedStock;
@@ -128,6 +136,9 @@ export class GameComponent implements OnInit {
         this.toastr.success("Your purchase has been successfully completed", "Success");
         this.loadPlayerData();
         this.getCurrentTurn();
+        this.stockQuantity = null;
+        this.stockPrice = null;
+        this.totalAmount = null;
       }, error => {
         this.toastr.warning(error, "Warning");
       });
@@ -143,7 +154,9 @@ export class GameComponent implements OnInit {
               this.message = 'winner :' + winner.Accounts.PlayerName + '  Score:' + winner.Accounts.Balance;
               setTimeout(() => {
                 this.gameService.newGame()
-                this.router.navigate([''])
+                  .subscribe(res => {
+                    this.router.navigate(['']);
+                  });
               }, 4000);
             });
         } else {
@@ -158,7 +171,7 @@ export class GameComponent implements OnInit {
     this.gameService.getBankData(this.player)
       .subscribe(bankdata => {
         this.currentTurn = bankdata.CurrentTurn;
-        if(this.currentTurn == Constants.maximumTurn){
+        if (this.currentTurn == Constants.maximumTurn) {
           this.gameOver();
         }
       }, error => {

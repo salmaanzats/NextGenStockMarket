@@ -2,6 +2,7 @@ import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr';
 import { GameService } from '../../../service/game.service';
+import { Constants } from '../../../core/constants';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,7 @@ export class HeaderComponent implements OnInit {
   player: string;
   balance: number;
   currentTurn: number = 0; 
-  totalTurns:number = 3;
+  totalTurns:number = Constants.maximumTurn;
 
   constructor(private router: Router, private gameService: GameService, private activatedRoute: ActivatedRoute,
     private toastr: ToastsManager, vcr: ViewContainerRef) {
