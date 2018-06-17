@@ -99,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BankControllerTest.cs" />
+    <Compile Include="Controllers\BrokerControllerTest.cs" />
     <Compile Include="NextGenMarketAPIContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />

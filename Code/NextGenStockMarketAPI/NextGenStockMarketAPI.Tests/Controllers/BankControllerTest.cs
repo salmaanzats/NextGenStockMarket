@@ -1,12 +1,11 @@
 ﻿using System;
 using NextGenStockMarket.Data.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NextGenStockMarket.Data.Entities;
 //using NextGenStockMarket.Service.Interface;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Results;
 
 namespace NextGenStockMarketAPI.Tests.Controllers
 {
@@ -26,16 +25,18 @@ namespace NextGenStockMarketAPI.Tests.Controllers
             Console.WriteLine(result);
         }
 
+        [TestMethod]
         public void checkBankBalance()
         {
             var controller = new NextGenStockMarketAPI.Controllers.Api.BankController();
 
             var account = DemoBankAccount();
 
-            //var result = controller.;
+            var result = controller.Get(account.PlayerName); //as CreatedAtRouteNegotiatedContentResult<>;
 
-            //Assert.IsNotNull(result);
-            //Console.WriteLine(result);
+            Assert.IsNotNull(result);
+            Assert.Equals(result.ToString(), account.Balance);
+            Console.WriteLine(result);
         }
       BankAccount DemoBankAccount()
         {
