@@ -15,11 +15,12 @@ namespace NextGenStockMarketAPI.Tests.Controllers
             HomeController controller = new HomeController();
 
             // Act
-            ViewResult result = controller.Index() as ViewResult;
+            var  result = controller.Index();
+            System.Console.WriteLine(result);
 
             // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual("Home Page", result.ViewBag.Title);
+            Assert.IsInstanceOfType(result, typeof(System.Web.Mvc.RedirectResult));
         }
     }
 }

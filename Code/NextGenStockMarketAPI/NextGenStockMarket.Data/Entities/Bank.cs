@@ -14,11 +14,13 @@ namespace NextGenStockMarket.Data.Entities
         public int Turn { get; set; }
         public string Transceiver { get; set; }
         public decimal Price { get; set; }
+        public string Status { get; set; }
     }
 
     public class AllBankRecords
     {
         public BankAccount Accounts { get; set; }
-        public ICollection<BankTransaction> BankTransactions { get; set; } = new List<BankTransaction>();
+        public List<BankTransaction> BankTransactions { get; set; } = new List<BankTransaction>();
+        public int CurrentTurn { get; set; }
     }
 }

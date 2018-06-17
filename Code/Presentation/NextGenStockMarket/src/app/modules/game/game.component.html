@@ -1,3 +1,170 @@
-<p>
-  game works!
-</p>
+<app-sidebar></app-sidebar>
+<app-block-ui [isBlocked]="isBlocked" [loadMessage]="this.message"></app-block-ui>
+<div class="modal-body" style="background: #d6e5ff;margin-left: 250px">
+  <div class="row row-flex-box" style="background: #cbd0d8;">
+    <div class="col-xs-6 col-sm-6 col-md-3">
+      <div class="thumbnail flex-col-vertical-center">
+        <div class="caption">
+          <H5>
+            <span>
+              <strong>Balance:</strong>
+            </span>
+            <span>${{this.balance}}</span>
+          </H5>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-6  col-md-3">
+      <div class="thumbnail flex-col-vertical-center">
+        <div class="caption">
+          <H5>
+            <span>
+              <strong>Currnt Turn:</strong>
+            </span>
+            <span>{{currentTurn}}</span>
+          </H5>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-6  col-md-3">
+      <div class="thumbnail flex-col-vertical-center">
+        <div class="caption">
+          <H5>
+            <span>
+              <strong>Total # of Turns:</strong>
+            </span>
+            <span>{{totalTurns}}</span>
+          </H5>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-6  col-md-3">
+      <div class="thumbnail homepage-slider-bottom-block-single flex-col-vertical-center">
+        <div class="caption">
+          <H5>
+            <span>
+              <strong>Player:</strong>
+            </span>
+            <span>{{this.player}}</span>
+          </H5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row row-flex-box" style="margin-top: 10px; background: white;">
+    <div class="container">
+      <div class="row">
+        <div class="space sm-col-3">
+          <h4>Google Stock Details</h4>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Stocks</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let sector of this.google.Sectors">
+                <td>{{sector.SectorName}}</td>
+                <td>{{sector.StockPrice}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="space sm-col-3">
+          <h4>Yahoo Stock Details</h4>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Stocks</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let sector of this.yahoo.Sectors">
+                <td>{{sector.SectorName}}</td>
+                <td>{{sector.StockPrice}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="space sm-col-3">
+          <h4>Microsoft Stock Details</h4>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Stocks</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let sector of this.microsoft.Sectors">
+                <td>{{sector.SectorName}}</td>
+                <td>{{sector.StockPrice}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="space sm-col-3">
+          <h4>Amazon Stock Details</h4>
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Stocks</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let sector of this.amazon.Sectors">
+                <td>{{sector.SectorName}}</td>
+                <td>{{sector.StockPrice}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-9">
+        <label> Select Sector : </label>
+        <select class="form-control" [(ngModel)]="selectedSector" (change)="getStocks()">
+          <option>Select a sector</option>
+          <option *ngFor="let sector of sectors">{{sector}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <label> Select stock : </label>
+        <select class="form-control" [(ngModel)]="selectedStock" (change)="loadPrice()">
+          <option selected>Select a stock</option>
+          <option *ngFor="let stock of stocks">{{stock.SectorName}}</option>
+        </select>
+      </div>
+      <div class="col-3">
+        <label> Price : </label>
+        <input type="text" class="form-control" value={{this.stockPrice}} disabled>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <label> Stock Quantity : </label>
+        <input type="number" [min]=0 class="form-control" [(ngModel)]="stockQuantity" (change)=calculateTotalAmount()>
+      </div>
+    </div>
+    <hr size="30">
+    <div class="row">
+      <div class="col-6">
+        <label> Stock Total : </label>
+        <input type="number" class="form-control" [(ngModel)]="totalAmount" disabled>
+      </div>
+      <div class="col-3">
+        <button type="button" class="btn btn-success" (click)="buyStocks()">Buy</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-﻿using Inx.CarWash.Core.Cache;
+﻿using Core.Cache;
 using NextGenStockMarket.Data.Entities;
 using NextGenStockMarket.Service.Interface;
 using NextGenStockMarket.Service.Utility;
@@ -46,9 +46,9 @@ namespace NextGenStockMarket.Service
             return newPlayer;
         }
 
-        public async Task<List<StockMarket>> GetCompany()
+        public async Task<List<string>> GetSectors()
         {
-            var companies = new List<StockMarket>();
+            var companies = new List<string>();
             var markets = cache.Get<List<AllStockMarketRecords>>(Constants.marketData);
 
             if (markets == null)
@@ -58,13 +58,13 @@ namespace NextGenStockMarket.Service
 
             foreach (var market in markets)
             {
-                companies.Add(market.StockMarket);
+                companies.Add(market.StockMarket.CompanyName);
             }
 
             return companies;
         }
 
-        public async Task<List<Sector>> GetSector(string companyName)
+        public async Task<List<Sector>> GetStocks(string companyName)
         {
             var sectors = new List<Sector>();
             var markets = cache.Get<List<AllStockMarketRecords>>(Constants.marketData);
