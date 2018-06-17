@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Runtime.Caching;
-namespace Inx.CarWash.Core.Cache
+namespace Core.Cache
 {
     public  class MemoryCacheManager : ICacheManager
     {

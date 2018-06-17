@@ -1,38 +1,30 @@
-<body class="bg">
-<div class="container" style="height: 796px;">
-  
-  <div class="modal-body row" >
-    <div class="col-md-6" style="margin-top: 190px;">
-      <h3><p style="color:mediumblue">Register to Play...</p></h3>
-      <form [formGroup]="playerForm" novalidate>
-        <div class="form-group">
-          <label for="usr"><h4 style="color:orangered">Enter Player Name:</h4></label>
-          <input type="text" class="form-control" id="usr" formControlName="playerName">
+<div class="container" style="background: #3979db;">
+  <h2>Stock Market Simulation Game</h2>
 
-          <div *ngIf="playerForm.controls['playerName'].errors && (!playerForm.controls['playerName'].pristine || isFormSubmitted)">
-            <small [hidden]="!playerForm.controls['playerName'].errors.required">
-              <i class="fas fa-info-circle m-r-5"></i>Player Name is required.</small>
-          </div>
+  <div class="modal-body row" style="background: #58667c;">
+    <div class="col-md-6" style="background: #7594c4;">
+      <p>Register to Play</p>
+        <div class="form-group">
+          <label for="usr">Enter Player Name:</label>
+          <input type="text" class="form-control" id="usr" [(ngModel)]="playerName">
+          <small *ngIf="playerName =='' && isFormSubmitted">
+              Player Name is Required
+          </small>
         </div>
         <button class="btn btn-default" (click)="createPlayer()">Create Player</button>
-      </form>
     </div>
-    <div class="col-md-6" style="margin-top: 190px;">
-      <h3><p style="color: mediumblue">If you are already registered...</p></h3>
-      <form [formGroup]="playerForm" novalidate>
-        <div class="form-group">
-          <label for="usr"><h4 style="color:orangered">Enter Player Name:</h4></label>
-          <input type="text" class="form-control" id="usr" formControlName="playerName">
 
-          <div *ngIf="playerForm.controls['playerName'].errors && (!playerForm.controls['playerName'].pristine || isFormSubmitted)">
-            <small [hidden]="!playerForm.controls['playerName'].errors.required">
-              <i class="fas fa-info-circle m-r-5"></i>Player Name is required.</small>
-          </div>
+    <div class="col-md-6" style="background: #92afdb;">
+      <p>If you are already registerd</p>
+        <div class="form-group">
+          <label for="usr">Enter Player Name:</label>
+          <input type="text" class="form-control" id="usr" [(ngModel)]="existingPlayerName">
+          <small *ngIf="existingPlayerName =='' && isFormSubmitted">
+              Player Name is Required
+          </small>
         </div>
         <button class="btn btn-default" (click)="checkExistingPlayer()">Play</button>
-      </form>
     </div>
   </div>
 
 </div>
-</body>

@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastOptions } from 'ng2-toastr';
 import { ToastModule } from 'ng2-toastr/ng2-toastr';
 import { ToasterCustomOptions } from './toasterCustomOptions';
+import { BlockUiComponent } from './block-ui/block-ui.component';
 
 @NgModule({
   imports: [
@@ -12,12 +13,13 @@ import { ToasterCustomOptions } from './toasterCustomOptions';
     FormsModule,
     ToastModule.forRoot(),
   ],
-  declarations: [],
+  declarations: [BlockUiComponent],
   exports: [
     ReactiveFormsModule,
     CommonModule,
     FormsModule,
-    ToastModule
+    ToastModule,
+    BlockUiComponent
   ],
   providers: [
     { provide: ToastOptions, useClass: ToasterCustomOptions }]

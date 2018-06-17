@@ -8,8 +8,8 @@ namespace NextGenStockMarket.Service.Interface
     public interface IBrokerService
     {
         Task<BrokerAccount> CreateAccount(string playerName);
-        Task<List<StockMarket>> GetCompany();
-        Task<List<Sector>> GetSector(string companyName);
+        Task<List<string>> GetSectors();
+        Task<List<Sector>> GetStocks(string companyName);
         Task<AllBrokerData> SellStock(BrokerInfo brokerInfo);
         Task<AllBrokerData> BuyStock(BrokerInfo brokerInfo);
         Task<AllBrokerData> Portfolio(string playerName);

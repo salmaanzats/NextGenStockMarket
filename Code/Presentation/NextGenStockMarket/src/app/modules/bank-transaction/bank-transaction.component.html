@@ -1,4 +1,23 @@
 <app-sidebar></app-sidebar>
-<p>
-  bank-transaction works!
-</p>
+<div class="modal-body" style="background: #d6e5ff;margin-left: 250px">
+  <app-header></app-header>
+  <h4>Bank Transactions</h4>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Turn</th>
+        <th>Transceiver</th>
+        <th>Price</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let info of bankInfo">
+        <td>{{info.Turn}}</td>
+        <td>{{info.Transceiver}}</td>
+        <td>{{info.Price}}</td>
+        <td>{{info.Status}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

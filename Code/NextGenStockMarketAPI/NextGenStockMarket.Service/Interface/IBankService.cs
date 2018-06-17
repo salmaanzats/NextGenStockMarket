@@ -9,6 +9,6 @@ namespace NextGenStockMarket.Service.Interface
         Task<AllBankRecords> ShowBankBalance(string PlayerName);
         Task<AllBankRecords> Deposit(BankTransaction transaction);
         Task<AllBankRecords> Withdraw(BankTransaction transaction);
-        Task<AllBankRecords> GetBankAccount(BankAccount bank);
+        Task<AllBankRecords> GetBankAccount(string playerName);
     }
 }

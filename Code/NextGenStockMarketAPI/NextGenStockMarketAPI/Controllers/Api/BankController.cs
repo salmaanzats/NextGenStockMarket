@@ -43,10 +43,10 @@ namespace NextGenStockMarketAPI.Controllers.Api
             return Ok(await bankService.Withdraw(transaction));
         }
 
-        [HttpPost, Route("bank/getaccount")]
-        public async Task<IHttpActionResult> GetAccount([FromBody]BankAccount bankAccount)
+        [HttpGet, Route("bank/getaccount")]
+        public async Task<IHttpActionResult> GetAccount(string playerName)
         {
-            return Ok(await bankService.GetBankAccount(bankAccount));
+            return Ok(await bankService.GetBankAccount(playerName));
         }
     }
 }
