@@ -167,7 +167,7 @@ namespace NextGenStockMarket.Service
                 {
                     var TempValue = (cache.Get<SectorTrend>(Stock.SectorName + "_ScoreArray") != null) ? cache.Get<SectorTrend>(Stock.SectorName + "_ScoreArray").SectorTrendValue : 0;
                     //AllData.Where(e => e.StockMarket.CompanyName.Contains(brokerInfo.StockName)).FirstOrDefault()!=null
-                    if (Market.StockMarket.CompanyName==brokerInfo.StockName && Stock.SectorName==brokerInfo.Sector )
+                    if (Market.StockMarket.CompanyName==brokerInfo.Stock && Stock.SectorName==brokerInfo.Sector )
                     {
                         if (turn == 1)
                         {

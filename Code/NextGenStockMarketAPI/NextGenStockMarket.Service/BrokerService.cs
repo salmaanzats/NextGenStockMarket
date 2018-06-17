@@ -121,7 +121,7 @@ namespace NextGenStockMarket.Service
 
             cache.Set(brokerInfo.PlayerName + "_Broker", brokerRecords, Constants.cacheTime);
             int GameTurn = 1;
-            var CompaniesList = await GetSector(brokerInfo.StockName);
+            var CompaniesList = await GetStocks(brokerInfo.Stock);
             stockbuy.BuyStock(brokerInfo, CompaniesList, GameTurn, markets);
 
             return brokerRecords;
