@@ -141,8 +141,12 @@
       <div class="col-6">
         <label> Select stock : </label>
         <select class="form-control" [(ngModel)]="selectedStock" (change)="loadPrice()">
+          <option selected>Select a stock</option>
           <option *ngFor="let stock of stocks">{{stock.SectorName}}</option>
         </select>
+        <small *ngIf="selectedStock =='' && isFormSubmitted">
+            Player Name is Required
+        </small>
       </div>
       <div class="col-3">
         <label> Price : </label>
@@ -153,6 +157,9 @@
       <div class="col-6">
         <label> Stock Quantity : </label>
         <input type="number" [min]=0 class="form-control" [(ngModel)]="stockQuantity" (change)=calculateTotalAmount()>
+        <small *ngIf="stockQuantity =='' && isFormSubmitted">
+            Stock quantity is Required
+        </small>
       </div>
     </div>
     <hr size="30">

@@ -107,15 +107,7 @@ namespace NextGenStockMarket.Service
 
         public int NewGame()
         {
-            var connectedPlayers = cache.Get<AllPlayers>("ConnectedPlayers");
-            if (connectedPlayers != null)
-            {
-                foreach (var players in connectedPlayers.Players)
-                {
-                    cache.RemoveByStartwith(players.PlayerName);
-                }
-                return 0;
-           }
+            cache.Clear();
             return 0;
         }
     }

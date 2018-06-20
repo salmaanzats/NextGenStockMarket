@@ -46,8 +46,7 @@ export class PlayerComponent implements OnInit {
   checkExistingPlayer() {
     this.isFormSubmitted = true;
     if (this.existingPlayerName == "") return;
-    this.player.PlayerName = this.existingPlayerName;
-    this.playerService.checkExistingPlayer(this.player)
+    this.playerService.checkExistingPlayer(this.existingPlayerName)
       .subscribe(playerInfo => {
         this.router.navigate(['/game', playerInfo.Accounts.PlayerName]);
       }, error => {
