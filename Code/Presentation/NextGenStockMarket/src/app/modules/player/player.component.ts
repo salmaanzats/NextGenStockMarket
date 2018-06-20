@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr';
 import { PlayerService } from '../service/player.service';
 import { Player } from '../model/player';
+import { BrokerService } from '../service/broker.service';
+import { mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-player',
@@ -12,35 +14,30 @@ import { Player } from '../model/player';
 })
 export class PlayerComponent implements OnInit {
 
-  playerForm: FormGroup;
-
-  player = new Player();
+  playerName: string;
+  existingPlayerName: string;
   isFormSubmitted = false;
+  player = new Player();
 
-  constructor(private fb: FormBuilder, private router: Router, private playerService: PlayerService,
+  constructor(private router: Router, private playerService: PlayerService,
     private toastr: ToastsManager, vcr: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
   ngOnInit() {
-    this.createForm();
-  }
-
-  createForm() {
-    this.playerForm = this.fb.group({
-      playerName: ['', [Validators.required]],
-    });
   }
 
   createPlayer() {
     this.isFormSubmitted = true;
-    if (this.playerForm.invalid) return;
-
-    this.player = Object.assign({}, this.player, this.playerForm.value);
+    if (this.playerName == "") return;
+    this.player.PlayerName = this.playerName;
     this.playerService.createPlayer(this.player)
       .subscribe(playerInfo => {
-        this.router.navigate(['/game', playerInfo.PlayerName]);
-        this.toastr.success("Player Has been successfully created!", "Success");
+        this.playerService.createBrokerAccount(this.player.PlayerName)
+          .subscribe(broker => {
+            this.router.navigate(['/game', playerInfo.PlayerName]);
+            this.toastr.success("Player Has been successfully created!", "Success");
+          });
       }, error => {
         this.toastr.warning(error, "warning");
       })
@@ -48,10 +45,8 @@ export class PlayerComponent implements OnInit {
 
   checkExistingPlayer() {
     this.isFormSubmitted = true;
-    if (this.playerForm.invalid) return;
-
-    this.player = Object.assign({}, this.player, this.playerForm.value);
-    this.playerService.checkExistingPlayer(this.player)
+    if (this.existingPlayerName == "") return;
+    this.playerService.checkExistingPlayer(this.existingPlayerName)
       .subscribe(playerInfo => {
         this.router.navigate(['/game', playerInfo.Accounts.PlayerName]);
       }, error => {

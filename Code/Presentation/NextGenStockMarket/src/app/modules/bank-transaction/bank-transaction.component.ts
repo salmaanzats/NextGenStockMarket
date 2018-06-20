@@ -1,8 +1,7 @@
-import { Component, OnInit , ViewContainerRef} from '@angular/core';
-import { GameService } from './../service/game.service';
-import { FormBuilder } from '@angular/forms';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr';
+import { GameService } from '../service/game.service';
 
 @Component({
   selector: 'app-bank-transaction',
@@ -11,42 +10,30 @@ import { ToastsManager } from 'ng2-toastr';
 })
 export class BankTransactionComponent implements OnInit {
 
-  totalStock = [];
-  google = [];
-  yahoo = [];
-  amazon = [];
-  microsoft = [];
   player: string;
-  balance:number;
+  bankInfo = [];
 
- constructor(private fb: FormBuilder, private router: Router, private gameService: GameService, private activatedRoute: ActivatedRoute,
+  constructor(private router: Router, private gameService: GameService, private activatedRoute: ActivatedRoute,
     private toastr: ToastsManager, vcr: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vcr);
   }
+
   ngOnInit() {
-    
+    this.activatedRoute.params.subscribe((params: Params) => {
+      this.player = params['player'];
+      if (this.player != null || this.player != undefined) {
+        this.loadBankTransactions();
+      }
+    });
   }
-   loadStockData() {
-    this.gameService.getStockData()
-      .subscribe(data => {
-        this.google = data[0];
-        this.yahoo = data[1];
-        this.microsoft = data[2];
-        this.amazon = data[3];
+
+  loadBankTransactions(){
+    this.gameService.getBankData(this.player)
+      .subscribe(bankInfo => {
+        this.bankInfo = bankInfo.BankTransactions;
       }, error => {
-        this.toastr.warning("Error in loading stock data", "Warning");
+        this.toastr.warning("Error in loading bank info", "Warning");
       });
   }
 
-loadPlayerData() {
-    this.gameService.getPlayerData(this.player)
-      .subscribe(data => {
-        this.balance = data.Accounts.Balance;
-      }, error => {
-        this.toastr.warning(error, "Warning");
-        setTimeout(() => {
-          this.router.navigate([''])
-        }, 3000);
-      })
-  }
 }

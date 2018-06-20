@@ -20,6 +20,7 @@ namespace NextGenStockMarketAPI.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(System.Web.Mvc.RedirectResult));
         }
     }
 }

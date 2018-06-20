@@ -8,7 +8,8 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class PlayerService extends BaseService {
 
-  private bankEndPoint = this.baseApiEndPoint + "v1/bank"
+  private bankEndPoint = this.baseApiEndPoint + "v1/bank";
+  private brokerEndPoint = this.baseApiEndPoint + "v1/broker";
 
   constructor(private http: HttpClient) {
     super();
@@ -21,12 +22,15 @@ export class PlayerService extends BaseService {
       .catch(this.errorHandler)
   }
 
-  checkExistingPlayer(player){
-    return this.http.post(`${this.bankEndPoint}/getaccount`,
-    player, this.httpOptions)
-    .map(response => response)
-    .catch(this.errorHandler)
+  checkExistingPlayer(playerName) {
+    return this.http.get(`${this.bankEndPoint}/getaccount?playerName=${playerName}`, this.httpOptions)
+      .map(response => response)
+      .catch(this.errorHandler)
   }
 
-
+  createBrokerAccount(playerName) {
+    return this.http.post(`${this.brokerEndPoint}/createaccount?playerName=${playerName}`, playerName, this.httpOptions)
+      .map(response => response)
+      .catch(this.errorHandler)
+  }
 }

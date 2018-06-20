@@ -1,4 +1,4 @@
-﻿using Inx.CarWash.Core.Cache;
+﻿using Core.Cache;
 using NextGenStockMarket.Data.Entities;
 using NextGenStockMarket.Service.Interface;
 using NextGenStockMarket.Service.Utility;
@@ -30,16 +30,15 @@ namespace NextGenStockMarket.Service
         {
             var turn = cache.Get<Clock>(clock.PlayerName + "_Clock");
             turn.Turn += 1;
-
-            if (turn.Turn == Constants.gameTurns)
+            if (turn.Turn > Constants.gameTurns)
             {
                 return Constants.gameOver;
             }
 
             turn.PlayerTurn = clock.PlayerTurn;
-           
             cache.Set(clock.PlayerName + "_Clock", turn, Constants.cacheTime);
             return Constants.play;
         }
+
     }
 }

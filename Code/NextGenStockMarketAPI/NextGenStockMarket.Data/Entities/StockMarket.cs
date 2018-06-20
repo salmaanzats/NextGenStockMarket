@@ -21,4 +21,23 @@ namespace NextGenStockMarket.Data.Entities
         public StockMarket StockMarket { get; set; } = new StockMarket();
         public List<Sector> Sectors { get; set; } = new List<Sector>();
     }
+
+    public class StockPriceUpdate
+    {
+        public int Turn { get; set; }
+        public ScoreArray ScoreArray { get; set; } = new ScoreArray();
+    }
+
+    public class ScoreArray
+    {
+        public int RandomMarket  { get; set; }
+        public int SectorTrend { get; set; }
+        public int GeneralTrend  { get; set; }
+        public int EventComponent { get; set; }
+    }
+
+    public class SectorTrend
+    {
+        public int SectorTrendValue { get; set; }
+    }
 }

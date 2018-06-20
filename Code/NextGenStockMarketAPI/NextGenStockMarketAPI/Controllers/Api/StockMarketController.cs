@@ -19,10 +19,11 @@ namespace NextGenStockMarketAPI.Controllers.Api
             stockMarketService = _stockMarketService;
         }
 
-        [HttpGet, Route("stock")]
+        [HttpGet, Route("market/stock")]
         public async Task<IHttpActionResult> Get()
         {
             return Ok(await stockMarketService.GetMarketData());
         }
+        
     }
 }

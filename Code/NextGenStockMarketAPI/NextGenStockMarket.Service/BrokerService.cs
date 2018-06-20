@@ -1,4 +1,4 @@
-﻿using Inx.CarWash.Core.Cache;
+﻿using Core.Cache;
 using NextGenStockMarket.Data.Entities;
 using NextGenStockMarket.Service.Interface;
 using NextGenStockMarket.Service.Utility;
@@ -13,11 +13,12 @@ namespace NextGenStockMarket.Service
     {
         protected readonly ICacheManager cache;
         protected readonly IBankService bankService;
-
+    
         public BrokerService(IBankService _bankService)
         {
             cache = new MemoryCacheManager();
             bankService = _bankService;
+           
         }
 
         public async Task<BrokerAccount> CreateAccount(string playerName)
@@ -45,9 +46,9 @@ namespace NextGenStockMarket.Service
             return newPlayer;
         }
 
-        public async Task<List<StockMarket>> GetCompany()
+        public async Task<List<string>> GetSectors()
         {
-            var companies = new List<StockMarket>();
+            var companies = new List<string>();
             var markets = cache.Get<List<AllStockMarketRecords>>(Constants.marketData);
 
             if (markets == null)
@@ -57,13 +58,13 @@ namespace NextGenStockMarket.Service
 
             foreach (var market in markets)
             {
-                companies.Add(market.StockMarket);
+                companies.Add(market.StockMarket.CompanyName);
             }
 
             return companies;
         }
 
-        public async Task<List<Sector>> GetSector(string companyName)
+        public async Task<List<Sector>> GetStocks(string companyName)
         {
             var sectors = new List<Sector>();
             var markets = cache.Get<List<AllStockMarketRecords>>(Constants.marketData);
@@ -85,6 +86,8 @@ namespace NextGenStockMarket.Service
 
         public async Task<AllBrokerData> BuyStock(BrokerInfo brokerInfo)
         {
+            var stockbuy = new StockMarketService();
+            var markets = cache.Get<List<AllStockMarketRecords>>(Constants.marketData);
             var playerBrokerAccount = cache.Get<AllBrokerData>(brokerInfo.PlayerName + "_Broker");
 
             if (playerBrokerAccount == null)
@@ -117,6 +120,10 @@ namespace NextGenStockMarket.Service
             brokerRecords.BrokerInfos.Add(brokerInfo);
 
             cache.Set(brokerInfo.PlayerName + "_Broker", brokerRecords, Constants.cacheTime);
+            int GameTurn = 1;
+            var CompaniesList = await GetStocks(brokerInfo.Stock);
+            stockbuy.BuyStock(brokerInfo, CompaniesList, GameTurn, markets);
+
             return brokerRecords;
         }
 
