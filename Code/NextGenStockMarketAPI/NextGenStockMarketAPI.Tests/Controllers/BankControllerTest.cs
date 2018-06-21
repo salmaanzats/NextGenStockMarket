@@ -26,7 +26,7 @@ namespace NextGenStockMarketAPI.Tests.Controllers
         }
 
         [TestMethod]
-        public async Task checkBankBalance()
+        public async Task CheckBankBalance()
         {
             var controller = new NextGenStockMarketAPI.Controllers.Api.BankController();
 
@@ -41,7 +41,7 @@ namespace NextGenStockMarketAPI.Tests.Controllers
             //OkNegotiatedContentResult<string> conNegResult = Assert.IsType<OkNegotiatedContentResult<string>>(result);
             //Assert.Equals(1000, conNegResult.Content);
             IHttpActionResult actionResult = await controller.Get(account.PlayerName);
-            var contentResult = actionResult as OkNegotiatedContentResult<int>;
+            var contentResult = actionResult as OkNegotiatedContentResult<String>;
             Console.WriteLine(contentResult.Content);
             // Assert.AreEqual(1000, contentResult.Content);
         }
