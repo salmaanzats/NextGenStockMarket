@@ -9,7 +9,7 @@
         public static string deposit = "Deposit";
         public static string withdraw = "Withdraw";
         public static int maximumPlayers = 2;
-        public static int gameTurns = 2;
+        public static int gameTurns = 12;
         public static string gameOver = "Game Over";
         public static string play = "Play";
     }
