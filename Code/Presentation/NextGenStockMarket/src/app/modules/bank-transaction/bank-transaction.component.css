@@ -10,4 +10,67 @@
     text-align:center;
     height: 100%; /* since cols have bigger height this has effect, also can be ussefull - height: calc(100% - 15px); with 15px bottom margin */
   }
-  
+  #Ticon{
+   width: 60px;
+    height: 60px; 
+    margin-top:30px;
+
+}
+  #transaction{
+    
+    margin-left: 80px;
+    margin-top:  -40px;
+    animation: Ptext 5s infinite;
+}
+ 
+
+@keyframes Ptext {
+    50%{color: lightslategray}
+}
+#LoadIcon
+{
+  margin-top: 350px;
+  }
+  #google,#yahoo,#amazon,#microsoft
+  {
+     width: 100px;
+    height: 100px; 
+  }
+  #google
+  {
+    margin-right: 125px;
+    margin-left: 100px;
+  animation: google 5s infinite;
+
+
+ }
+ @keyframes google {
+    50% {opacity: 0;}
+}
+#yahoo{
+    margin-right: 125px;
+  animation: yahoo 8s infinite;
+
+
+ }
+ @keyframes yahoo {
+    50% {opacity: 0;}
+}
+#amazon{
+    margin-right: 125px;
+  animation: amazon 10s infinite;
+
+
+ }
+ @keyframes amazon {
+    50% {opacity: 0;}
+}
+  #microsoft{
+    margin-right: 125px;
+  animation: microsoft 6s infinite;
+
+
+ }
+ @keyframes microsoft {
+    50% {opacity: 0;}
+}
