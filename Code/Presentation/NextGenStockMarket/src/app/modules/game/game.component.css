@@ -152,3 +152,21 @@ the middle of boxes much cleaner than display:table-cell way*/
   float: left;
   margin-right: 10px;
  }
+ .D1{
+   margin-top: 100px;
+ }
+ .lbl1{
+  font-weight: bold;
+   margin-right: 50px;
+   margin-left: 50px;
+   margin-top: 10px;
+  color: white;
+ }
+
+ .lbl2{
+  font-weight: bold;
+   margin-right: 50px;
+   margin-left: 400px;
+   margin-top: 25px;
+  color: firebrick;
+ }
