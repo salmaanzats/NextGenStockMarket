@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using static NextGenStockMarket.Data.Entities.Broker;
+using static NextGenStockMarket.Data.Entities.Clock;
 
 namespace NextGenStockMarket.Service
 {
@@ -84,10 +85,28 @@ namespace NextGenStockMarket.Service
             return sectors;
         }
 
+        public void TurnChange()
+        {
+            Records records = new Records();
+            if (cache.Get<Records>("Turn") == null)
+            {
+                records.Turns = 1;
+                cache.Set("Turn", records, Constants.cacheTime);
+            }
+            else
+            {
+                records.Turns = cache.Get<Records>("Turn").Turns+1;
+                cache.Remove("Turn");
+                cache.Set("Turn", records, Constants.cacheTime);
+            }
+        }
+
         public async Task<AllBrokerData> BuyStock(BrokerInfo brokerInfo)
         {
+            
             var stockbuy = new StockMarketService();
             var markets = cache.Get<List<AllStockMarketRecords>>(Constants.marketData);
+            
             var playerBrokerAccount = cache.Get<AllBrokerData>(brokerInfo.PlayerName + "_Broker");
 
             if (playerBrokerAccount == null)
@@ -120,15 +139,17 @@ namespace NextGenStockMarket.Service
             brokerRecords.BrokerInfos.Add(brokerInfo);
 
             cache.Set(brokerInfo.PlayerName + "_Broker", brokerRecords, Constants.cacheTime);
-            int GameTurn = 1;
+            TurnChange();
             var CompaniesList = await GetStocks(brokerInfo.Stock);
-            stockbuy.BuyStock(brokerInfo, CompaniesList, GameTurn, markets);
-
+            stockbuy.PriceUpdate(brokerInfo, CompaniesList, markets, "Buy");
+            
             return brokerRecords;
         }
 
         public async Task<AllBrokerData> SellStock(BrokerInfo brokerInfo)
         {
+            var stockbuy = new StockMarketService();
+            var markets = cache.Get<List<AllStockMarketRecords>>(Constants.marketData);
             var playerBrokerAccount = cache.Get<AllBrokerData>(brokerInfo.PlayerName + "_Broker");
 
             if (playerBrokerAccount == null)
@@ -153,6 +174,9 @@ namespace NextGenStockMarket.Service
             brokerRecords.BrokerInfos.Add(brokerInfo);
 
             cache.Set(brokerInfo.PlayerName + "_Broker", brokerRecords, Constants.cacheTime);
+            TurnChange();
+            var CompaniesList = await GetStocks(brokerInfo.Stock);
+            stockbuy.PriceUpdate(brokerInfo, CompaniesList, markets, "Sell");
             return brokerRecords;
         }
 
