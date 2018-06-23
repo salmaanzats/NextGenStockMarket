@@ -100,6 +100,7 @@
   <ItemGroup>
     <Compile Include="Controllers\BankControllerTest.cs" />
     <Compile Include="Controllers\BrokerControllerTest.cs" />
+    <Compile Include="Controllers\GameControllerTest.cs" />
     <Compile Include="NextGenMarketAPIContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
@@ -120,6 +121,9 @@
       <Project>{92A28757-A3E6-4D98-B8A9-3C5AA0D9D0A2}</Project>
       <Name>NextGenStockMarketAPI</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
