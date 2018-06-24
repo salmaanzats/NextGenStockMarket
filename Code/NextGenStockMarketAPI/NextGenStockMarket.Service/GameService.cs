@@ -3,6 +3,9 @@ using NextGenStockMarket.Data.Entities;
 using NextGenStockMarket.Service.Interface;
 using NextGenStockMarket.Service.Utility;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using static NextGenStockMarket.Data.Entities.Broker;
 
 namespace NextGenStockMarket.Service
 {
@@ -49,7 +52,7 @@ namespace NextGenStockMarket.Service
             }
         }
 
-        public int GetConnectedPlayers()
+        public async Task<int> GetConnectedPlayers()
         {
             var connectedPlayers = cache.Get<AllPlayers>("ConnectedPlayers");
             if (connectedPlayers != null)
@@ -60,7 +63,7 @@ namespace NextGenStockMarket.Service
             return 0;
         }
 
-        public string GameStatus()
+        public async Task<string> GameStatus()
         {
             int game = 0;
             var connectedPlayers = cache.Get<AllPlayers>("ConnectedPlayers");
@@ -70,7 +73,7 @@ namespace NextGenStockMarket.Service
                 {
                     var playerBank = cache.Get<AllBankRecords>(players.PlayerName + "_Bank");
 
-                    if (playerBank.CurrentTurn == Constants.maximumPlayers)
+                    if (playerBank.CurrentTurn == Constants.gameTurns)
                     {
                         game += 1;
                     }
@@ -83,29 +86,64 @@ namespace NextGenStockMarket.Service
             return Constants.play;
         }
 
-        public AllBankRecords GetWinner()
+        public async Task<AllBankRecords> GetWinner()
         {
-            decimal Score = 0;
-            AllBankRecords Winner = new AllBankRecords();
+            decimal winnerScore = 0;
+            var playerBank = new AllBankRecords();
+            var winner = new AllBankRecords();
+
             var connectedPlayers = cache.Get<AllPlayers>("ConnectedPlayers");
             if (connectedPlayers != null)
             {
                 foreach (var players in connectedPlayers.Players)
                 {
-                    var playerBank = cache.Get<AllBankRecords>(players.PlayerName + "_Bank");
+                    Dictionary<string, decimal> stockPrice = new Dictionary<string, decimal>();
+                    stockPrice.Add(String.Format(players.PlayerName, 1.ToString()), 1);
 
-                    if (Score < playerBank.Accounts.Balance)
+                    Dictionary<string, decimal> score = new Dictionary<string, decimal>();
+                    stockPrice.Add(String.Format(players.PlayerName, 1.ToString()), 1);
+
+                    stockPrice[players.PlayerName] = GetStockValue(players.PlayerName);
+                    playerBank = cache.Get<AllBankRecords>(players.PlayerName + "_Bank");
+
+                    if (winnerScore < playerBank.Accounts.Balance + stockPrice[players.PlayerName])
                     {
-                        Score = playerBank.Accounts.Balance;
-                        Winner = playerBank;
+                        winnerScore = playerBank.Accounts.Balance + stockPrice[players.PlayerName];
+                        winner = playerBank;
                     }
-
                 }
             }
-            return Winner;
+            winner.Accounts.Balance = winnerScore;
+            return winner;
         }
 
-        public int NewGame()
+        public decimal GetStockValue(string playerName)
+        {
+            var playerPortfolio = cache.Get<AllBrokerData>(playerName + "_Broker");
+            Dictionary<string, decimal> stockPrice = new Dictionary<string, decimal>();
+            stockPrice.Add(String.Format(playerName, 1.ToString()), 1);
+
+            foreach (var portfolio in playerPortfolio.BrokerInfos)
+            {
+                var market = cache.Get<List<AllStockMarketRecords>>(Constants.marketData);
+                foreach (var sec in market)
+                {
+                    if (portfolio.Sector == sec.StockMarket.CompanyName)
+                    {
+                        foreach (var s in sec.Sectors)
+                        {
+                            if (portfolio.Stock == s.SectorName)
+                            {
+                                stockPrice[playerName] += s.StockPrice;
+                            }
+                        }
+                    }
+                }
+            }
+            return stockPrice[playerName];
+        }
+
+        public async Task<int> NewGame()
         {
             cache.Clear();
             return 0;

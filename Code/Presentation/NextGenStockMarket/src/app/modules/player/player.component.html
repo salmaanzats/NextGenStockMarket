@@ -1,12 +1,15 @@
 <body class="bg">
-<div class="container" style=" height: 796px;">
+<div class="container" style=" height: 670px;">
   
-
-  <div class="modal-body row" style="">
-    <div class="col-md-6 transbox" style=" margin-top: 190px;">
-      <h5><p style="color: mediumblue">Register to Play</p></h5>
+<div class="title">
+<label for="title"><h2 style="color:#ec4848;margin-top: 300px;margin-left:-60px">The <br>Stock Market<br> Game.</h2></label>
+  </div>
+  <div >
+    <div id="panel1" style="background-color:#152427a1;width:500px; height:500px;margin-top: -500px;margin-left: 500px;">
+       <div class="col-md-6 "  id="d1">
+      <h5><p style="color: #ffacac;font-size: 25px;"><br>Register to Play</p></h5>
         <div class="form-group">
-          <label for="usr"><h6 style="color: indigo">Enter Player Name:</h6></label>
+          <label for="usr"><h6 style="color: #f1d754;">Enter Player Name:</h6></label>
           <input type="text" class="form-control" id="usr" style="background-color:rgb(186, 185, 250)" [(ngModel)]="playerName">
           <small *ngIf="playerName =='' && isFormSubmitted">
               Player Name is Required
@@ -15,17 +18,18 @@
         <button class="btn btn-default black-background white" (click)="createPlayer()">Create Player</button>
     </div>
 
-    <div class="col-md-6 transbox" style=" margin-top: 190px;">
-      <h5><p style="color: mediumblue">If you are already registerd</p></h5>
+    <div class="col-md-6"  id="d2">
+      <h5><p style="color: #ffacac;font-size: 25px;width: 400px;">If you are already registerd</p></h5>
         <div class="form-group">
-          <label for="usr"><h6 style="color: indigo">Enter Player Name:</h6></label>
+          <label for="usr"><h6 style="color: #f1d754;">Enter Player Name:</h6></label>
           <input type="text" class="form-control" id="usr" style="background-color:rgb(186, 185, 250)" [(ngModel)]="existingPlayerName">
           <small *ngIf="existingPlayerName =='' && isFormSubmitted">
               Player Name is Required
           </small>
         </div>
         <button class="btn btn-default black-background white" (click)="checkExistingPlayer()">Play</button>
-    </div>
+    </div></div>>
+   
   </div>
 
 </div>

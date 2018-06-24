@@ -14,5 +14,6 @@ namespace NextGenStockMarket.Service.Interface
         Task<AllBrokerData> BuyStock(BrokerInfo brokerInfo);
         Task<AllBrokerData> Portfolio(string playerName);
         Task<List<ScoreArray>> AllData();
+        Task<AllBrokerData> GetAvailableStocks(string playerName);
     }
 }

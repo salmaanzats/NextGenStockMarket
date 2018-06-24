@@ -6,7 +6,8 @@
 export const environment = {
   production: false,
   message: 'devlopment',
-
+  // apiEndPoint: 'http://nextgenstocksimulationapi.somee.com/api/',
+  // apiBaseEndPoint: 'http://nextgenstocksimulationapi.somee.com/',
   apiEndPoint: 'http://localhost:53040/api/',
   apiBaseEndPoint: 'http://localhost:53040/',
 };

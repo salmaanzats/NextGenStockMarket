@@ -1,12 +1,16 @@
 import { GameService } from './../service/game.service';
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr';
 import { Stock } from '../model/stock';
 import { BrokerService } from '../service/broker.service';
 import { Constants } from '../core/constants';
 import { BlockUiService } from '../core/services/block-ui.service';
+import { GoogleStock } from '../model/googleStock';
+import { YahooStock } from '../model/yahooStock';
+import { AmazonStock } from '../model/amozonStock';
+import { MicrosoftStock } from '../model/microsoftStock';
+
 
 @Component({
   selector: 'app-game',
@@ -16,31 +20,44 @@ import { BlockUiService } from '../core/services/block-ui.service';
 
 export class GameComponent implements OnInit {
 
-  google = [];
-  yahoo = [];
-  amazon = [];
-  microsoft = [];
+  allStockData = [];
+  google = new Array<GoogleStock>();
+  yahoo = new Array<YahooStock>();
+  amazon = new Array<AmazonStock>();
+  microsoft = new Array<MicrosoftStock>();
   sectors = [];
   stocks = [];
   stockPrices = [];
+  purchasedStock = [];
 
   stockEntity = new Stock();
+  sellStockEntity = new Stock();
 
   selectedSector: string;
   selectedStock: string;
+  selectedPurchasedStock: string;
   player: string;
+  purchasedSelectedSector: string;
+  purchasedSelectedStock: string;
   balance: number;
   stockPrice: number = 0;
-  stockQuantity: number =0;
+  stockQuantity: number = 0;
+  availableQuantity: number = 0;
+  purchasedPrice: number = 0;
   totalAmount: number;
   currentTurn: number = 0;
+  currentStockPrice: number = 0;
+  income: number = 0;
   totalTurns: number = Constants.maximumTurn;
   isBlocked = false;
-  message = 'Please wait until all players connect';
+  isStockBought = true;
   isFormSubmitted = false;
 
-  constructor(private router: Router, private gameService: GameService, private activatedRoute: ActivatedRoute,
-    private toastr: ToastsManager, vcr: ViewContainerRef, private blockUiService: BlockUiService) {
+  message = 'Please wait until all players connect';
+
+
+  constructor(private router: Router, private gameService: GameService, private brokerService: BrokerService, private activatedRoute: ActivatedRoute,
+    private toastr: ToastsManager, vcr: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vcr);
   }
 
@@ -52,13 +69,14 @@ export class GameComponent implements OnInit {
         this.loadStockData();
         this.getCurrentTurn();
         this.gamePlay();
+        this.getPurchasedStockData();
       }
     });
   }
   gamePlay() {
     this.gameService.getConnectedPlayers()
       .subscribe(playerCount => {
-        if (playerCount == Constants.maximumPlayers) {
+        if (playerCount.Result == Constants.maximumPlayers) {
           this.isBlocked = false;
         } else {
           this.isBlocked = true;
@@ -69,12 +87,14 @@ export class GameComponent implements OnInit {
   loadStockData() {
     this.gameService.getStockData()
       .subscribe(data => {
-        this.google = data[0];
-        this.yahoo = data[1];
-        this.microsoft = data[2];
-        this.amazon = data[3];
+        debugger;
+        this.allStockData = data;
+        this.google = data[0].Sectors;
+        this.yahoo = data[1].Sectors;
+        this.microsoft = data[2].Sectors;
+        this.amazon = data[3].Sectors;
         this.loadSectors();
-      }, error => {
+      }, () => {
         this.toastr.warning("Error in loading stock data", "Warning");
       });
   }
@@ -96,7 +116,7 @@ export class GameComponent implements OnInit {
       .subscribe(sect => {
         this.sectors = sect;
         this.getStocks();
-      }, error => {
+      }, () => {
         this.toastr.warning("Error in loading Sectors", "Warning");
       });
   }
@@ -108,37 +128,43 @@ export class GameComponent implements OnInit {
         this.stockQuantity = null;
         this.stockPrice = null;
         this.totalAmount = null;
-      }, error => {
+      }, () => {
         this.toastr.warning("Error in loading stocks", "Warning");
       });
   }
 
   loadPrice() {
     this.stockPrice = this.stocks.find(s => s.SectorName == this.selectedStock).StockPrice;
+    this.stockPrice = Math.round(this.stockPrice * 100) / 100;
     this.stockQuantity = null;
     this.totalAmount = null;
   }
 
   calculateTotalAmount() {
     this.totalAmount = this.stockQuantity * this.stockPrice;
+    this.totalAmount = Math.round(this.totalAmount * 100) / 100;
   }
 
   buyStocks() {
     this.isFormSubmitted = true;
-if(this.selectedSector == '' || this.selectedStock== ''|| this.stockQuantity== 0 ||this.stockPrice== 0)return;
+    if (this.selectedSector == undefined || this.selectedStock == undefined || this.stockQuantity == null || this.stockPrice == null) return;
     this.stockEntity.PlayerName = this.player;
     this.stockEntity.Sector = this.selectedSector;
     this.stockEntity.Stock = this.selectedStock;
     this.stockEntity.Quantity = this.stockQuantity;
     this.stockEntity.StockPrice = this.stockPrice;
-    this.gameService.buyStocks(this.stockEntity)
-      .subscribe(bought => {
+    this.stockEntity.Total = this.totalAmount;
+    this.brokerService.buyStocks(this.stockEntity)
+      .subscribe(() => {
         this.toastr.success("Your purchase has been successfully completed", "Success");
         this.loadPlayerData();
         this.getCurrentTurn();
-        this.stockQuantity = null;
-        this.stockPrice = null;
-        this.totalAmount = null;
+        this.stockQuantity = 0;
+        this.stockPrice = 0;
+        this.totalAmount = 0;
+        this.getPurchasedStockData();
+        this.isStockBought = true;
+        this.loadStockData();
       }, error => {
         this.toastr.warning(error, "Warning");
       });
@@ -147,14 +173,14 @@ if(this.selectedSector == '' || this.selectedStock== ''|| this.stockQuantity== 0
   gameOver() {
     this.gameService.getGameStatus()
       .subscribe(status => {
-        if (status == 'Game Over') {
+        if (status.Result == 'Game Over') {
           this.gameService.getWinner()
             .subscribe(winner => {
               this.isBlocked = true;
-              this.message = 'winner :' + winner.Accounts.PlayerName + '  Score:' + winner.Accounts.Balance;
+              this.message = 'winner :' + winner.Result.Accounts.PlayerName + '  Score:' + winner.Result.Accounts.Balance;
               setTimeout(() => {
                 this.gameService.newGame()
-                  .subscribe(res => {
+                  .subscribe(() => {
                     this.router.navigate(['']);
                   });
               }, 4000);
@@ -176,6 +202,73 @@ if(this.selectedSector == '' || this.selectedStock== ''|| this.stockQuantity== 0
         }
       }, error => {
         this.toastr.warning(error, "Warning");
+      });
+  }
+
+  getPurchasedStockData() {
+    this.brokerService.getBrokerData(this.player)
+      .subscribe(data => {
+        if (data.BrokerInfos.length == 0) {
+          this.isStockBought = false;
+        }
+        else {
+          this.purchasedStock = data.BrokerInfos;
+          this.purchasedStock = this.purchasedStock.filter(c => c.IsAvailable == true);
+        }
+      }, () => {
+        this.toastr.warning("Error in loading Sectors", "Warning");
+      });
+  }
+
+  getCurrentStockPrice() {
+    this.brokerService.getBrokerData(this.player)
+      .subscribe(() => {
+        this.purchasedStock.forEach(element => {
+          let s = element.Sector + " - " + element.Stock;
+
+          this.purchasedSelectedSector = element.Sector;
+          this.purchasedSelectedStock = element.Stock;
+
+          if (s == this.selectedPurchasedStock) {
+            this.availableQuantity = element.Quantity;
+            this.purchasedPrice = Math.round(element.StockPrice * 100) / 100;
+            let sectorStock = this.selectedPurchasedStock.split(" - ", 2);
+            for (let market of this.allStockData) {
+              if (market.StockMarket.CompanyName == sectorStock[0]) {
+                market.Sectors.forEach(sector => {
+                  if (sector.SectorName == sectorStock[1]) {
+                    this.currentStockPrice = Math.round(sector.StockPrice * 100) / 100;
+                    this.income = Math.round((this.currentStockPrice * this.availableQuantity) * 100) / 100;
+                  }
+                });
+              }
+            }
+          }
+        });
+      }, () => {
+        this.toastr.warning("Error in loading Sectors", "Warning");
+      });
+  }
+
+  sellStocks() {
+    this.sellStockEntity.PlayerName = this.player;
+    this.sellStockEntity.Sector = this.purchasedSelectedSector;
+    this.sellStockEntity.Stock = this.purchasedSelectedStock;
+    this.sellStockEntity.Quantity = this.availableQuantity;
+    this.sellStockEntity.StockPrice = this.currentStockPrice;
+    this.sellStockEntity.Total = this.income;
+    this.brokerService.SellStocks(this.sellStockEntity)
+      .subscribe(res => {
+        this.toastr.success("You have successfully sold selected sector!", "Success");
+        this.loadPlayerData();
+        this.getCurrentTurn();
+        this.availableQuantity = 0;
+        this.currentStockPrice = 0;
+        this.income = 0;
+        this.getPurchasedStockData();
+        this.loadStockData();
+      }, error => {
+        this.toastr.error("Error in solding the selected stock", "Error");
       });
   }
 }
