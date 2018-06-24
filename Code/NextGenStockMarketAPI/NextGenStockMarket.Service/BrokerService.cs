@@ -204,6 +204,32 @@ namespace NextGenStockMarket.Service
             return playerBrokerAccount;
         }
 
+        public async Task<List<ScoreArray>> AllData()
+        {
+            int turn = cache.Get<Records>("Turn").Turns;
+            List<ScoreArray> data = new List<ScoreArray>(); ;
+            var sector = await GetSectors();
+            for(int i =1;i<=turn;i++)
+            {
+                foreach (var sec in sector)
+                {
+                    var comp = await GetStocks(sec);
+                    foreach (var soc in comp)
+                    {
+                        string strlast = i + "_" + sec + "_" + soc.SectorName;
+                        data.Add(cache.Get<ScoreArray>(strlast));
+                    }
+                }
+            }
+
+            if (data == null)
+            {
+                throw new Exception("No data");
+            }
+
+            return data;
+        }
+
         public async Task<AllBrokerData> GetAvailableStocks(string playerName)
         {
             AllBrokerData playerBrokerAccount = cache.Get<AllBrokerData>(playerName + "_Broker");
