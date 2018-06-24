@@ -8,4 +8,8 @@ namespace NextGenStockMarket.Data.Entities
         public int PlayerTurn { get; set; }
         public int Turn { get; set; } = 0;
     }
+    public class Records
+    {
+        public int Turns { get; set; }
+    }
 }
