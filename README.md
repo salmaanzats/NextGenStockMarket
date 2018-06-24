@@ -20,6 +20,9 @@ Web API(.NET) - Using Asynchronous programming
 	
 Angular:
 	location : NextGenStockMarket\Code\Presentation\NextGenStockMarket
+
+Testing Document
+    location : NextGenStockMarket\documents\NextGen Stock Market Testing Document
 	
 #############################################################################################
 
