@@ -10,13 +10,13 @@ namespace NextGenStockMarketAPI.Controllers.Api
     {
         private IBrokerService brokerService;
 
+        public BrokerController()
+        {
+        }
+
         public BrokerController(IBrokerService _brokerService)
         {
             brokerService = _brokerService;
-        }
-
-        public BrokerController()
-        {
         }
 
         [HttpPost, Route("broker/createaccount")]
@@ -54,6 +54,12 @@ namespace NextGenStockMarketAPI.Controllers.Api
         public async Task<IHttpActionResult> GetPortfolio(string playerName)
         {
             return Ok(await brokerService.Portfolio(playerName));
+        }
+
+        [HttpGet, Route("broker/getavailablestock")]
+        public async Task<IHttpActionResult> GetAvailableStocks(string playerName)
+        {
+            return Ok(await brokerService.GetAvailableStocks(playerName));
         }
     }
 }

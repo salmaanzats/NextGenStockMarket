@@ -41,12 +41,6 @@ export class GameService extends BaseService {
     .catch(this.errorHandler)
   }
 
-  buyStocks(stocks){
-    return this.http.post(`${this.brokerEndPoint}/buy`,(stocks), this.httpOptions)
-    .map(response => response)
-    .catch(this.errorHandler)
-  }
-
   getBankData(playerName){
     return this.http.get(`${this.bankEndPoint}/getaccount?playerName=${playerName}`, this.httpOptions)
     .map(response => response)

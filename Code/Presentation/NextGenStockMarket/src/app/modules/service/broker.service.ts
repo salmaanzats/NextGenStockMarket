@@ -16,4 +16,23 @@ export class BrokerService extends BaseService {
     .map(response => response)
     .catch(this.errorHandler)
   }
+
+  GetAvailableStocks(playerName){
+    return this.http.get(`${this.brokerEndPoint}/getavailablestock?playerName=${playerName}`, this.httpOptions)
+    .map(response => response)
+    .catch(this.errorHandler)
+  }
+
+  SellStocks(stocks){
+    return this.http.post(`${this.brokerEndPoint}/sell`,(stocks), this.httpOptions)
+    .map(response => response)
+    .catch(this.errorHandler)
+  }
+ 
+  buyStocks(stocks){
+    return this.http.post(`${this.brokerEndPoint}/buy`,(stocks), this.httpOptions)
+    .map(response => response)
+    .catch(this.errorHandler)
+  }
+  
 }

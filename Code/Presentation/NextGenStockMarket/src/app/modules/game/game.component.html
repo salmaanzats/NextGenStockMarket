@@ -65,9 +65,9 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let sector of this.google.Sectors">
+              <tr *ngFor="let sector of this.google">
                 <td>{{sector.SectorName}}</td>
-                <td>{{sector.StockPrice}}</td>
+                <td>{{sector.StockPrice|number:'1.2-2'}}</td>
               </tr>
             </tbody>
           </table>
@@ -82,9 +82,9 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let sector of this.yahoo.Sectors">
+              <tr *ngFor="let sector of this.yahoo">
                 <td>{{sector.SectorName}}</td>
-                <td>{{sector.StockPrice}}</td>
+                <td>{{sector.StockPrice|number:'1.2-2'}}</td>
               </tr>
             </tbody>
           </table>
@@ -99,9 +99,9 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let sector of this.microsoft.Sectors">
+              <tr *ngFor="let sector of this.microsoft">
                 <td>{{sector.SectorName}}</td>
-                <td>{{sector.StockPrice}}</td>
+                <td>{{sector.StockPrice|number:'1.2-2'}}</td>
               </tr>
             </tbody>
           </table>
@@ -116,9 +116,9 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let sector of this.amazon.Sectors">
+              <tr *ngFor="let sector of this.amazon">
                 <td>{{sector.SectorName}}</td>
-                <td>{{sector.StockPrice}}</td>
+                <td>{{sector.StockPrice|number:'1.2-2'}}</td>
               </tr>
             </tbody>
           </table>
@@ -129,48 +129,99 @@
 
   <div class="form-group">
     <div class="row">
-      <div class="col-9">
-        <label> Select Sector : </label>
-        <select class="form-control" [(ngModel)]="selectedSector" (change)="getStocks()">
-          <option>Select a sector</option>
-          <option *ngFor="let sector of sectors">{{sector}}</option>
-        </select>
+      <div class="col-6"> BUY
+        <div class="row">
+          <div class="col-9">
+            <label> Select Sector : </label>
+            <select class="form-control" [(ngModel)]="selectedSector" (change)="getStocks()">
+              <option>Select a sector</option>
+              <option *ngFor="let sector of sectors">{{sector}}</option>
+            </select>
+            <small *ngIf="selectedSector == undefined && isFormSubmitted">
+              Sector name is Required
+            </small>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <label> Select stock : </label>
+            <select class="form-control" [(ngModel)]="selectedStock" (change)="loadPrice()">
+              <option selected>Select a stock</option>
+              <option *ngFor="let stock of stocks">{{stock.SectorName}}</option>
+            </select>
+            <small *ngIf="selectedStock ==undefined && isFormSubmitted">
+              Stock is Required
+            </small>
+          </div>
+          <div class="col-3">
+            <label> Price : </label>
+            <input type="text" class="form-control" value={{this.stockPrice}} disabled>
+            <small *ngIf="selectedSector == null && isFormSubmitted">
+              Stock Price is Required
+            </small>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <label> Stock Quantity : </label>
+            <input type="number" [min]=0 class="form-control" [(ngModel)]="stockQuantity" (change)=calculateTotalAmount()>
+            <small *ngIf="stockQuantity == null && isFormSubmitted">
+              Stock quantity is Required
+            </small>
+          </div>
+        </div>
+        <hr size="20">
+        <div class="row">
+          <div class="col-6">
+            <label>Stock Total :</label>
+            <input type="number" class="form-control" [(ngModel)]="totalAmount" disabled>
+          </div>
+          <div class="col-3">
+            <button type="button" class="btn btn-success" (click)="buyStocks()">Buy</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-6" *ngIf="!isStockBought">
+        <label>There are no available stocks to sell</label>
+      </div>
+      <div class="col-6" *ngIf="isStockBought"> SELL
+        <div class="row">
+          <div class="col-9">
+            <label> Select Purchased Stock : </label>
+            <select class="form-control" [(ngModel)]="selectedPurchasedStock" (change)="getCurrentStockPrice()">
+              <option>Select a sector</option>
+              <option *ngFor="let stock of purchasedStock">{{stock.Sector}} - {{stock.Stock}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <label>Purchased Quantity :</label>
+            <input type="number" class="form-control" [(ngModel)]="availableQuantity" disabled>
+          </div>
+          <div class="col-5">
+            <label>Purchased Price :</label>
+            <input type="number" class="form-control" [(ngModel)]="purchasedPrice" disabled>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4">
+            <label>Current Price :</label>
+            <input type="number" class="form-control" [(ngModel)]="currentStockPrice" disabled>
+          </div>
+          <div class="col-5">
+            <label>Income :</label>
+            <input type="number" class="form-control" [(ngModel)]="income" disabled>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-9">
+            <button type="button" class="btn btn-success" (click)="sellStocks()">Sell</button>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-6">
-        <label> Select stock : </label>
-        <select class="form-control" [(ngModel)]="selectedStock" (change)="loadPrice()">
-          <option selected>Select a stock</option>
-          <option *ngFor="let stock of stocks">{{stock.SectorName}}</option>
-        </select>
-        <small *ngIf="selectedStock =='' && isFormSubmitted">
-            Player Name is Required
-        </small>
-      </div>
-      <div class="col-3">
-        <label> Price : </label>
-        <input type="text" class="form-control" value={{this.stockPrice}} disabled>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-6">
-        <label> Stock Quantity : </label>
-        <input type="number" [min]=0 class="form-control" [(ngModel)]="stockQuantity" (change)=calculateTotalAmount()>
-        <small *ngIf="stockQuantity =='' && isFormSubmitted">
-            Stock quantity is Required
-        </small>
-      </div>
-    </div>
-    <hr size="30">
-    <div class="row">
-      <div class="col-6">
-        <label> Stock Total : </label>
-        <input type="number" class="form-control" [(ngModel)]="totalAmount" disabled>
-      </div>
-      <div class="col-3">
-        <button type="button" class="btn btn-success" (click)="buyStocks()">Buy</button>
-      </div>
-    </div>
+
+
   </div>
 </div>

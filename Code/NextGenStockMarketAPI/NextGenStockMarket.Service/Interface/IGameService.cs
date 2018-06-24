@@ -1,13 +1,14 @@
 ﻿using NextGenStockMarket.Data.Entities;
+using System.Threading.Tasks;
 
 namespace NextGenStockMarket.Service.Interface
 {
     public interface IGameService
     {
         string CreatePlayer(Players player);
-        int GetConnectedPlayers();
-        string GameStatus();
-        AllBankRecords GetWinner();
-        int NewGame();
+        Task<int> GetConnectedPlayers();
+        Task<string> GameStatus();
+        Task<AllBankRecords> GetWinner();
+        Task<int> NewGame();
     }
 }

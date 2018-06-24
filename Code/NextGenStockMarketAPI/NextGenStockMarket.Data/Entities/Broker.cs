@@ -16,7 +16,9 @@ namespace NextGenStockMarket.Data.Entities
             public string Stock { get; set; }
             public int Quantity { get; set; }
             public decimal StockPrice { get; set; }
+            public decimal Total { get; set; }
             public string Status { get; set; }
+            public bool IsAvailable { get; set; }
         }
 
         public class AllBrokerData

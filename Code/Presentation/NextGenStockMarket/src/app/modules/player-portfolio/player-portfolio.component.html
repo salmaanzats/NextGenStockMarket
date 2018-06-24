@@ -13,6 +13,7 @@
         <th>Stock</th>
         <th>Stock Price</th>
         <th>Quantity</th>
+        <th>Total</th>
         <th>Status</th>
       </tr>
     </thead>
@@ -20,8 +21,9 @@
       <tr *ngFor="let info of brokerInfo">
         <td>{{info.Sector}}</td>
         <td>{{info.Stock}}</td>
-        <td>{{info.StockPrice}}</td>
+        <td>${{info.StockPrice}}</td>
         <td>{{info.Quantity}}</td>
+        <td>${{info.Total}}</td>
         <td>{{info.Status}}</td>
       </tr>
     </tbody>

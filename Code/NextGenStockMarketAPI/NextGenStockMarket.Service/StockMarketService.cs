@@ -38,17 +38,17 @@ namespace NextGenStockMarket.Service
                 new Sector
                 {
                     SectorName = "Financial",
-                    StockPrice = 100
+                    StockPrice = 60
                 },
                 new Sector
                 {
                     SectorName = "Artificial Intelligence",
-                    StockPrice = 120
+                    StockPrice = 45
                 },
                 new Sector
                 {
                     SectorName = "Robotics",
-                    StockPrice = 120
+                    StockPrice = 56
                 },
                 new Sector
                 {
@@ -65,22 +65,22 @@ namespace NextGenStockMarket.Service
                 new Sector
                 {
                     SectorName = "Financial",
-                    StockPrice = 100
+                    StockPrice = 26
                 },
                 new Sector
                 {
                     SectorName = "Artificial Intelligence",
-                    StockPrice = 120
+                    StockPrice = 15
                 },
                 new Sector
                 {
                     SectorName = "Robotics",
-                    StockPrice = 120
+                    StockPrice = 65
                 },
                 new Sector
                 {
                     SectorName = "Android",
-                    StockPrice = 50
+                    StockPrice = 45
                 }
             };
             allMarketData.Add(marketTwo);
@@ -92,22 +92,22 @@ namespace NextGenStockMarket.Service
                 new Sector
                 {
                     SectorName = "Financial",
-                    StockPrice = 100
+                    StockPrice = 65
                 },
                 new Sector
                 {
                     SectorName = "Artificial Intelligence",
-                    StockPrice = 120
+                    StockPrice = 78
                 },
                 new Sector
                 {
                     SectorName = "Robotics",
-                    StockPrice = 120
+                    StockPrice = 98
                 },
                 new Sector
                 {
                     SectorName = "Android",
-                    StockPrice = 50
+                    StockPrice = 105
                 }
             };
             allMarketData.Add(marketThree);
@@ -120,22 +120,22 @@ namespace NextGenStockMarket.Service
                 new Sector
                 {
                     SectorName = "Financial",
-                    StockPrice = 100
+                    StockPrice = 26
                 },
                 new Sector
                 {
                     SectorName = "Artificial Intelligence",
-                    StockPrice = 120
+                    StockPrice = 89
                 },
                 new Sector
                 {
                     SectorName = "Robotics",
-                    StockPrice = 120
+                    StockPrice = 87
                 },
                 new Sector
                 {
                     SectorName = "Android",
-                    StockPrice = 50
+                    StockPrice = 36
                 }
             };
             allMarketData.Add(marketFour);

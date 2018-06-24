@@ -3,6 +3,7 @@ using NextGenStockMarket.Data.Entities;
 using NextGenStockMarket.Service.Interface;
 using NextGenStockMarket.Service.Utility;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using static NextGenStockMarket.Data.Entities.Broker;
@@ -14,12 +15,12 @@ namespace NextGenStockMarket.Service
     {
         protected readonly ICacheManager cache;
         protected readonly IBankService bankService;
-    
+
         public BrokerService(IBankService _bankService)
         {
             cache = new MemoryCacheManager();
             bankService = _bankService;
-           
+
         }
 
         public async Task<BrokerAccount> CreateAccount(string playerName)
@@ -95,7 +96,7 @@ namespace NextGenStockMarket.Service
             }
             else
             {
-                records.Turns = cache.Get<Records>("Turn").Turns+1;
+                records.Turns = cache.Get<Records>("Turn").Turns + 1;
                 cache.Remove("Turn");
                 cache.Set("Turn", records, Constants.cacheTime);
             }
@@ -103,10 +104,10 @@ namespace NextGenStockMarket.Service
 
         public async Task<AllBrokerData> BuyStock(BrokerInfo brokerInfo)
         {
-            
+
             var stockbuy = new StockMarketService();
             var markets = cache.Get<List<AllStockMarketRecords>>(Constants.marketData);
-            
+
             var playerBrokerAccount = cache.Get<AllBrokerData>(brokerInfo.PlayerName + "_Broker");
 
             if (playerBrokerAccount == null)
@@ -136,13 +137,14 @@ namespace NextGenStockMarket.Service
             var brokerRecords = new AllBrokerData();
             brokerRecords = playerBrokerAccount;
             brokerInfo.Status = Constants.boughtStock;
+            brokerInfo.IsAvailable = true;
             brokerRecords.BrokerInfos.Add(brokerInfo);
 
             cache.Set(brokerInfo.PlayerName + "_Broker", brokerRecords, Constants.cacheTime);
             TurnChange();
             var CompaniesList = await GetStocks(brokerInfo.Stock);
             stockbuy.PriceUpdate(brokerInfo, CompaniesList, markets, "Buy");
-            
+
             return brokerRecords;
         }
 
@@ -171,9 +173,19 @@ namespace NextGenStockMarket.Service
             var brokerRecords = new AllBrokerData() { };
             brokerRecords = playerBrokerAccount;
             brokerInfo.Status = Constants.sellStock;
+            brokerInfo.IsAvailable = false;
             brokerRecords.BrokerInfos.Add(brokerInfo);
 
+            foreach(var item in brokerRecords.BrokerInfos)
+            {
+                if(item.Sector == brokerInfo.Sector && item.Stock == brokerInfo.Stock && item.Quantity == brokerInfo.Quantity && item.Status == Constants.boughtStock)
+                {
+                    item.IsAvailable = false;
+                }
+            }
+
             cache.Set(brokerInfo.PlayerName + "_Broker", brokerRecords, Constants.cacheTime);
+
             TurnChange();
             var CompaniesList = await GetStocks(brokerInfo.Stock);
             stockbuy.PriceUpdate(brokerInfo, CompaniesList, markets, "Sell");
@@ -189,6 +201,23 @@ namespace NextGenStockMarket.Service
                 throw new Exception("No broker account exists for provided data");
             }
 
+            return playerBrokerAccount;
+        }
+
+        public async Task<AllBrokerData> GetAvailableStocks(string playerName)
+        {
+            AllBrokerData playerBrokerAccount = cache.Get<AllBrokerData>(playerName + "_Broker");
+        
+            if (playerBrokerAccount == null)
+            {
+                throw new Exception("No broker account exists for provided data");
+            }
+
+            var brokerInfo = (from Info in playerBrokerAccount.BrokerInfos
+                              where Info.IsAvailable == true
+                              select Info).ToList();
+
+            playerBrokerAccount.BrokerInfos = brokerInfo;
             return playerBrokerAccount;
         }
     }

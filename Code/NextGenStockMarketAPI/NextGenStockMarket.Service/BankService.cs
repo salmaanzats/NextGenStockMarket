@@ -92,6 +92,7 @@ namespace NextGenStockMarket.Service
 
             var clock = new Clock();
             clock.PlayerName = turn.PlayerName;
+            clock.PlayerTurn = turn.PlayerTurn + 1;
 
             var gameStatus = this.clockService.PlayerTurn(clock);
             if (gameStatus == Constants.gameOver)
@@ -105,7 +106,7 @@ namespace NextGenStockMarket.Service
             var bankRecords = new AllBankRecords() { };
             bankRecords = playerAccount;
             bankRecords.BankTransactions.Add(transaction);
-            bankRecords.CurrentTurn = turn.PlayerTurn + 1;
+            bankRecords.CurrentTurn = turn.PlayerTurn;
 
             cache.Set(transaction.PlayerName + "_Bank", bankRecords, Constants.cacheTime);
             return bankRecords;
