@@ -152,6 +152,46 @@ the middle of boxes much cleaner than display:table-cell way*/
   float: left;
   margin-right: 10px;
  }
+
+ .bg {
+  /* The image used */
+  background-image: url("/assets/images/stock6.jpg");
+
+  /* Full height */
+  height: 100%; 
+
+  /* Center and scale the image nicely */
+  background-position: right;
+  background-repeat: no-repeat;
+  
+}
+
+.bgtbls{
+/* The image used */
+background-image: url("/assets/images/stock9.jpg");
+
+/* Full height */
+height: 100%; 
+
+/* Center and scale the image nicely */
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+
+}
+
+.trans{
+  background-color:rgb(102, 233, 102);
+  opacity: 0.8;
+  filter: alpha(opacity=60);
+}
+
+h5{
+  color: indigo;
+}
+h4{
+  color: mediumblue;
+}
  .D1{
    margin-top: 100px;
  }
@@ -168,5 +208,57 @@ the middle of boxes much cleaner than display:table-cell way*/
    margin-right: 50px;
    margin-left: 400px;
    margin-top: 25px;
-  color: firebrick;
+  color: rgb(178, 34, 34);
  }
+
+ 
+@keyframes Ptext {
+  50%{color: lightslategray}
+}
+#LoadIcon
+{
+margin-top: 10px;
+}
+#google,#yahoo,#amazon,#microsoft
+{
+   width: 100px;
+  height: 100px; 
+}
+#google
+{
+  margin-right: 125px;
+  margin-left: 100px;
+animation: google 5s infinite;
+
+
+}
+@keyframes google {
+  50% {opacity: 0;}
+}
+#yahoo{
+  margin-right: 125px;
+animation: yahoo 8s infinite;
+
+
+}
+@keyframes yahoo {
+  50% {opacity: 0;}
+}
+#amazon{
+  margin-right: 125px;
+animation: amazon 10s infinite;
+
+
+}
+@keyframes amazon {
+  50% {opacity: 0;}
+}
+#microsoft{
+  margin-right: 125px;
+animation: microsoft 6s infinite;
+
+
+}
+@keyframes microsoft {
+  50% {opacity: 0;}
+}

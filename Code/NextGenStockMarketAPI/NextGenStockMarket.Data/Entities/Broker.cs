@@ -24,6 +24,5 @@ namespace NextGenStockMarket.Data.Entities
             public BrokerAccount Accounts { get; set; }
             public ICollection<BrokerInfo> BrokerInfos { get; set; } = new List<BrokerInfo>();
         }
-        
     }
 }

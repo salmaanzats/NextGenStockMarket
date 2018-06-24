@@ -40,30 +40,4 @@ namespace NextGenStockMarket.Data.Entities
     {
         public int SectorTrendValue { get; set; }
     }
-
-    public class Event
-    {
-        public double EventSum { get; set; }
-        public string Type { get; set; }
-
-    }
-
-    public class EventRecord
-    {
-        public int NextTurn { get; set; }
-        public int LastTurn { get; set; }
-        public double EventSum { get; set; }
-        public int Duration { get; set; }
-    }
-
-    public class MainEventRecord
-    {
-        public string Sector { get; set; }
-        public string Stock { get; set; }
-        public int Value { get; set; }
-    }
-    public class PrevVal
-    {
-        public int Value { get; set; }
-    }
 }

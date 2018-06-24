@@ -14,10 +14,6 @@ namespace NextGenStockMarketAPI.Controllers.Api
             gameService = _gameService;
         }
 
-        public GameController()
-        {
-        }
-
         [HttpGet, Route("game/connectedplayers")]
         public async Task<IHttpActionResult> GetConnectedPlayersCount()
         {
