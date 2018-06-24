@@ -1,6 +1,6 @@
 <app-sidebar></app-sidebar>
 <app-block-ui [isBlocked]="isBlocked" [loadMessage]="this.message"></app-block-ui>
-<div class="modal-body" style="background: #d6e5ff;margin-left: 250px">
+<div class="modal-body bgtbls" style="margin-left: 250px;">
   <div class="row row-flex-box" style="background: #cbd0d8;">
     <div class="col-xs-6 col-sm-6 col-md-3">
       <div class="thumbnail flex-col-vertical-center">
@@ -52,12 +52,13 @@
     </div>
   </div>
 
-  <div class="row row-flex-box" style="margin-top: 10px; background: white;">
+
+  <div class="row row-flex-box " style="margin-top: 10px; ">
     <div class="container">
       <div class="row">
-        <div class="space sm-col-3">
-          <h4>Google Stock Details</h4>
-          <table class="table table-bordered table-striped">
+        <div class="space sm-col-3 ">
+          <h4><font style="color: mediumblue">Google</font><font style="color: darkmagenta"> Stock Details</font></h4>
+          <table class="table table-bordered table-striped trans">
             <thead>
               <tr>
                 <th>Stocks</th>
@@ -73,8 +74,8 @@
           </table>
         </div>
         <div class="space sm-col-3">
-          <h4>Yahoo Stock Details</h4>
-          <table class="table table-bordered table-striped">
+          <h4><font style="color: mediumblue">Yahoo</font><font style="color: darkmagenta"> Stock Details</font></h4>
+          <table class="table table-bordered table-striped trans">
             <thead>
               <tr>
                 <th>Stocks</th>
@@ -90,8 +91,8 @@
           </table>
         </div>
         <div class="space sm-col-3">
-          <h4>Microsoft Stock Details</h4>
-          <table class="table table-bordered table-striped">
+          <h4><font style="color: mediumblue">Microsoft</font><font style="color: darkmagenta"> Stock Details</font></h4>
+          <table class="table table-bordered table-striped trans">
             <thead>
               <tr>
                 <th>Stocks</th>
@@ -107,8 +108,8 @@
           </table>
         </div>
         <div class="space sm-col-3">
-          <h4>Amazon Stock Details</h4>
-          <table class="table table-bordered table-striped">
+          <h4><font style="color: mediumblue">Amazon</font><font style="color: darkmagenta"> Stock Details</font></h4>
+          <table class="table table-bordered table-striped trans">
             <thead>
               <tr>
                 <th>Stocks</th>
@@ -127,10 +128,10 @@
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group" style="height: 407px">
     <div class="row">
       <div class="col-9">
-        <label> Select Sector : </label>
+        <label><b> Select Sector : </b></label>
         <select class="form-control" [(ngModel)]="selectedSector" (change)="getStocks()">
           <option>Select a sector</option>
           <option *ngFor="let sector of sectors">{{sector}}</option>
@@ -139,7 +140,7 @@
     </div>
     <div class="row">
       <div class="col-6">
-        <label> Select stock : </label>
+        <label><b> Select stock : </b></label>
         <select class="form-control" [(ngModel)]="selectedStock" (change)="loadPrice()">
           <option selected>Select a stock</option>
           <option *ngFor="let stock of stocks">{{stock.SectorName}}</option>
@@ -149,13 +150,13 @@
         </small>
       </div>
       <div class="col-3">
-        <label> Price : </label>
+        <label><b> Price : </b></label>
         <input type="text" class="form-control" value={{this.stockPrice}} disabled>
       </div>
     </div>
     <div class="row">
       <div class="col-6">
-        <label> Stock Quantity : </label>
+        <label><b> Stock Quantity : </b></label>
         <input type="number" [min]=0 class="form-control" [(ngModel)]="stockQuantity" (change)=calculateTotalAmount()>
         <small *ngIf="stockQuantity =='' && isFormSubmitted">
             Stock quantity is Required
@@ -165,7 +166,7 @@
     <hr size="30">
     <div class="row">
       <div class="col-6">
-        <label> Stock Total : </label>
+        <label><b> Stock Total : </b></label>
         <input type="number" class="form-control" [(ngModel)]="totalAmount" disabled>
       </div>
       <div class="col-3">
