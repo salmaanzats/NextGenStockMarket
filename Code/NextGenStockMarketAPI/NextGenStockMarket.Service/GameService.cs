@@ -86,7 +86,7 @@ namespace NextGenStockMarket.Service
             return Constants.play;
         }
 
-        public async Task<AllBankRecords> GetWinner()
+        public async Task<string> GetWinner()
         {
             decimal winnerScore = 0;
             var playerBank = new AllBankRecords();
@@ -103,8 +103,8 @@ namespace NextGenStockMarket.Service
                     Dictionary<string, decimal> score = new Dictionary<string, decimal>();
                     score.Add(String.Format(players.PlayerName, 1.ToString()), 1);
 
-                    var stock = GetStockValue(players.PlayerName);
-                    stockPrice[players.PlayerName] = stock;
+                    score[players.PlayerName] = GetStockValue(players.PlayerName);
+                    stockPrice[players.PlayerName] = score[players.PlayerName];
 
                     playerBank = cache.Get<AllBankRecords>(players.PlayerName + "_Bank");
 
@@ -115,8 +115,7 @@ namespace NextGenStockMarket.Service
                     }
                 }
             }
-            winner.Accounts.Balance = winnerScore;
-            return winner;
+            return "Winner :" + winner.Accounts.PlayerName + "  Score :" + winnerScore;
         }
 
         public decimal GetStockValue(string playerName)

@@ -8,7 +8,7 @@ namespace NextGenStockMarket.Service.Interface
         string CreatePlayer(Players player);
         Task<int> GetConnectedPlayers();
         Task<string> GameStatus();
-        Task<AllBankRecords> GetWinner();
+        Task<string> GetWinner();
         Task<int> NewGame();
     }
 }

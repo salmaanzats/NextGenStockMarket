@@ -175,8 +175,10 @@ export class GameComponent implements OnInit {
         if (status.Result == 'Game Over') {
           this.gameService.getWinner()
             .subscribe(winner => {
+              debugger;
               this.isBlocked = true;
-              this.message = 'winner :' + winner.Result.Accounts.PlayerName + '  Score:' + Math.round(winner.Result.Accounts.Balance);
+              //this.message = 'winner :' + winner.Result.Accounts.PlayerName + '  Score:' + Math.round(winner.Result.Accounts.Balance);
+              this.message = winner.Result;
               setTimeout(() => {
                 this.gameService.newGame()
                   .subscribe(() => {
