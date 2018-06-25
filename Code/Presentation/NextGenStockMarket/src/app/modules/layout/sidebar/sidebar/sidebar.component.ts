@@ -30,4 +30,7 @@ export class SidebarComponent implements OnInit {
   goToPlayerPortFolio() {
     this.router.navigate(['/portfolio/',this.player]);
   }
+  goToAnalyst(){
+    this.router.navigate(['/analyst/',this.player]);
+  }
 }

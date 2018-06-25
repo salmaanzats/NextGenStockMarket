@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { GameComponent } from './modules/game/game.component';
 import { BankTransactionComponent } from './modules/bank-transaction/bank-transaction.component';
 import { PlayerPortfolioComponent } from './modules/player-portfolio/player-portfolio.component';
+import { AnalystComponent } from './modules/analyst/analyst.component';
 
 const routes: Routes = [
   {
@@ -17,11 +18,15 @@ const routes: Routes = [
   },
   {
     path: 'bank/:player',
-    component:BankTransactionComponent,
+    component: BankTransactionComponent,
   },
   {
     path: 'portfolio/:player',
-    component:PlayerPortfolioComponent,
+    component: PlayerPortfolioComponent,
+  },
+  {
+    path: 'analyst/:player',
+    component: AnalystComponent,
   }
 ];
 

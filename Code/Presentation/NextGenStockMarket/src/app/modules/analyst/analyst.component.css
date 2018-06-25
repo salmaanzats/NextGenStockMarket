@@ -1,0 +1,19 @@
+.row-flex-box {
+    display: flex; /* make cols same heigh */
+    flex-wrap: wrap; /* alows responsive behavior of cols (otherwise cols will never break on mobile)*/
+  }
+  
+  .flex-col-vertical-center {
+    display: flex; /* specifing display/flex-direction/justifi-content only because i want to have text aligned in the middle of boxes much cleaner than display:table-cell way*/
+    flex-direction: column;
+    justify-content: center;
+    text-align:center;
+    height: 100%; /* since cols have bigger height this has effect, also can be ussefull - height: calc(100% - 15px); with 15px bottom margin */
+  }
+  #Ticon{
+   width: 60px;
+    height: 60px; 
+    margin-top:30px;
+
+}
+ 

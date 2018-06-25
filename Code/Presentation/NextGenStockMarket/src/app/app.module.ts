@@ -18,6 +18,7 @@ import { BankTransactionComponent } from './modules/bank-transaction/bank-transa
 import { PlayerPortfolioComponent } from './modules/player-portfolio/player-portfolio.component';
 import { BrokerService } from './modules/service/broker.service';
 import { HeaderComponent } from './modules/layout/header/header/header.component';
+import { AnalystComponent } from './modules/analyst/analyst.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { HeaderComponent } from './modules/layout/header/header/header.component
     BankTransactionComponent,
     PlayerPortfolioComponent,
     HeaderComponent,
+    AnalystComponent,
   ],
   imports: [
     BrowserModule,

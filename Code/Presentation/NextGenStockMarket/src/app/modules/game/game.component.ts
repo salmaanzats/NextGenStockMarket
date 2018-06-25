@@ -175,9 +175,7 @@ export class GameComponent implements OnInit {
         if (status.Result == 'Game Over') {
           this.gameService.getWinner()
             .subscribe(winner => {
-              debugger;
               this.isBlocked = true;
-              //this.message = 'winner :' + winner.Result.Accounts.PlayerName + '  Score:' + Math.round(winner.Result.Accounts.Balance);
               this.message = winner.Result;
               setTimeout(() => {
                 this.gameService.newGame()
@@ -253,7 +251,7 @@ export class GameComponent implements OnInit {
 
   sellStocks() {
     this.isFormSubmitted = true;
-    if(this.selectedPurchasedStock == undefined) return;
+    if (this.selectedPurchasedStock == undefined) return;
     this.sellStockEntity.PlayerName = this.player;
     this.sellStockEntity.Sector = this.purchasedSelectedSector;
     this.sellStockEntity.Stock = this.purchasedSelectedStock;

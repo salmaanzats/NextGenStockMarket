@@ -23,6 +23,8 @@
     "@angular/router": "^5.2.0",
     "bootstrap": "^4.1.1",
     "core-js": "^2.4.1",
+    "chart.js": "^2.7.1",
+    "highcharts": "^6.1.0",
     "ng2-toastr": "^4.1.2",
     "rxjs": "^5.5.6",
     "toastr": "^2.1.4",
