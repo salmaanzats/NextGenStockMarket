@@ -19,6 +19,7 @@ import { PlayerPortfolioComponent } from './modules/player-portfolio/player-port
 import { BrokerService } from './modules/service/broker.service';
 import { HeaderComponent } from './modules/layout/header/header/header.component';
 import { AnalystComponent } from './modules/analyst/analyst.component';
+import { ChartModule } from 'angular-highcharts';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { AnalystComponent } from './modules/analyst/analyst.component';
     AppRoutingModule,
     HttpClientModule,
     SharedModule,
+    ChartModule,
     CoreModule.forRoot(),
   ],
   providers: [PlayerService, GameService, BrokerService],

@@ -132,25 +132,25 @@
       <div class="col-6"> BUY
         <div class="row">
           <div class="col-9">
-            <label> Select Company (Stock) : </label>
+            <label> Select Sector : </label>
             <select class="form-control" [(ngModel)]="selectedSector" (change)="getStocks()">
-              <option>Select a Company (Stock)</option>
+              <option>Select a Sector</option>
               <option *ngFor="let sector of sectors">{{sector}}</option>
             </select>
             <small *ngIf="selectedSector == undefined && isFormSubmitted">
-              Company (Stock) name is Required
+              Sector is Required
             </small>
           </div>
         </div>
         <div class="row">
           <div class="col-6">
-            <label> Select Sector : </label>
+            <label> Select Stock : </label>
             <select class="form-control" [(ngModel)]="selectedStock" (change)="loadPrice()">
-              <option selected>Select a Sector</option>
+              <option selected>Select a Stock</option>
               <option *ngFor="let stock of stocks">{{stock.SectorName}}</option>
             </select>
             <small *ngIf="selectedStock ==undefined && isFormSubmitted">
-              Sector is Required
+              Stock is Required
             </small>
           </div>
           <div class="col-3">
@@ -224,7 +224,5 @@
         </div>
       </div>
     </div>
-
-
   </div>
 </div>
