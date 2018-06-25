@@ -86,7 +86,7 @@ namespace NextGenStockMarket.Service
             return Constants.play;
         }
 
-        public async Task<AllBankRecords> GetWinner()
+        public async Task<string> GetWinner()
         {
             decimal winnerScore = 0;
             var playerBank = new AllBankRecords();
@@ -101,9 +101,11 @@ namespace NextGenStockMarket.Service
                     stockPrice.Add(String.Format(players.PlayerName, 1.ToString()), 1);
 
                     Dictionary<string, decimal> score = new Dictionary<string, decimal>();
-                    stockPrice.Add(String.Format(players.PlayerName, 1.ToString()), 1);
+                    score.Add(String.Format(players.PlayerName, 1.ToString()), 1);
 
-                    stockPrice[players.PlayerName] = GetStockValue(players.PlayerName);
+                    score[players.PlayerName] = GetStockValue(players.PlayerName);
+                    stockPrice[players.PlayerName] = score[players.PlayerName];
+
                     playerBank = cache.Get<AllBankRecords>(players.PlayerName + "_Bank");
 
                     if (winnerScore < playerBank.Accounts.Balance + stockPrice[players.PlayerName])
@@ -113,8 +115,7 @@ namespace NextGenStockMarket.Service
                     }
                 }
             }
-            winner.Accounts.Balance = winnerScore;
-            return winner;
+            return "Winner :" + winner.Accounts.PlayerName + "  Score :" + winnerScore;
         }
 
         public decimal GetStockValue(string playerName)
@@ -132,9 +133,9 @@ namespace NextGenStockMarket.Service
                     {
                         foreach (var s in sec.Sectors)
                         {
-                            if (portfolio.Stock == s.SectorName)
+                            if (portfolio.Stock == s.SectorName && portfolio.IsAvailable == true)
                             {
-                                stockPrice[playerName] += s.StockPrice;
+                                stockPrice[playerName] += s.StockPrice * portfolio.Quantity;
                             }
                         }
                     }
