@@ -11,9 +11,27 @@ import { Chart } from 'angular-highcharts';
 })
 export class AnalystComponent implements OnInit {
 
-  constructor() { }
+  player: string;
+  selectedSector: string;
+  selectedStock: string;
+  currentTurn: number = 0;
+  isFormSubmitted = false;
+
+  bankInfo = [];
+  sectors = [];
+  stocks = [];
+  constructor(private router: Router, private gameService: GameService, private activatedRoute: ActivatedRoute,
+    private toastr: ToastsManager, vcr: ViewContainerRef) {
+    this.toastr.setRootViewContainerRef(vcr);
+  }
 
   ngOnInit() {
+    this.activatedRoute.params.subscribe((params: Params) => {
+      this.player = params['player'];
+      if (this.player != null || this.player != undefined) {
+        this.getSectors();
+      }
+    });
   }
 
   chart = new Chart({
@@ -21,22 +39,61 @@ export class AnalystComponent implements OnInit {
       type: 'line'
     },
     title: {
-      text: 'Linechart'
+      text: 'Stock market variation'
     },
     credits: {
       enabled: false
     },
     series: [
       {
-        name: 'Line 1',
-        data: [1, 2, 3]
+        name: 'Turns', // 16 turns
+        data: [1, 2, 3] // dataset
       }
     ]
   });
 
-  // add point to chart serie
-  add() {
-    this.chart.addPoint(Math.floor(Math.random() * 10));
+  // // add point to chart serie
+  // add() {
+  //   this.chart.addPoint(Math.floor(Math.random() * 10));
+  // }
+
+  getSectors() {
+    this.gameService.getSectorData()
+      .subscribe(sect => {
+        this.sectors = sect;
+      }, () => {
+        this.toastr.warning("Error in loading Sectors", "Warning");
+      });
   }
 
+  getStocks() {
+    this.gameService.getStockToSectors(this.selectedSector)
+      .subscribe(stocks => {
+        this.stocks = stocks;
+      }, () => {
+        this.toastr.warning("Error in loading stocks", "Warning");
+      });
+  }
+
+  getCurrentTurn() {
+    this.gameService.getBankData(this.player)
+      .subscribe(bankdata => {
+        this.currentTurn = bankdata.CurrentTurn;
+      }, error => {
+        this.toastr.warning(error, "Warning");
+      });
+  }
+
+  generate() {
+    this.isFormSubmitted = true;
+    if(this.selectedSector == undefined || this.selectedStock == undefined) return;
+
+    this.getCurrentTurn();
+    this.gameService.getGraphData(this.selectedSector, this.selectedStock, this.currentTurn)
+    .subscribe(res => {
+        debugger; //response should bind with the dataset
+    }, error => {
+
+    });
+  }
 }

@@ -12,6 +12,7 @@ export class GameService extends BaseService {
   private bankEndPoint =this.baseApiEndPoint + "v1/bank";
   private brokerEndPoint = this.baseApiEndPoint + "v1/broker";
   private gameEndPoint = this.baseApiEndPoint + "v1/game";
+  private merketEndPoint = this.baseApiEndPoint +"v1/market"
 
   constructor(private http: HttpClient) {
     super();
@@ -67,6 +68,12 @@ export class GameService extends BaseService {
 
   newGame(){
     return this.http.get(`${this.gameEndPoint}/newgame`, this.httpOptions)
+    .map(response => response)
+    .catch(this.errorHandler)
+  }
+
+  getGraphData(sector,stock,turn){
+    return this.http.get(`${this.gameEndPoint}/getprice?sector=${sector}&stock=${stock}&turn=${turn}`, this.httpOptions)
     .map(response => response)
     .catch(this.errorHandler)
   }
