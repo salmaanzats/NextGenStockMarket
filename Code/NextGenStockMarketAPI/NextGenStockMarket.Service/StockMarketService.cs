@@ -33,81 +33,81 @@ namespace NextGenStockMarket.Service
             //First Market and sectors
             var marketOne = new AllStockMarketRecords();
 
-            marketOne.StockMarket.CompanyName = "Financial";
+            marketOne.StockMarket.CompanyName = "Google";
             marketOne.Sectors = new List<Sector>()
             {
                 new Sector
                 {
-                    SectorName = "Google",
+                    SectorName = "Financial",
                     StockPrice = 60
                 },
                 new Sector
                 {
-                    SectorName = "Yahoo",
+                    SectorName = "Artificial Intelligence",
                     StockPrice = 45
                 },
                 new Sector
                 {
-                    SectorName = "Microsoft",
+                    SectorName = "Robotics",
                     StockPrice = 56
                 },
                 new Sector
                 {
-                    SectorName = "Amazon",
+                    SectorName = "Android",
                     StockPrice = 50
                 }
             };
             allMarketData.Add(marketOne);
             //Second Market and sectors
             var marketTwo = new AllStockMarketRecords();
-            marketTwo.StockMarket.CompanyName = "Artificial Intelligence";
+            marketTwo.StockMarket.CompanyName = "Yahoo";
             marketTwo.Sectors = new List<Sector>()
             {
                 new Sector
                 {
-                    SectorName = "Google",
+                    SectorName = "Financial",
                     StockPrice = 26
                 },
                 new Sector
                 {
-                    SectorName = "Yahoo",
+                    SectorName = "Artificial Intelligence",
                     StockPrice = 15
                 },
                 new Sector
                 {
-                    SectorName = "Microsoft",
+                    SectorName = "Robotics",
                     StockPrice = 65
                 },
                 new Sector
                 {
-                    SectorName = "Amazon",
+                    SectorName = "Android",
                     StockPrice = 45
                 }
             };
             allMarketData.Add(marketTwo);
             //Third Market and sectors
             var marketThree = new AllStockMarketRecords();
-            marketThree.StockMarket.CompanyName = "Robotics";
+            marketThree.StockMarket.CompanyName = "Microsoft";
             marketThree.Sectors = new List<Sector>()
             {
                 new Sector
                 {
-                    SectorName = "Google",
+                    SectorName = "Financial",
                     StockPrice = 65
                 },
                 new Sector
                 {
-                    SectorName = "Yahoo",
+                    SectorName = "Artificial Intelligence",
                     StockPrice = 78
                 },
                 new Sector
                 {
-                    SectorName = "Microsoft",
+                    SectorName = "Robotics",
                     StockPrice = 98
                 },
                 new Sector
                 {
-                    SectorName = "Amazon",
+                    SectorName = "Android",
                     StockPrice = 105
                 }
             };
@@ -115,43 +115,33 @@ namespace NextGenStockMarket.Service
 
             //Fourth Market and sectors
             var marketFour = new AllStockMarketRecords();
-            marketFour.StockMarket.CompanyName = "Android";
+            marketFour.StockMarket.CompanyName = "Amazon";
             marketFour.Sectors = new List<Sector>()
             {
                 new Sector
                 {
-                    SectorName = "Google",
+                    SectorName = "Financial",
                     StockPrice = 26
                 },
                 new Sector
                 {
-                    SectorName = "Yahoo",
+                    SectorName = "Artificial Intelligence",
                     StockPrice = 89
                 },
                 new Sector
                 {
-                    SectorName = "Microsoft",
+                    SectorName = "Robotics",
                     StockPrice = 87
                 },
                 new Sector
                 {
-                    SectorName = "Amazon",
+                    SectorName = "Android",
                     StockPrice = 36
                 }
             };
             allMarketData.Add(marketFour);
             allMarketData = RandomMarket(allMarketData);
             cache.Set(Constants.marketData, allMarketData, Constants.cacheTime);
-            //foreach(var item in allMarketData)
-            //{
-            //    foreach(var com in item.StockMarket.CompanyName)
-            //    {
-            //        foreach(var sec in item.Sectors)
-            //        {
-            //            item.Sectors.Where(w => w.SectorName == sec.SectorName).ToList().ForEach(s => s.StockPrice = GetRandomNumber(20,91));
-            //        }
-            //    }
-            //}
             return allMarketData;
         }
 
@@ -159,12 +149,14 @@ namespace NextGenStockMarket.Service
         {
             foreach (var item in allMarketData)
             {
-                foreach (var com in item.StockMarket.CompanyName)
+                foreach (var sec in item.Sectors)
                 {
-                    foreach (var sec in item.Sectors)
-                    {
-                        sec.StockPrice = GetRandomNumber(20, 91);
-                    }
+                    AllData alldata = new AllData();
+                    var turn = 0;
+                    var strnow = "R_" + turn + "_" + item.StockMarket.CompanyName + "_" + sec.SectorName;
+                    sec.StockPrice = GetRandomNumber(20, 91);
+                    alldata.Value = sec.StockPrice;
+                    cache.Set(strnow, alldata, Constants.cacheTime);
                 }
             }
             return allMarketData;
@@ -252,8 +244,10 @@ namespace NextGenStockMarket.Service
                 foreach(var Stock in Market.Sectors)
                 {
                     ScoreArray ScoreArray = new ScoreArray();
+                    AllData alldata = new AllData();
                     var strnow = turn + "_" + Market.StockMarket.CompanyName + "_" + Stock.SectorName;
                     var strlast = last + "_" + Market.StockMarket.CompanyName + "_" + Stock.SectorName;
+                    var strRec = "R_" + strnow;
 
                     ScoreArray.EventComponent = (Stock.SectorName == temp.Sector && temp.Stock == null) ? temp.Value : 0;
                     ScoreArray.EventComponent = (Stock.SectorName == temp.Sector && Market.StockMarket.CompanyName == temp.Stock) ? temp.Value : 0;
@@ -283,10 +277,12 @@ namespace NextGenStockMarket.Service
                     decimal updatedprice = Stock.StockPrice * (percentage);
 
                     Market.Sectors.Where(w => w.SectorName == Stock.SectorName).ToList().ForEach(s => s.StockPrice = updatedprice);
-
+                    alldata.Value = updatedprice;
+                    
                     if (cache.Get<ScoreArray>(strnow) == null)
                     {
                         cache.Set(strnow, ScoreArray, Constants.cacheTime);
+                        cache.Set(strRec, alldata, Constants.cacheTime);
                     }
                     else
                     {
@@ -297,7 +293,14 @@ namespace NextGenStockMarket.Service
             }
         }
 
-        
+        public int GetPrice(string sector, string stock, int turn)
+        {
+            var str = "R_" + turn + "_" + stock + "_" + sector;
+            var result = cache.Get<AllData>(str).Value;
+            return (int)result;
+        }
+
+
         public int calculatePreValue(int turn)
         {
             int last = turn - 1;
@@ -474,10 +477,12 @@ namespace NextGenStockMarket.Service
 
             return SelectEvent;
         }
+
         public static double Remap(float value, float from1, float to1, float from2, float to2)
         {
             double MapValue = (value - from1) / (to1 - from1) * (to2 - from2) + from2;
             return Math.Round(MapValue, MidpointRounding.AwayFromZero);
         }
+
     }
 }

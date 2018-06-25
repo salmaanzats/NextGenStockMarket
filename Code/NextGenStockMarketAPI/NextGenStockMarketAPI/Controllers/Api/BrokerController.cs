@@ -57,7 +57,7 @@ namespace NextGenStockMarketAPI.Controllers.Api
         }
 
         [HttpGet, Route("broker/alldata")]
-        public async Task<IHttpActionResult> AllData(string playerName)
+        public async Task<IHttpActionResult> AllData()
         {
             return Ok(await brokerService.AllData());
         }
