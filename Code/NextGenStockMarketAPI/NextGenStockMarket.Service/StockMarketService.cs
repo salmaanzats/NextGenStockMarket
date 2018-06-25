@@ -142,16 +142,6 @@ namespace NextGenStockMarket.Service
             allMarketData.Add(marketFour);
             allMarketData = RandomMarket(allMarketData);
             cache.Set(Constants.marketData, allMarketData, Constants.cacheTime);
-            //foreach(var item in allMarketData)
-            //{
-            //    foreach(var com in item.StockMarket.CompanyName)
-            //    {
-            //        foreach(var sec in item.Sectors)
-            //        {
-            //            item.Sectors.Where(w => w.SectorName == sec.SectorName).ToList().ForEach(s => s.StockPrice = GetRandomNumber(20,91));
-            //        }
-            //    }
-            //}
             return allMarketData;
         }
 
@@ -163,7 +153,11 @@ namespace NextGenStockMarket.Service
                 {
                     foreach (var sec in item.Sectors)
                     {
+                        AllData alldata = new AllData();
+                        var strnow = "R_0_" + item.StockMarket.CompanyName + "_" + sec.SectorName;
                         sec.StockPrice = GetRandomNumber(20, 91);
+                        alldata.Value = sec.StockPrice;
+                        cache.Set(strnow, alldata, Constants.cacheTime);
                     }
                 }
             }
@@ -252,8 +246,10 @@ namespace NextGenStockMarket.Service
                 foreach(var Stock in Market.Sectors)
                 {
                     ScoreArray ScoreArray = new ScoreArray();
+                    AllData alldata = new AllData();
                     var strnow = turn + "_" + Market.StockMarket.CompanyName + "_" + Stock.SectorName;
                     var strlast = last + "_" + Market.StockMarket.CompanyName + "_" + Stock.SectorName;
+                    var strRec = "R_" + strnow;
 
                     ScoreArray.EventComponent = (Stock.SectorName == temp.Sector && temp.Stock == null) ? temp.Value : 0;
                     ScoreArray.EventComponent = (Stock.SectorName == temp.Sector && Market.StockMarket.CompanyName == temp.Stock) ? temp.Value : 0;
@@ -283,10 +279,12 @@ namespace NextGenStockMarket.Service
                     decimal updatedprice = Stock.StockPrice * (percentage);
 
                     Market.Sectors.Where(w => w.SectorName == Stock.SectorName).ToList().ForEach(s => s.StockPrice = updatedprice);
-
+                    alldata.Value = updatedprice;
+                    
                     if (cache.Get<ScoreArray>(strnow) == null)
                     {
                         cache.Set(strnow, ScoreArray, Constants.cacheTime);
+                        cache.Set(strRec, alldata, Constants.cacheTime);
                     }
                     else
                     {
