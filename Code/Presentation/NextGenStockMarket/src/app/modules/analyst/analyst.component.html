@@ -1,7 +1,43 @@
 <app-sidebar></app-sidebar>
 <div class="modal-body" style="background: #d6e5ff;margin-left: 250px">
     <app-header></app-header>
-    
-    <button (click)="add()">Add Point!</button>
-    <div [chart]="chart"></div>
+
+    <div class="row">
+        <div class="col-4">
+            <b> Select Sector : </b>
+            <select class="form-control" [(ngModel)]="selectedSector" (change)="getStocks()">
+                <option>Select a Sector</option>
+                <option *ngFor="let sector of sectors">{{sector}}</option>
+            </select>
+            <small *ngIf="selectedSector == undefined && isFormSubmitted">
+                Sector is Required
+            </small>
+        </div>
+        <div class="col-6">
+            <b> Select stock : </b>
+            <select class="form-control" [(ngModel)]="selectedStock">
+                <option selected>Select a Stock</option>
+                <option *ngFor="let stock of stocks">{{stock.SectorName}}</option>
+            </select>
+
+            <small *ngIf="selectedStock ==undefined && isFormSubmitted">
+                Stock is Required
+            </small>
+        </div>
+        <button class="btn btn-primary" (click)="generate()">Generate</button>
+    </div>
+    <br/>
+    <hr/>
+    <!-- <button (click)="add()">Add Point!</button> -->
+    <div *ngIf="selectedSector != undefined && selectedStock != undefined" [chart]="chart"></div>
+
+    <div class="row"> <b>Analyst Information</b></div>
+    <div class="row">
+        <div class="col-6">
+            <label>Best stock for purchase</label>
+        </div>
+        <div class="col-6">
+            <label>Best stock to sell</label>
+        </div>
+    </div>
 </div>
