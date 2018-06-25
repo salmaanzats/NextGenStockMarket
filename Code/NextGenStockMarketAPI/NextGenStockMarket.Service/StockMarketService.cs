@@ -404,8 +404,7 @@ namespace NextGenStockMarket.Service
                         }
                     }
                 }
-            }
-            
+            }           
             sa.Max = maxsec;
             sa.Min = minsec;
             return sa;
