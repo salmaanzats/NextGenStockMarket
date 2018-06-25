@@ -19,5 +19,11 @@ namespace NextGenStockMarketAPI.Controllers.Api
         {
             return Ok(await stockMarketService.GetMarketData());
         }
+
+        [HttpGet, Route("market/getprice")]
+        public int GetPrice(string sector, string stock, int turn)
+        {
+            return stockMarketService.GetPrice(sector, stock, turn);
+        }
     }
 }

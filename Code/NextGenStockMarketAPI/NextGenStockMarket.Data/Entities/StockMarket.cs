@@ -66,4 +66,18 @@ namespace NextGenStockMarket.Data.Entities
     {
         public int Value { get; set; }
     }
+    public class AllData
+    {
+        public decimal Value { get; set; }
+    }
+    //public class AllDataRecord
+    //{
+    //    public string Sector { get; set; }
+    //    public string Stock { get; set; }
+    //    public List<AllData> record { get; set; } = new List<AllData>();
+    //}
+    public class AllData1
+    {
+        public List<AllData> Value { get; set; } = new List<AllData>();
+    }
 }
