@@ -28,10 +28,12 @@
     </div>
     <br/>
     <hr/>
-    <!-- <button (click)="add()">Add Point!</button> -->
-    <div *ngIf="selectedSector != undefined && selectedStock != undefined" [chart]="chart"></div>
 
-    <div class="row"> <b>Analyst Information</b></div>
+    <div *ngIf="isDisplayGraph == true" [chart]="chart"></div>
+
+    <div class="row">
+        <b>Analyst Information</b>
+    </div>
     <div class="row">
         <div class="col-6">
             <label>Best stock for purchase</label>

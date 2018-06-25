@@ -15,11 +15,15 @@ export class AnalystComponent implements OnInit {
   selectedSector: string;
   selectedStock: string;
   currentTurn: number = 0;
-  isFormSubmitted = false;
 
+  isFormSubmitted = false;
+  isDisplayGraph = false;
+
+  graphData =[];
   bankInfo = [];
   sectors = [];
   stocks = [];
+  
   constructor(private router: Router, private gameService: GameService, private activatedRoute: ActivatedRoute,
     private toastr: ToastsManager, vcr: ViewContainerRef) {
     this.toastr.setRootViewContainerRef(vcr);
@@ -46,8 +50,8 @@ export class AnalystComponent implements OnInit {
     },
     series: [
       {
-        name: 'Turns', // 16 turns
-        data: [1, 2, 3] // dataset
+        name: 'Turns', 
+        data: this.graphData
       }
     ]
   });
@@ -86,12 +90,13 @@ export class AnalystComponent implements OnInit {
 
   generate() {
     this.isFormSubmitted = true;
+ 
     if(this.selectedSector == undefined || this.selectedStock == undefined) return;
-
     this.getCurrentTurn();
-    this.gameService.getGraphData(this.selectedSector, this.selectedStock, this.currentTurn)
+    this.gameService.getGraphData(this.selectedStock, this.selectedSector,this.currentTurn)
     .subscribe(res => {
-        debugger; //response should bind with the dataset
+        this.graphData.push(res);
+        this.isDisplayGraph = true;
     }, error => {
 
     });
