@@ -1,6 +1,7 @@
 ﻿using NextGenStockMarket.Service.Interface;
 using System.Threading.Tasks;
 using System.Web.Http;
+using NextGenStockMarket.Data.Entities;
 
 namespace NextGenStockMarketAPI.Controllers.Api
 {
@@ -24,6 +25,18 @@ namespace NextGenStockMarketAPI.Controllers.Api
         public int GetPrice(string sector, string stock, int turn)
         {
             return stockMarketService.GetPrice(sector, stock, turn);
+        }
+
+        [HttpGet, Route("market/stockanalyst")]
+        public StockAnalyst Stockanalyst()
+        {
+            return stockMarketService.Stockanalyst();
+        }
+
+        [HttpGet, Route("market/sectoranalyst")]
+        public SectorAnalyst Sectoranalyst()
+        {
+            return stockMarketService.Sectoranalyst();
         }
     }
 }

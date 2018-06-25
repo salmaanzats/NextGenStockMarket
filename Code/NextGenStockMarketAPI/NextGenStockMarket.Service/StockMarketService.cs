@@ -16,6 +16,7 @@ namespace NextGenStockMarket.Service
         Random r = new Random();
         protected readonly ICacheManager cache;
         private IBrokerService brokerService;
+        public List<AllStockMarketRecords> alltData = new List<AllStockMarketRecords>();
         public StockMarketService()
         {
             cache = new MemoryCacheManager();
@@ -142,6 +143,7 @@ namespace NextGenStockMarket.Service
             allMarketData.Add(marketFour);
             allMarketData = RandomMarket(allMarketData);
             cache.Set(Constants.marketData, allMarketData, Constants.cacheTime);
+            alltData = allMarketData;
             return allMarketData;
         }
 
@@ -300,6 +302,113 @@ namespace NextGenStockMarket.Service
             return (int)result;
         }
 
+        public StockAnalyst Stockanalyst()
+        {
+            StockAnalyst sa = new StockAnalyst();
+            MaxMin maxstock = new MaxMin();
+            MaxMin minstock = new MaxMin();
+            
+            int max = 0;
+            int min = 0;
+
+            maxstock.Sector = "NA";
+            maxstock.Stock = "NA";
+
+            minstock.Sector = "NA";
+            minstock.Stock = "NA";
+
+            int turn = (cache.Get<Records>("Turn") != null) ? cache.Get<Records>("Turn").Turns : 0;
+
+            var alltData = cache.Get<List<AllStockMarketRecords>>(Constants.marketData);
+
+            if (cache.Get<Records>("Turn") == null || turn== 0 || alltData == null)
+            {
+                sa.Max = maxstock;
+                sa.Min = minstock;
+                return sa;
+            }
+            else
+            {
+                foreach (var item in alltData)
+                {
+                    foreach (var sec in item.Sectors)
+                    {
+                        var strlast = turn + "_" + item.StockMarket.CompanyName + "_" + sec.SectorName;
+                        if (max < Sum(cache.Get<ScoreArray>(strlast)))
+                        {
+                            max = Sum(cache.Get<ScoreArray>(strlast));
+                            maxstock.Sector = sec.SectorName;
+                            maxstock.Stock = item.StockMarket.CompanyName;
+                        }
+                        if (min > Sum(cache.Get<ScoreArray>(strlast)))
+                        {
+                            min = Sum(cache.Get<ScoreArray>(strlast));
+                            minstock.Sector = sec.SectorName;
+                            minstock.Stock = item.StockMarket.CompanyName;
+                        }
+                    }
+                }
+            }
+            
+            sa.Max = maxstock;
+            sa.Min = minstock;
+            return sa;
+        }
+
+        public SectorAnalyst Sectoranalyst()
+        {
+            MinMaxSec maxsec = new MinMaxSec();
+            MinMaxSec minsec = new MinMaxSec();
+            SectorAnalyst sa = new SectorAnalyst();
+            int max = 0;
+            int min = 0;
+
+            maxsec.Sector = "NA";
+            minsec.Sector = "NA";
+
+            int eventval = 0;
+            int turn = (cache.Get<Records>("Turn") != null) ? cache.Get<Records>("Turn").Turns : 0;
+
+            var alltData = cache.Get<List<AllStockMarketRecords>>(Constants.marketData);
+
+            if (cache.Get<Records>("Turn") == null || turn == 0 || alltData == null)
+            {
+                sa.Max = maxsec;
+                sa.Min = minsec;
+                return sa;
+            }
+            else
+            {
+                foreach (var item in alltData)
+                {
+                    foreach (var sec in item.Sectors)
+                    {
+                        if (cache.Get<MainEventRecord>("MainEventRecord") != null)
+                        {
+                            if (cache.Get<MainEventRecord>("MainEventRecord").Stock == null && cache.Get<MainEventRecord>("MainEventRecord").Sector == sec.SectorName)
+                            {
+                                eventval = cache.Get<MainEventRecord>("MainEventRecord").Value;
+                            }
+                        }
+                        var strlast = turn + "_" + item.StockMarket.CompanyName + "_" + sec.SectorName;
+                        var secvalue = (cache.Get<SectorTrend>(sec.SectorName + "_ScoreArray") !=null) ? cache.Get<SectorTrend>(sec.SectorName + "_ScoreArray").SectorTrendValue : 0;
+                        if (max < (secvalue + eventval))
+                        {
+                            max = Sum(cache.Get<ScoreArray>(strlast));
+                            maxsec.Sector = sec.SectorName;
+                        }
+                        if (min > (secvalue + eventval))
+                        {
+                            min = Sum(cache.Get<ScoreArray>(strlast));
+                            minsec.Sector = sec.SectorName;
+                        }
+                    }
+                }
+            }           
+            sa.Max = maxsec;
+            sa.Min = minsec;
+            return sa;
+        }
 
         public int calculatePreValue(int turn)
         {

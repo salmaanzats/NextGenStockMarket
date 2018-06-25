@@ -11,5 +11,7 @@ namespace NextGenStockMarket.Service.Interface
     {
         Task<List<AllStockMarketRecords>> GetMarketData();
         int GetPrice(string sector, string stock, int turn);
+        StockAnalyst Stockanalyst();
+        SectorAnalyst Sectoranalyst();
     }
 }
