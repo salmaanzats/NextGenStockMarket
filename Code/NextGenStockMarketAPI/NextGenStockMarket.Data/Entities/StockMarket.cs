@@ -70,14 +70,29 @@ namespace NextGenStockMarket.Data.Entities
     {
         public decimal Value { get; set; }
     }
-    //public class AllDataRecord
-    //{
-    //    public string Sector { get; set; }
-    //    public string Stock { get; set; }
-    //    public List<AllData> record { get; set; } = new List<AllData>();
-    //}
+    public class MaxMin
+    {
+        public string Sector { get; set; }
+        public string Stock { get; set; }
+    }
     public class AllData1
     {
         public List<AllData> Value { get; set; } = new List<AllData>();
+    }
+
+    public class MinMaxSec
+    {
+        public string Sector { get; set; }
+    }
+
+    public class SectorAnalyst
+    {
+        public MinMaxSec Max { get; set; }
+        public MinMaxSec Min { get; set; }
+    }
+    public class StockAnalyst
+    {
+        public MaxMin Max { get; set; }
+        public MaxMin Min { get; set; }
     }
 }
