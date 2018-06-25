@@ -87,7 +87,6 @@ export class GameComponent implements OnInit {
   loadStockData() {
     this.gameService.getStockData()
       .subscribe(data => {
-        debugger;
         this.allStockData = data;
         this.google = data[0].Sectors;
         this.yahoo = data[1].Sectors;
@@ -177,7 +176,7 @@ export class GameComponent implements OnInit {
           this.gameService.getWinner()
             .subscribe(winner => {
               this.isBlocked = true;
-              this.message = 'winner :' + winner.Result.Accounts.PlayerName + '  Score:' + winner.Result.Accounts.Balance;
+              this.message = 'winner :' + winner.Result.Accounts.PlayerName + '  Score:' + Math.round(winner.Result.Accounts.Balance);
               setTimeout(() => {
                 this.gameService.newGame()
                   .subscribe(() => {
@@ -251,6 +250,8 @@ export class GameComponent implements OnInit {
   }
 
   sellStocks() {
+    this.isFormSubmitted = true;
+    if(this.selectedPurchasedStock == undefined) return;
     this.sellStockEntity.PlayerName = this.player;
     this.sellStockEntity.Sector = this.purchasedSelectedSector;
     this.sellStockEntity.Stock = this.purchasedSelectedStock;

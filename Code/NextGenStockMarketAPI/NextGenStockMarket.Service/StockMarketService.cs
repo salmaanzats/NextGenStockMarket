@@ -32,81 +32,81 @@ namespace NextGenStockMarket.Service
             //First Market and sectors
             var marketOne = new AllStockMarketRecords();
 
-            marketOne.StockMarket.CompanyName = "Google";
+            marketOne.StockMarket.CompanyName = "Financial";
             marketOne.Sectors = new List<Sector>()
             {
                 new Sector
                 {
-                    SectorName = "Financial",
+                    SectorName = "Google",
                     StockPrice = 60
                 },
                 new Sector
                 {
-                    SectorName = "Artificial Intelligence",
+                    SectorName = "Yahoo",
                     StockPrice = 45
                 },
                 new Sector
                 {
-                    SectorName = "Robotics",
+                    SectorName = "Microsoft",
                     StockPrice = 56
                 },
                 new Sector
                 {
-                    SectorName = "Android",
+                    SectorName = "Amazon",
                     StockPrice = 50
                 }
             };
             allMarketData.Add(marketOne);
             //Second Market and sectors
             var marketTwo = new AllStockMarketRecords();
-            marketTwo.StockMarket.CompanyName = "Yahoo";
+            marketTwo.StockMarket.CompanyName = "Artificial Intelligence";
             marketTwo.Sectors = new List<Sector>()
             {
                 new Sector
                 {
-                    SectorName = "Financial",
+                    SectorName = "Google",
                     StockPrice = 26
                 },
                 new Sector
                 {
-                    SectorName = "Artificial Intelligence",
+                    SectorName = "Yahoo",
                     StockPrice = 15
                 },
                 new Sector
                 {
-                    SectorName = "Robotics",
+                    SectorName = "Microsoft",
                     StockPrice = 65
                 },
                 new Sector
                 {
-                    SectorName = "Android",
+                    SectorName = "Amazon",
                     StockPrice = 45
                 }
             };
             allMarketData.Add(marketTwo);
             //Third Market and sectors
             var marketThree = new AllStockMarketRecords();
-            marketThree.StockMarket.CompanyName = "Microsoft";
+            marketThree.StockMarket.CompanyName = "Robotics";
             marketThree.Sectors = new List<Sector>()
             {
                 new Sector
                 {
-                    SectorName = "Financial",
+                    SectorName = "Google",
                     StockPrice = 65
                 },
                 new Sector
                 {
-                    SectorName = "Artificial Intelligence",
+                    SectorName = "Yahoo",
                     StockPrice = 78
                 },
                 new Sector
                 {
-                    SectorName = "Robotics",
+                    SectorName = "Microsoft",
                     StockPrice = 98
                 },
                 new Sector
                 {
-                    SectorName = "Android",
+                    SectorName = "Amazon",
                     StockPrice = 105
                 }
             };
@@ -114,27 +114,27 @@ namespace NextGenStockMarket.Service
 
             //Fourth Market and sectors
             var marketFour = new AllStockMarketRecords();
-            marketFour.StockMarket.CompanyName = "Amazon";
+            marketFour.StockMarket.CompanyName = "Android";
             marketFour.Sectors = new List<Sector>()
             {
                 new Sector
                 {
-                    SectorName = "Financial",
+                    SectorName = "Google",
                     StockPrice = 26
                 },
                 new Sector
                 {
-                    SectorName = "Artificial Intelligence",
+                    SectorName = "Yahoo",
                     StockPrice = 89
                 },
                 new Sector
                 {
-                    SectorName = "Robotics",
+                    SectorName = "Microsoft",
                     StockPrice = 87
                 },
                 new Sector
                 {
-                    SectorName = "Android",
+                    SectorName = "Amazon",
                     StockPrice = 36
                 }
             };

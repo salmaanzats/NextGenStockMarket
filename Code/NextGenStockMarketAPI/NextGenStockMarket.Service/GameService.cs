@@ -101,9 +101,11 @@ namespace NextGenStockMarket.Service
                     stockPrice.Add(String.Format(players.PlayerName, 1.ToString()), 1);
 
                     Dictionary<string, decimal> score = new Dictionary<string, decimal>();
-                    stockPrice.Add(String.Format(players.PlayerName, 1.ToString()), 1);
+                    score.Add(String.Format(players.PlayerName, 1.ToString()), 1);
 
-                    stockPrice[players.PlayerName] = GetStockValue(players.PlayerName);
+                    var stock = GetStockValue(players.PlayerName);
+                    stockPrice[players.PlayerName] = stock;
+
                     playerBank = cache.Get<AllBankRecords>(players.PlayerName + "_Bank");
 
                     if (winnerScore < playerBank.Accounts.Balance + stockPrice[players.PlayerName])
@@ -132,9 +134,9 @@ namespace NextGenStockMarket.Service
                     {
                         foreach (var s in sec.Sectors)
                         {
-                            if (portfolio.Stock == s.SectorName)
+                            if (portfolio.Stock == s.SectorName && portfolio.IsAvailable == true)
                             {
-                                stockPrice[playerName] += s.StockPrice;
+                                stockPrice[playerName] += s.StockPrice * portfolio.Quantity;
                             }
                         }
                     }
