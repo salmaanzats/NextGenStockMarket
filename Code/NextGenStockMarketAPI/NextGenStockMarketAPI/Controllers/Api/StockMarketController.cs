@@ -19,6 +19,5 @@ namespace NextGenStockMarketAPI.Controllers.Api
         {
             return Ok(await stockMarketService.GetMarketData());
         }
-        
     }
 }

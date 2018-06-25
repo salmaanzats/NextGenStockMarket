@@ -13,6 +13,7 @@ namespace NextGenStockMarket.Service
 {
     public class StockMarketService : IStockMarketService
     {
+        Random r = new Random();
         protected readonly ICacheManager cache;
         private IBrokerService brokerService;
         public StockMarketService()
@@ -139,8 +140,33 @@ namespace NextGenStockMarket.Service
                 }
             };
             allMarketData.Add(marketFour);
-
+            allMarketData = RandomMarket(allMarketData);
             cache.Set(Constants.marketData, allMarketData, Constants.cacheTime);
+            //foreach(var item in allMarketData)
+            //{
+            //    foreach(var com in item.StockMarket.CompanyName)
+            //    {
+            //        foreach(var sec in item.Sectors)
+            //        {
+            //            item.Sectors.Where(w => w.SectorName == sec.SectorName).ToList().ForEach(s => s.StockPrice = GetRandomNumber(20,91));
+            //        }
+            //    }
+            //}
+            return allMarketData;
+        }
+
+        public List<AllStockMarketRecords> RandomMarket(List<AllStockMarketRecords> allMarketData)
+        {
+            foreach (var item in allMarketData)
+            {
+                foreach (var com in item.StockMarket.CompanyName)
+                {
+                    foreach (var sec in item.Sectors)
+                    {
+                        sec.StockPrice = GetRandomNumber(20, 91);
+                    }
+                }
+            }
             return allMarketData;
         }
 
@@ -350,7 +376,6 @@ namespace NextGenStockMarket.Service
 
         public int GetRandomNumber(int min, int max)
         {
-            Random r = new Random();
             int rInt = r.Next(min, max);
             return rInt;
         }
