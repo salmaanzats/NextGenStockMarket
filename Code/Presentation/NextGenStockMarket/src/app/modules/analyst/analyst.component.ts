@@ -93,7 +93,7 @@ export class AnalystComponent implements OnInit {
  
     if(this.selectedSector == undefined || this.selectedStock == undefined) return;
     this.getCurrentTurn();
-    this.gameService.getGraphData(this.selectedStock, this.selectedSector,this.currentTurn)
+    this.gameService.getGraphData(this.selectedStock, this.selectedSector)
     .subscribe(res => {
         this.graphData.push(res);
         this.isDisplayGraph = true;

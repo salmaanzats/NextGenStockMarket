@@ -56,12 +56,6 @@ namespace NextGenStockMarketAPI.Controllers.Api
             return Ok(await brokerService.Portfolio(playerName));
         }
 
-        [HttpGet, Route("broker/alldata")]
-        public async Task<IHttpActionResult> AllData()
-        {
-            return Ok(await brokerService.AllData());
-        }
-
         [HttpGet, Route("broker/getavailablestock")]
         public async Task<IHttpActionResult> GetAvailableStocks(string playerName)
         {
