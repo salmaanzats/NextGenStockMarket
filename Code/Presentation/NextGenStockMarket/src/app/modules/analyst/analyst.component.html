@@ -29,17 +29,21 @@
     <br/>
     <hr/>
 
-    <div *ngIf="isDisplayGraph == true" [chart]="chart"></div>
+    <div id="chartTarget2" #chartTarget></div>
 
     <div class="row">
         <b>Analyst Information</b>
     </div>
     <div class="row">
         <div class="col-6">
-            <label>Best stock for purchase</label>
+            <label>Best stock for purchase</label><br/>
+            Sector to Buy : {{minSector.Sector}}
+            <br/> Stock to Buy : {{minSector.Stock}}
         </div>
         <div class="col-6">
-            <label>Best stock to sell</label>
+            <label>Best stock to sell</label><br/>
+            Sector to Sell : {{maxSector.Sector}}
+            <br/> Stock to Sell : {{maxSector.Stock}}
         </div>
     </div>
 </div>

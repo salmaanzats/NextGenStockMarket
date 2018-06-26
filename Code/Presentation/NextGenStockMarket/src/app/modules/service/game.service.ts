@@ -77,4 +77,16 @@ export class GameService extends BaseService {
     .map(response => response)
     .catch(this.errorHandler)
   }
+
+  getStockAnalyst(){
+     return this.http.get(`${this.merketEndPoint}/stockanalyst`, this.httpOptions)
+     .map(response => response)
+     .catch(this.errorHandler)
+  }
+
+  getSectorAnalyst(){
+    return this.http.get(`${this.merketEndPoint}/sectoranalyst`, this.httpOptions)
+     .map(response => response)
+     .catch(this.errorHandler)
+  }
 }
