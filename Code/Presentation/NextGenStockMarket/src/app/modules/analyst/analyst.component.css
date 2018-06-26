@@ -17,7 +17,6 @@
 
 }
 #anlyst {
-    text-decoration: underline;
     animation: mymove 5s infinite;
 }
 #best{
@@ -47,4 +46,19 @@
 {
   color:#8B4513;
   margin-left: 10px;
+}
+
+.analyst{
+    background-color: beige;
+    border-radius: 25px;
+    border: 2px solid #959fca ;
+    margin-left: 400px;
+    font-size: 20px;
+    padding: 6px;
+}
+.selected{
+    background-color: beige;
+    border-radius: 25px;
+    border: 2px solid #959fca ;
+    padding: 4px;
 }

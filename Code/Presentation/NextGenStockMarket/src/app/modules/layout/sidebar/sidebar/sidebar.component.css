@@ -171,5 +171,9 @@ the middle of boxes much cleaner than display:table-cell way*/
    width: 100px;
    height: 130px; 
    margin-left: 110px;
-
 }
+
+a:hover {
+  background-color: rgb(136, 136, 124);
+}
+a:hover, a.active {font-size: 120%;}
