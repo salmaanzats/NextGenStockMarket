@@ -32,36 +32,37 @@
     <div id="chartTarget2" #chartTarget></div>
 
     <div class="row" >
-        <b id="anlyst" style="margin-left: 300px;font-size: 20px;">Analyst Information</b>
+        <h1 id="anlyst" class="analyst">Analyst Information</h1>
     </div>
+    <hr/>
 
-    <div class="row">
+    <div class="row" style="padding-left: 90px;">
         <div class="col-6">
             <label style="margin-top: 20px;">
-                <strong>&#8593; Best stock to purchase </strong>
+                <strong class="selected">&#8593; Best stock to purchase </strong>
             </label>
-            <br/> <label style="margin-left: 10px; width: 120px;">Sector to Buy : </label><label id="sector"> {{minStocks.Sector}}</label>
-            <br/><label style="margin-left: 10px; width: 120px;"> Stock to Buy :</label> <label id="stock"> {{minStocks.Stock}}</label>
+            <br/><label style="margin-left: 10px; width: 120px;"><b>Sector to Buy :</b> </label><label id="sector"> {{minStocks.Sector}}</label>
+            <br/><label style="margin-left: 10px; width: 120px;"><b>Stock to Buy :</b></label> <label id="stock"> {{minStocks.Stock}}</label>
         </div>
         <div class="col-6">
             <label style="margin-top: 20px;">
-                <strong>&#8595; Best stock to sell</strong>
+                <strong class="selected">&#8595; Best stock to sell</strong>
             </label>
-            <br/> <label style="margin-left: 10px; width: 120px;"> Sector to Sell :</label><label id="sector">  {{maxStocks.Sector}}</label>
-            <br/> <label style="margin-left: 10px; width: 120px;">Stock to Sell : </label><label id="stock"> {{maxStocks.Stock}}</label>
+            <br/> <label style="margin-left: 10px; width: 120px;"><b> Sector to Sell :</b></label><label id="sector">  {{maxStocks.Sector}}</label>
+            <br/> <label style="margin-left: 10px; width: 120px;"><b>Stock to Sell : </b></label><label id="stock"> {{maxStocks.Stock}}</label>
         </div>
     </div>
 
-    <div class="row">
+    <div class="row"  style="padding-left: 85px;">
         <div class="col-6">
             <label style="margin-top: 20px;margin-left: 10px;" id="best">
-                <strong>Best sector to purchase</strong>
+                <strong class="selected">Best sector to purchase</strong>
             </label>
             <br/><label style="margin-left: 50px;"> {{minSectors}}</label>
         </div>
         <div class="col-6">
             <label style="margin-top: 20px;margin-left: 10px;" id="best">
-                <strong>Best sector to sell</strong>
+                <strong class="selected">Best sector to sell</strong>
             </label>
             <br/> <label style="margin-left: 50px;">{{this.maxSectors}}</label>
         </div>
