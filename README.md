@@ -1,5 +1,8 @@
 Next Gen Stock Market Game
 
+How to Play : Visit http://nextgenstockgame.info
+			  API : http://nextgenstocksimulationapi.somee.com
+
 
 Repository:
 	url : https://github.com/salmaanzats/NextGenStockMarket
@@ -16,6 +19,7 @@ Web API(.NET) - Using Asynchronous programming
 	
 Angular:
 	location : NextGenStockMarket\Code\Presentation\NextGenStockMarket
+	Hosted url : http://nextgenstockgame.info
 
 Testing Document
     location : NextGenStockMarket\documents\NextGen Stock Market Testing Document
