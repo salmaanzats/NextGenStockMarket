@@ -8,8 +8,8 @@
         public static string sellStock = "Sold";
         public static string deposit = "Deposit";
         public static string withdraw = "Withdraw";
-        public static int maximumPlayers = 3;
-        public static int gameTurns = 4;
+        public static int maximumPlayers = 4;
+        public static int gameTurns = 8;
         public static string gameOver = "Game Over";
         public static string play = "Play";
     }
