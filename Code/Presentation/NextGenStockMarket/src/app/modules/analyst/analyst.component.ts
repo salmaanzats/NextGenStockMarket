@@ -25,9 +25,12 @@ export class AnalystComponent implements OnInit {
   sectors = [];
   stocks = [];
   turns = [];
-  maxSector = [];
-  minSector = [];
-  maxStock = [];
+  maxStocks = [];
+  minStocks = [];
+
+  minSectors:string;
+  maxSectors:string;
+
 
   @ViewChild('chartTarget') chartTarget: ElementRef;
   chart: Highcharts.ChartObject;
@@ -44,6 +47,7 @@ export class AnalystComponent implements OnInit {
       if (this.player != null || this.player != undefined) {
         this.getSectors();
         this.getSectorAnalyst();
+        this.getStockAnalyst();
       }
     });
   }
@@ -99,16 +103,16 @@ export class AnalystComponent implements OnInit {
   getSectorAnalyst() {
     this.gameService.getStockAnalyst()
       .subscribe(res => {
-debugger;
-        this.maxSector = res.Max;
-        this.minSector = res.Min;
+        this.maxStocks = res.Max;
+        this.minStocks = res.Min;
       })
   }
 
   getStockAnalyst() {
     this.gameService.getSectorAnalyst()
       .subscribe(res => {
-
+        this.minSectors = res.Max.Sector;
+        this.maxSectors =res.Min.Sector
       })
   }
 
