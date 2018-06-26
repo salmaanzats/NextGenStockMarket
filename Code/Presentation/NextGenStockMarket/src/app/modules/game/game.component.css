@@ -246,7 +246,7 @@ height: 100px;
 #google
 {
 margin-right: 125px;
-margin-left: 100px;
+margin-left: 125px;
 animation: google 5s infinite;
 
 }
@@ -255,7 +255,7 @@ animation: google 5s infinite;
 }
 
 #yahoo{
-margin-right: 125px;
+margin-right: 75px;
 animation: yahoo 8s infinite;
 
 }
@@ -265,6 +265,7 @@ animation: yahoo 8s infinite;
 
 #amazon{
 margin-right: 125px;
+margin-top: 120px;
 animation: amazon 10s infinite;
 
 }
@@ -274,6 +275,7 @@ animation: amazon 10s infinite;
 
 #microsoft{
 margin-right: 125px;
+margin-top: -50px;
 animation: microsoft 6s infinite;
 
 }

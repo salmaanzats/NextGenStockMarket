@@ -190,7 +190,7 @@
               <b> Stock Quantity : </b>
             </label>
             <input type="number" [min]=0 class="form-control" [(ngModel)]="stockQuantity" (change)=calculateTotalAmount()>
-            <small *ngIf="stockQuantity == null  && isFormSubmitted" class="red">
+            <small *ngIf="stockQuantity == null  && isFormSubmitted == true" class="red">
               Stock quantity is Required
             </small>
           </div>
@@ -227,7 +227,7 @@
               <option>Select a Stock</option>
               <option *ngFor="let stock of purchasedStock">{{stock.Sector}} - {{stock.Stock}}</option>
             </select>
-            <small *ngIf="selectedPurchasedStock == undefined  && isFormSubmitted" class="red">
+            <small *ngIf="selectedPurchasedStock == undefined  && isSellFormSubmitted " class="red">
               Stock is Required
             </small>
           </div>
@@ -270,7 +270,7 @@
 
     <div id="LoadIcon" style="margin-left: 10%">
       <img id="google" src="assets/images/google.png" alt="">
-      <img id="amazon" src="assets/images/amazon.png" alt="">
+      <img id="amazon" src="assets/images/amazon1.png" alt="">
       <img id="yahoo" src="assets/images/yahoo.png" alt="">
       <img id="microsoft" src="assets/images/microsoft.png" alt="">
     </div>

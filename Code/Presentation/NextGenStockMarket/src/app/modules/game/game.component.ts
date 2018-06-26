@@ -52,6 +52,7 @@ export class GameComponent implements OnInit {
   isBlocked = false;
   isStockBought = true;
   isFormSubmitted = false;
+  isSellFormSubmitted = false;
 
   message = 'Waiting For Other Players to Connect.';
 
@@ -148,8 +149,8 @@ export class GameComponent implements OnInit {
     this.isFormSubmitted = true;
     if (this.selectedSector == undefined || this.selectedStock == undefined || this.stockQuantity == null || this.stockPrice == null) return;
     this.stockEntity.PlayerName = this.player;
-    this.stockEntity.Sector = this.selectedSector;
-    this.stockEntity.Stock = this.selectedStock;
+    this.stockEntity.Sector = this.selectedStock;
+    this.stockEntity.Stock = this.selectedSector;
     this.stockEntity.Quantity = this.stockQuantity;
     this.stockEntity.StockPrice = this.stockPrice;
     this.stockEntity.Total = this.totalAmount;
@@ -158,7 +159,8 @@ export class GameComponent implements OnInit {
         this.toastr.success("Your purchase has been successfully completed", "Success");
         this.loadPlayerData();
         this.getCurrentTurn();
-        this.stockQuantity = 0;
+        this.isFormSubmitted = false;
+        this.stockQuantity = null;
         this.stockPrice = 0;
         this.totalAmount = 0;
         this.getPurchasedStockData();
@@ -182,7 +184,7 @@ export class GameComponent implements OnInit {
                   .subscribe(() => {
                     this.router.navigate(['']);
                   });
-              }, 4000);
+              }, 8000);
             });
         } else {
           this.isBlocked = true;
@@ -233,9 +235,9 @@ export class GameComponent implements OnInit {
             this.purchasedPrice = Math.round(element.StockPrice * 100) / 100;
             let sectorStock = this.selectedPurchasedStock.split(" - ", 2);
             for (let market of this.allStockData) {
-              if (market.StockMarket.CompanyName == sectorStock[0]) {
+              if (market.StockMarket.CompanyName == sectorStock[1]) {
                 market.Sectors.forEach(sector => {
-                  if (sector.SectorName == sectorStock[1]) {
+                  if (sector.SectorName == sectorStock[0]) {
                     this.currentStockPrice = Math.round(sector.StockPrice * 100) / 100;
                     this.income = Math.round((this.currentStockPrice * this.availableQuantity) * 100) / 100;
                   }
@@ -250,7 +252,7 @@ export class GameComponent implements OnInit {
   }
 
   sellStocks() {
-    this.isFormSubmitted = true;
+    this.isSellFormSubmitted = true;
     if (this.selectedPurchasedStock == undefined) return;
     this.sellStockEntity.PlayerName = this.player;
     this.sellStockEntity.Sector = this.purchasedSelectedSector;

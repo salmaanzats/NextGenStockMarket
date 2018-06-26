@@ -10,9 +10,6 @@ Kanban Board :
 	
 Sprint Planning:
 	location : NextGenStockMarket\documents\NextGen - SCRUM Documentation
-	
-Demo: 1 minute video about how game works(using 2 turns and two players)
-	location : 
 
 Web API(.NET) - Using Asynchronous programming
 	location : NextGenStockMarket\Code\NextGenStockMarketAPI\NextGenStockMarketAPI.sln

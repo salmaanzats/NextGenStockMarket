@@ -115,7 +115,7 @@ namespace NextGenStockMarket.Service
                     }
                 }
             }
-            return "Winner :" + winner.Accounts.PlayerName + "  Score :" + winnerScore;
+            return "Winner :" + winner.Accounts.PlayerName + "             Score :" + Decimal.Round(winnerScore);
         }
 
         public decimal GetStockValue(string playerName)
@@ -129,11 +129,11 @@ namespace NextGenStockMarket.Service
                 var market = cache.Get<List<AllStockMarketRecords>>(Constants.marketData);
                 foreach (var sec in market)
                 {
-                    if (portfolio.Sector == sec.StockMarket.CompanyName)
+                    if (portfolio.Stock == sec.StockMarket.CompanyName)
                     {
                         foreach (var s in sec.Sectors)
                         {
-                            if (portfolio.Stock == s.SectorName && portfolio.IsAvailable == true)
+                            if (portfolio.Sector == s.SectorName && portfolio.IsAvailable == true)
                             {
                                 stockPrice[playerName] += s.StockPrice * portfolio.Quantity;
                             }
