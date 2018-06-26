@@ -396,16 +396,15 @@ namespace NextGenStockMarket.Service
                                 eventval = cache.Get<MainEventRecord>("MainEventRecord").Value;
                             }
                         }
-                        var strlast = turn + "_" + item.StockMarket.CompanyName + "_" + sec.SectorName;
                         var secvalue = (cache.Get<SectorTrend>(sec.SectorName + "_ScoreArray") !=null) ? cache.Get<SectorTrend>(sec.SectorName + "_ScoreArray").SectorTrendValue : 0;
                         if (max < (secvalue + eventval))
                         {
-                            max = Sum(cache.Get<ScoreArray>(strlast));
+                            max = secvalue + eventval;
                             maxsec.Sector = sec.SectorName;
                         }
                         if (min > (secvalue + eventval) || turn == 1)
                         {
-                            min = Sum(cache.Get<ScoreArray>(strlast));
+                            min = secvalue + eventval;
                             minsec.Sector = sec.SectorName;
                         }
                     }
