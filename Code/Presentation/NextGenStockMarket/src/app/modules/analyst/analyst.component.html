@@ -3,25 +3,25 @@
     <app-header></app-header>
 
     <div class="row" style="margin-top: 30px;">
-        <div class="col-4">
-            <b> Select Sector : </b>
+        <div class="col-5">
+            <b> Select Stock (Company Name) : </b>
             <select class="form-control" [(ngModel)]="selectedSector" (change)="getStocks()">
-                <option>Select a Sector</option>
+                <option>Select a Stock</option>
                 <option *ngFor="let sector of sectors">{{sector}}</option>
             </select>
             <small *ngIf="selectedSector == undefined && isFormSubmitted">
-                Sector is Required
+                    Stock is Required
             </small>
         </div>
-        <div class="col-6">
-            <b> Select stock : </b>
+        <div class="col-5">
+            <b> Select Sector : </b>
             <select class="form-control" [(ngModel)]="selectedStock">
-                <option selected>Select a Stock</option>
+                <option selected>Select a Sector</option>
                 <option *ngFor="let stock of stocks">{{stock.SectorName}}</option>
             </select>
 
             <small *ngIf="selectedStock ==undefined && isFormSubmitted">
-                Stock is Required
+                    Sector is Required
             </small>
         </div>
         <button class="btn btn-primary" (click)="generate()" style="height: 40px; margin-top: 22px;margin-left: 25px;">Generate</button>
@@ -39,32 +39,32 @@
     <div class="row" style="padding-left: 90px;">
         <div class="col-6">
             <label style="margin-top: 20px;">
-                <strong class="selected">&#8593; Best stock to purchase </strong>
+                <strong class="selected">&#8593; Best Stock to purchase </strong>
             </label>
-            <br/><label style="margin-left: 10px; width: 120px;"><b>Sector to Buy :</b> </label><label id="sector"> {{minStocks.Sector}}</label>
-            <br/><label style="margin-left: 10px; width: 120px;"><b>Stock to Buy :</b></label> <label id="stock"> {{minStocks.Stock}}</label>
+            <br/><label style="margin-left: 10px; width: 120px;"><b>Sector to Buy :</b> </label><label id="sector"> {{maxStocks.Sector}}</label>
+            <br/><label style="margin-left: 10px; width: 120px;"><b>Stock to Buy :</b></label> <label id="stock"> {{maxStocks.Stock}}</label>
         </div>
         <div class="col-6">
             <label style="margin-top: 20px;">
-                <strong class="selected">&#8595; Best stock to sell</strong>
+                <strong class="selected">&#8595; Best Stock to sell</strong>
             </label>
-            <br/> <label style="margin-left: 10px; width: 120px;"><b> Sector to Sell :</b></label><label id="sector">  {{maxStocks.Sector}}</label>
-            <br/> <label style="margin-left: 10px; width: 120px;"><b>Stock to Sell : </b></label><label id="stock"> {{maxStocks.Stock}}</label>
+            <br/> <label style="margin-left: 10px; width: 120px;"><b> Sector to Sell :</b></label><label id="sector">  {{minStocks.Sector}}</label>
+            <br/> <label style="margin-left: 10px; width: 120px;"><b>Stock to Sell : </b></label><label id="stock"> {{minStocks.Stock}}</label>
         </div>
     </div>
 
     <div class="row"  style="padding-left: 85px;">
         <div class="col-6">
             <label style="margin-top: 20px;margin-left: 10px;" id="best">
-                <strong class="selected">Best sector to purchase</strong>
+                <strong class="selected">&#8593; Best Sector to purchase</strong>
             </label>
-            <br/><label style="margin-left: 50px;"> {{minSectors}}</label>
+            <br/><label style="margin-left: 50px;"> {{maxSectors}}</label>
         </div>
         <div class="col-6">
             <label style="margin-top: 20px;margin-left: 10px;" id="best">
-                <strong class="selected">Best sector to sell</strong>
+                <strong class="selected">&#8595; Best Sector to sell</strong>
             </label>
-            <br/> <label style="margin-left: 50px;">{{this.maxSectors}}</label>
+            <br/> <label style="margin-left: 50px;">{{this.minSectors}}</label>
         </div>
         
     </div>
