@@ -150,28 +150,28 @@
         <div class="row">
           <div class="col-9">
             <label>
-              <b> Select Sector : </b>
+              <b> Select Stock (Company Name) : </b>
             </label>
             <select class="form-control" [(ngModel)]="selectedSector" (change)="getStocks()">
-              <option>Select a Sector</option>
+              <option>Select a Stock</option>
               <option *ngFor="let sector of sectors">{{sector}}</option>
             </select>
             <small *ngIf="selectedSector == undefined && isFormSubmitted">
-              Sector is Required
+                Stock is Required
             </small>
           </div>
         </div>
         <div class="row">
           <div class="col-6">
             <label>
-              <b> Select stock : </b>
+              <b> Select Sector : </b>
             </label>
             <select class="form-control" [(ngModel)]="selectedStock" (change)="loadPrice()">
-              <option selected>Select a Stock</option>
+              <option selected>Select a Sector</option>
               <option *ngFor="let stock of stocks">{{stock.SectorName}}</option>
             </select>
             <small *ngIf="selectedStock ==undefined && isFormSubmitted">
-              Stock is Required
+                Sector is Required
             </small>
           </div>
           <div class="col-3">

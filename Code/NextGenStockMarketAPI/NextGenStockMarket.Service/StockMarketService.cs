@@ -339,13 +339,13 @@ namespace NextGenStockMarket.Service
                     foreach (var sec in item.Sectors)
                     {
                         var strlast = turn + "_" + item.StockMarket.CompanyName + "_" + sec.SectorName;
-                        if (max < Sum(cache.Get<ScoreArray>(strlast)))
+                        if (max < Sum(cache.Get<ScoreArray>(strlast)) || max == 0)
                         {
                             max = Sum(cache.Get<ScoreArray>(strlast));
                             maxstock.Sector = sec.SectorName;
                             maxstock.Stock = item.StockMarket.CompanyName;
                         }
-                        if (min > Sum(cache.Get<ScoreArray>(strlast)) || turn==1)
+                        if (min >= Sum(cache.Get<ScoreArray>(strlast)) || turn==1 || min ==0)
                         {
                             min = Sum(cache.Get<ScoreArray>(strlast));
                             minstock.Sector = sec.SectorName;
@@ -397,12 +397,12 @@ namespace NextGenStockMarket.Service
                             }
                         }
                         var secvalue = (cache.Get<SectorTrend>(sec.SectorName + "_ScoreArray") !=null) ? cache.Get<SectorTrend>(sec.SectorName + "_ScoreArray").SectorTrendValue : 0;
-                        if (max < (secvalue + eventval))
+                        if (max < (secvalue + eventval) || max == 0)
                         {
                             max = secvalue + eventval;
                             maxsec.Sector = sec.SectorName;
                         }
-                        if (min > (secvalue + eventval) || turn == 1)
+                        if (min >= (secvalue + eventval) || turn == 1 || min == 0)
                         {
                             min = secvalue + eventval;
                             minsec.Sector = sec.SectorName;
