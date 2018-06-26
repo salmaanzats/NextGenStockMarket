@@ -1,4 +1,4 @@
 export class Constants {
-    public static maximumPlayers: number = 2;
+    public static maximumPlayers: number = 3;
     public static maximumTurn: number = 4;
 }
