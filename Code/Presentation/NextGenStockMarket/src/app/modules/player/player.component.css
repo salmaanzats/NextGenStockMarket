@@ -140,8 +140,6 @@ body :-ms-input-placeholder {
   transition-duration: 1s;
   transition-timing-function: ease-in-put;
   font-weight: 200;
-  font-family: serif;
-  opacity: 0.3;
 }
 
 form {
