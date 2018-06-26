@@ -9,11 +9,42 @@
     justify-content: center;
     text-align:center;
     height: 100%; /* since cols have bigger height this has effect, also can be ussefull - height: calc(100% - 15px); with 15px bottom margin */
-  }
+  color: white}
   #Ticon{
    width: 60px;
     height: 60px; 
     margin-top:30px;
 
 }
+#anlyst {
+    text-decoration: underline;
+    animation: mymove 5s infinite;
+}
+#best{
  
+  animation: colorChange 5s infinite;
+}
+
+@keyframes mymove {
+    50% {
+        text-decoration-color: red;  
+           
+    }
+  
+}
+ @keyframes colorChange {
+    30% {
+       
+        color: red;      
+    }
+ }
+#stock
+{
+  color: #556B2F;
+      margin-left: 7px;
+}
+#sector
+{
+  color:#8B4513;
+  margin-left: 10px;
+}
