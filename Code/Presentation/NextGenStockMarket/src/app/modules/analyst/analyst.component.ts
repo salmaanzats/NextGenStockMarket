@@ -4,6 +4,8 @@ import { ToastsManager } from 'ng2-toastr';
 import { GameService } from '../service/game.service';
 import { chart } from 'highcharts';
 import { Constants } from '../core/constants';
+import { MaxStocks } from '../model/maxStock';
+import { MinStocks } from '../model/minStocks';
 
 @Component({
   selector: 'app-analyst',
@@ -25,8 +27,8 @@ export class AnalystComponent implements OnInit {
   sectors = [];
   stocks = [];
   turns = [];
-  maxStocks = [];
-  minStocks = [];
+  maxStocks = new MaxStocks();
+  minStocks = new MinStocks();
 
   minSectors:string;
   maxSectors:string;
