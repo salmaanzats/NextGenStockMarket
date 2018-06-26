@@ -1,36 +1,30 @@
-<body class="bg">
-<div class="container" style=" height: 670px;">
-  
-<div class="title">
-<label for="title"><h2 style="color:#ec4848;margin-top: 300px;margin-left:-60px">The <br>Stock Market<br> Game.</h2></label>
+<body>
+  <img src="assets/images/bg.png" id="bg" alt="">
+
+  <div id="loader">
+    <img src="assets/images/logo.png" style="max-width:40%;max-height:40%;" alt="">
   </div>
-  <div >
-    <div id="panel1" style="background-color:#152427a1;width:500px; height:500px;margin-top: -500px;margin-left: 500px;">
-       <div class="col-md-6 "  id="d1">
-      <h5><p style="color: #ffacac;font-size: 25px;"><br>Register to Play</p></h5>
+
+  
+    <div class="container">
+      <form class="form">
+        <h1>Register to Play</h1>
         <div class="form-group">
-          <label for="usr"><h6 style="color: #f1d754;">Enter Player Name:</h6></label>
-          <input type="text" class="form-control" id="usr" style="background-color:rgb(186, 185, 250)" [(ngModel)]="playerName">
-          <small *ngIf="playerName =='' && isFormSubmitted">
-              Player Name is Required
+          <input type="text" class="form-control" id="usr" placeholder="Username" [(ngModel)]="playerName" [ngModelOptions]="{standalone: true}">
+          <small *ngIf="playerName =='' && isFormSubmitted" class="red">
+            Player Name is Required
           </small>
         </div>
         <button class="btn btn-default black-background white" (click)="createPlayer()">Create Player</button>
-    </div>
-
-    <div class="col-md-6"  id="d2">
-      <h5><p style="color: #ffacac;font-size: 25px;width: 400px;">If you are already registerd</p></h5>
+        <h1>If you are already registerd</h1>
         <div class="form-group">
-          <label for="usr"><h6 style="color: #f1d754;">Enter Player Name:</h6></label>
-          <input type="text" class="form-control" id="usr" style="background-color:rgb(186, 185, 250)" [(ngModel)]="existingPlayerName">
-          <small *ngIf="existingPlayerName =='' && isFormSubmitted">
-              Player Name is Required
+          <input type="text" class="form-control" id="usr" placeholder="Username" [(ngModel)]="existingPlayerName" [ngModelOptions]="{standalone: true}">
+          <small *ngIf="existingPlayerName =='' && isFormSubmitted" class="red">
+            Player Name is Required
           </small>
         </div>
         <button class="btn btn-default black-background white" (click)="checkExistingPlayer()">Play</button>
-    </div></div>>
-   
-  </div>
+      </form>
 
-</div>
+  </div>
 </body>
