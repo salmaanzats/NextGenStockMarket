@@ -34,16 +34,36 @@
     <div class="row">
         <b>Analyst Information</b>
     </div>
+
     <div class="row">
         <div class="col-6">
-            <label>Best stock for purchase</label><br/>
-            Sector to Buy : {{minSector.Sector}}
-            <br/> Stock to Buy : {{minSector.Stock}}
+            <label>
+                <strong>Best stock to purchase</strong>
+            </label>
+            <br/> Sector to Buy : {{minStocks.Sector}}
+            <br/> Stock to Buy : {{minStocks.Stock}}
         </div>
         <div class="col-6">
-            <label>Best stock to sell</label><br/>
-            Sector to Sell : {{maxSector.Sector}}
-            <br/> Stock to Sell : {{maxSector.Stock}}
+            <label>
+                <strong>Best stock to sell</strong>
+            </label>
+            <br/> Sector to Sell : {{maxStocks.Sector}}
+            <br/> Stock to Sell : {{maxStocks.Stock}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <label>
+                <strong>Best sector to purchase</strong>
+            </label>
+            <br/> {{minSectors}}
+        </div>
+        <div class="col-6">
+            <label>
+                <strong>Best sector to sell</strong>
+            </label>
+            <br/> {{this.maxSectors}}
         </div>
     </div>
 </div>
