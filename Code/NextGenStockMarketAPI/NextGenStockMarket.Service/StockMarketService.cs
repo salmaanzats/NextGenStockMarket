@@ -357,6 +357,7 @@ namespace NextGenStockMarket.Service
             
             sa.Max = maxstock;
             sa.Min = minstock;
+
             return sa;
         }
 
