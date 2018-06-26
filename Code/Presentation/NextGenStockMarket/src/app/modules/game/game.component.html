@@ -1,5 +1,5 @@
-<app-sidebar></app-sidebar>
 <app-block-ui [isBlocked]="isBlocked" [loadMessage]="this.message"></app-block-ui>
+<app-sidebar *ngIf="!isBlocked"></app-sidebar>
 <div class="modal-body bgtbls" style="margin-left: 250px">
   <div class="row row-flex-box" style="background: #cbd0d8;">
     <div class="col-xs-6 col-sm-6 col-md-3">

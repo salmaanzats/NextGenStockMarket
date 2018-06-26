@@ -53,7 +53,7 @@ export class GameComponent implements OnInit {
   isStockBought = true;
   isFormSubmitted = false;
 
-  message = 'Please wait until all players connect';
+  message = 'Waiting For Other Players to Connect.';
 
 
   constructor(private router: Router, private gameService: GameService, private brokerService: BrokerService, private activatedRoute: ActivatedRoute,

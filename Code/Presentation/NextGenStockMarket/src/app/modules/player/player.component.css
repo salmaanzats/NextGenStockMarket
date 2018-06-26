@@ -7,7 +7,6 @@
     flex:1 0 auto;
   }
 
-
 .bg {
     /* The image used */
     background-image: url("/assets/images/bg.png");
@@ -141,7 +140,10 @@ body :-ms-input-placeholder {
   transition-duration: 1s;
   transition-timing-function: ease-in-put;
   font-weight: 200;
+  font-family: serif;
+  opacity: 0.3;
 }
+
 form {
   border: 2px solid white;
   border-radius:15px;
