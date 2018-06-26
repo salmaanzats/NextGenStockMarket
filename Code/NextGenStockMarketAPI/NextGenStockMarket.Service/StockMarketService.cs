@@ -345,7 +345,7 @@ namespace NextGenStockMarket.Service
                             maxstock.Sector = sec.SectorName;
                             maxstock.Stock = item.StockMarket.CompanyName;
                         }
-                        if (min > Sum(cache.Get<ScoreArray>(strlast)))
+                        if (min > Sum(cache.Get<ScoreArray>(strlast)) || turn==1)
                         {
                             min = Sum(cache.Get<ScoreArray>(strlast));
                             minstock.Sector = sec.SectorName;
@@ -403,7 +403,7 @@ namespace NextGenStockMarket.Service
                             max = Sum(cache.Get<ScoreArray>(strlast));
                             maxsec.Sector = sec.SectorName;
                         }
-                        if (min > (secvalue + eventval))
+                        if (min > (secvalue + eventval) || turn == 1)
                         {
                             min = Sum(cache.Get<ScoreArray>(strlast));
                             minsec.Sector = sec.SectorName;
