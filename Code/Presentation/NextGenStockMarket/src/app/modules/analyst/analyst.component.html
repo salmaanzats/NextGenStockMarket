@@ -2,7 +2,7 @@
 <div class="modal-body" style="background: #d6e5ff;margin-left: 250px">
     <app-header></app-header>
 
-    <div class="row">
+    <div class="row" style="margin-top: 30px;">
         <div class="col-4">
             <b> Select Sector : </b>
             <select class="form-control" [(ngModel)]="selectedSector" (change)="getStocks()">
@@ -24,78 +24,48 @@
                 Stock is Required
             </small>
         </div>
-        <button class="btn btn-primary" (click)="generate()">Generate</button>
+        <button class="btn btn-primary" (click)="generate()" style="height: 40px; margin-top: 22px;margin-left: 25px;">Generate</button>
     </div>
     <br/>
     <hr/>
 
     <div id="chartTarget2" #chartTarget></div>
 
-    <div class="row">
-        <b>Analyst Information</b>
+    <div class="row" >
+        <b id="anlyst" style="margin-left: 300px;font-size: 20px;">Analyst Information</b>
     </div>
 
     <div class="row">
         <div class="col-6">
-            <label>
-                <strong>Best stock to purchase</strong>
+            <label style="margin-top: 20px;">
+                <strong>&#8593; Best stock to purchase </strong>
             </label>
-            <br/> Sector to Buy : {{minStocks.Sector}}
-            <br/> Stock to Buy : {{minStocks.Stock}}
+            <br/> <label style="margin-left: 10px; width: 120px;">Sector to Buy : </label><label id="sector"> {{minStocks.Sector}}</label>
+            <br/><label style="margin-left: 10px; width: 120px;"> Stock to Buy :</label> <label id="stock"> {{minStocks.Stock}}</label>
         </div>
         <div class="col-6">
-            <label>
-                <strong>Best stock to sell</strong>
+            <label style="margin-top: 20px;">
+                <strong>&#8595; Best stock to sell</strong>
             </label>
-            <br/> Sector to Sell : {{maxStocks.Sector}}
-            <br/> Stock to Sell : {{maxStocks.Stock}}
+            <br/> <label style="margin-left: 10px; width: 120px;"> Sector to Sell :</label><label id="sector">  {{maxStocks.Sector}}</label>
+            <br/> <label style="margin-left: 10px; width: 120px;">Stock to Sell : </label><label id="stock"> {{maxStocks.Stock}}</label>
         </div>
     </div>
 
     <div class="row">
         <div class="col-6">
-            <label>
+            <label style="margin-top: 20px;margin-left: 10px;" id="best">
                 <strong>Best sector to purchase</strong>
             </label>
-            <br/> {{minSectors}}
+            <br/><label style="margin-left: 50px;"> {{minSectors}}</label>
         </div>
         <div class="col-6">
-            <label>
+            <label style="margin-top: 20px;margin-left: 10px;" id="best">
                 <strong>Best sector to sell</strong>
             </label>
-            <br/> {{this.maxSectors}}
+            <br/> <label style="margin-left: 50px;">{{this.maxSectors}}</label>
         </div>
         
     </div>
-     <div class="row">
-      <div class="col-5 transbox white col-md-offset-2" style="margin-right: 5%; margin-left: 5%; padding:15px; ">
-        <label style="margin-left: 48%;">
-          <h5 class="white">
-            Market Trend 
-          </h5>
-        </label>
-        <div class="row">
-          <div class="col-9">
-            <label>
-              <b> Sector Trend </b>
-            </label><br>
-            <label>Buy : </label>
-            <input type="text" [min]=0 class="form-control"style=" width: 150px;margin-left: 60px;margin-top: -35px;">
-            <br><br>
-            <label>Sell: </label>
-            <input type="text" [min]=0 class="form-control"style=" width: 150px;margin-left: 60px;margin-top: -35px;">
-            </div></div>
-            <div class="row">
-  
-          <div class="col-9" style="margin-left: 450px; margin-top: -142px;">
-            <label>
-              <b style="width: 150px"> Stock Trend </b>
-            </label><br>
-            <label style="width: 75px">Buy : </label>
-            <input type="text" [min]=0 class="form-control"style=" width: 150px;margin-left: 60px;margin-top: -35px;"> <br><br>
-            <label>Sell: </label>
-            <input type="text" [min]=0 class="form-control"style=" width: 150px;margin-left: 60px;margin-top: -35px;">
-           
-            </div></div>
-            </div></div>
+     
 </div>
