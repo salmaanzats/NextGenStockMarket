@@ -5,7 +5,7 @@
     <div class="col-xs-6 col-sm-6 col-md-3">
       <div class="thumbnail flex-col-vertical-center">
         <div class="caption">
-          <H5>
+          <H5 class="black">
             <span>
               <strong>Balance:</strong>
             </span>
@@ -17,7 +17,7 @@
     <div class="col-xs-6 col-sm-6  col-md-3">
       <div class="thumbnail flex-col-vertical-center">
         <div class="caption">
-          <H5>
+          <H5 class="black">
             <span>
               <strong>Currnt Turn:</strong>
             </span>
@@ -29,7 +29,7 @@
     <div class="col-xs-6 col-sm-6  col-md-3">
       <div class="thumbnail flex-col-vertical-center">
         <div class="caption">
-          <H5>
+          <H5 class="black">
             <span>
               <strong>Total # of Turns:</strong>
             </span>
@@ -41,7 +41,7 @@
     <div class="col-xs-6 col-sm-6  col-md-3">
       <div class="thumbnail homepage-slider-bottom-block-single flex-col-vertical-center">
         <div class="caption">
-          <H5>
+          <H5 class="black">
             <span>
               <strong>Player:</strong>
             </span>
@@ -57,13 +57,8 @@
       <div class="row">
         <div class="space sm-col-3">
           <h4>
-            <font style="color: blue">G</font>
-            <font style="color: rgb(226, 27, 27)">o</font>
-            <font style="color: yellow">o</font>
-            <font style="color: blue">g</font>
-            <font style="color: rgb(5, 141, 5)">l</font>
-            <font style="color: rgb(226, 27, 27)">e</font> LLC</h4>
-          <table class="table table-bordered table-striped">
+            <font style="color: blue">G</font><font style="color: rgb(226, 27, 27)">o</font><font style="color: yellow">o</font><font style="color: blue">g</font><font style="color: rgb(5, 141, 5)">l</font><font style="color: rgb(226, 27, 27)">e</font> LLC</h4>
+          <table class="table table-bordered table-striped trans white">
             <thead>
               <tr>
                 <th>Sector</th>
@@ -71,7 +66,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let sector of this.google" class="black">
+              <tr *ngFor="let sector of this.google" class="white">
                 <td>{{sector.SectorName}}</td>
                 <td>{{sector.StockPrice|number:'1.2-2'}}</td>
               </tr>
@@ -81,9 +76,9 @@
         <div class="space sm-col-3">
           <h4>
             <font style="color: #6c20c9">Yahoo!</font>
-            <font style="color: rgb(15, 42, 121); font-size: 20px;"> Stock Details</font>
+            <font style="color: #6c20c9; font-size: 20px;"> Stock Details</font>
           </h4>
-          <table class="table table-bordered table-striped trans black">
+          <table class="table table-bordered table-striped trans white">
             <thead>
               <tr>
                 <th>Sector</th>
@@ -91,7 +86,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let sector of this.yahoo" class="black">
+              <tr *ngFor="let sector of this.yahoo" class="white">
                 <td>{{sector.SectorName}}</td>
                 <td>{{sector.StockPrice|number:'1.2-2'}}</td>
               </tr>
@@ -100,10 +95,10 @@
         </div>
         <div class="space sm-col-3">
           <h4>
-            <font style="color: rgb(85, 121, 14)">Microsoft</font>
-            <font style="color: rgb(15, 42, 121); font-size: 20px;"> Corporation</font>
+            <font style="color: rgb(44, 150, 44)">Microsoft</font>
+            <font style="color: rgb(44, 150, 44); font-size: 20px;"> Corporation</font>
           </h4>
-          <table class="table table-bordered table-striped trans black">
+          <table class="table table-bordered table-striped trans white">
             <thead>
               <tr>
                 <th>Sector</th>
@@ -111,7 +106,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let sector of this.microsoft" class="black">
+              <tr *ngFor="let sector of this.microsoft" class="white">
                 <td>{{sector.SectorName}}</td>
                 <td>{{sector.StockPrice|number:'1.2-2'}}</td>
               </tr>
@@ -119,11 +114,11 @@
           </table>
         </div>
         <div class="space sm-col-3">
-          <h4>
-            <font style="color: rgb(243, 116, 70)">amazon</font>
-            <font style="color: rgb(15, 42, 121); font-size: 20px;"> .com Inc.</font>
+          <h4 style="align-content: center;">
+            <center><font style="color: rgb(243, 116, 70)">amazon</font>
+            <font style="color: rgb(243, 116, 70); font-size: 20px;">.com Inc.</font></center>
           </h4>
-          <table class="table table-bordered table-striped trans black">
+          <table class="table table-bordered table-striped trans white">
             <thead>
               <tr>
                 <th>Sector</th>
@@ -131,7 +126,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let sector of this.amazon" class="black">
+              <tr *ngFor="let sector of this.amazon" class="white">
                 <td>{{sector.SectorName}}</td>
                 <td>{{sector.StockPrice|number:'1.2-2'}}</td>
               </tr>
@@ -146,10 +141,10 @@
 
   <div class="form-group">
     <div class="row">
-      <div class="col-6">
-        <label style="margin-left: 20%;">
-          <h5 class="black">
-            <mark style="background: chartreuse"> BUY </mark>
+      <div class="col-5 transbox white col-md-offset-2" style="margin-right: 5%; margin-left: 5%; padding:15px; ">
+        <label style="margin-left: 48%;">
+          <h5 class="white">
+             BUY 
           </h5>
         </label>
         <div class="row">
@@ -195,7 +190,7 @@
               <b> Stock Quantity : </b>
             </label>
             <input type="number" [min]=0 class="form-control" [(ngModel)]="stockQuantity" (change)=calculateTotalAmount()>
-            <small *ngIf="stockQuantity == null  && isFormSubmitted">
+            <small *ngIf="stockQuantity == null  && isFormSubmitted" class="red">
               Stock quantity is Required
             </small>
           </div>
@@ -208,18 +203,19 @@
             </label>
             <input type="number" class="form-control" [(ngModel)]="totalAmount" disabled>
           </div>
-          <div class="col-3">
-            <button type="button" class="btn btn-success" style="background: darkgreen;" (click)="buyStocks()">Buy</button>
+          <div class="col-6" style="position: relative;">
+            <button type="button" class="btn btn-success col-6" style="background: darkgreen;position: absolute; bottom: 0;" (click)="buyStocks()">Buy</button>
           </div>
         </div>
       </div>
       <div class="col-6" *ngIf="!isStockBought">
         <label>There are no available stocks to sell</label>
       </div>
-      <div class="col-6" *ngIf="isStockBought">
-        <label style="margin-left: 20%;">
-          <h5 class="black">
-            <mark style="background: chartreuse"> SELL </mark>
+    
+      <div class="col-5 transbox white" *ngIf="isStockBought" style="padding:15px; ">
+        <label style="margin-left: 48%;">
+          <h5 class="white">
+            SELL
           </h5>
         </label>
         <div class="row">
@@ -231,19 +227,19 @@
               <option>Select a Stock</option>
               <option *ngFor="let stock of purchasedStock">{{stock.Sector}} - {{stock.Stock}}</option>
             </select>
-            <small *ngIf="selectedPurchasedStock == undefined  && isFormSubmitted">
-              Stock quantity is Required
+            <small *ngIf="selectedPurchasedStock == undefined  && isFormSubmitted" class="red">
+              Stock is Required
             </small>
           </div>
         </div>
         <div class="row">
-          <div class="col-4">
+          <div class="col-5">
             <label>
               <b> Purchased Quantity : </b>
             </label>
             <input type="number" class="form-control" [(ngModel)]="availableQuantity" disabled>
           </div>
-          <div class="col-5">
+          <div class="col-4">
             <label>
               <b> Purchased Price : </b>
             </label>
@@ -251,13 +247,13 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-4">
+          <div class="col-5">
             <label>
               <b> Current Price : </b>
             </label>
             <input type="number" class="form-control" [(ngModel)]="currentStockPrice" disabled>
           </div>
-          <div class="col-5">
+          <div class="col-4">
             <label>
               <b> Income : </b>
             </label>
@@ -265,8 +261,8 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-9" style="margin-top: 10px;">
-            <button type="button" class="btn btn-success" style="background: darkgreen;" (click)="sellStocks()">Sell</button>
+          <div class="col-6" style="margin-top: 10px;">
+            <button type="button" class="btn btn-success col-6" style="background: darkgreen; margin-top: 20%;" (click)="sellStocks()">Sell</button>
           </div>
         </div>
       </div>

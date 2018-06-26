@@ -295,11 +295,16 @@ namespace NextGenStockMarket.Service
             }
         }
 
-        public int GetPrice(string sector, string stock, int turn)
+        public decimal[] GetPrice(string sector, string stock)
         {
-            var str = "R_" + turn + "_" + stock + "_" + sector;
-            var result = cache.Get<AllData>(str).Value;
-            return (int)result;
+            int turn = (cache.Get<Records>("Turn") != null) ? cache.Get<Records>("Turn").Turns : 0;
+            decimal[] result = new decimal[turn+1];
+            for (int i=0;i<=turn;i++)
+            {
+                var str = "R_" + i + "_" + stock + "_" + sector;
+                result[i]= cache.Get<AllData>(str).Value;
+            }
+            return result;
         }
 
         public StockAnalyst Stockanalyst()

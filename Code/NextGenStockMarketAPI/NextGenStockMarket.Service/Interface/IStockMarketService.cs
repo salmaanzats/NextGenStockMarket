@@ -10,7 +10,7 @@ namespace NextGenStockMarket.Service.Interface
     public interface IStockMarketService
     {
         Task<List<AllStockMarketRecords>> GetMarketData();
-        int GetPrice(string sector, string stock, int turn);
+        decimal[] GetPrice(string sector, string stock);
         StockAnalyst Stockanalyst();
         SectorAnalyst Sectoranalyst();
     }

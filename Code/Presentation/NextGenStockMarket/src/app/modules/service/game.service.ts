@@ -72,8 +72,8 @@ export class GameService extends BaseService {
     .catch(this.errorHandler)
   }
 
-  getGraphData(sector,stock,turn){
-    return this.http.get(`${this.merketEndPoint}/getprice?sector=${sector}&stock=${stock}&turn=${turn}`)
+  getGraphData(sector,stock){
+    return this.http.get(`${this.merketEndPoint}/getprice?sector=${sector}&stock=${stock}`)
     .map(response => response)
     .catch(this.errorHandler)
   }

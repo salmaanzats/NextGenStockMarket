@@ -186,8 +186,8 @@ background-repeat: no-repeat;
 
 .bgtbls{
 /* The image used */
-background-image: url("/assets/images/stock9.jpg");
 
+background-color: #1d2025;
 /* Full height */
 height: 100%; 
 
@@ -202,11 +202,27 @@ background-size: cover;
 color:#000;
 }
 
+.white {
+  color:white;
+  }
+
+.red{
+  color: rgb(204, 26, 62);
+}
+
 .trans{
-background-color:rgb(102, 233, 102);
+background-color: #1f2736;
 opacity: 0.8;
 filter: alpha(opacity=60);
 }
+
+.transbox{
+  background-color: #1f2736;
+  opacity: 0.8;
+  filter: alpha(opacity=60);
+  border-radius: 25px;
+  border-color: white;
+  }
 
 h5{
 color: indigo;

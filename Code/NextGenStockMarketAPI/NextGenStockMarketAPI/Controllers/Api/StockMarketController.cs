@@ -22,9 +22,9 @@ namespace NextGenStockMarketAPI.Controllers.Api
         }
 
         [HttpGet, Route("market/getprice")]
-        public int GetPrice(string sector, string stock, int turn)
+        public decimal[] GetPrice(string sector, string stock)
         {
-            return stockMarketService.GetPrice(sector, stock, turn);
+            return stockMarketService.GetPrice(sector, stock);
         }
 
         [HttpGet, Route("market/stockanalyst")]
